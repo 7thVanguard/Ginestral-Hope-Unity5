@@ -1,0 +1,49 @@
+
+
+
+Ginestral Hope					< Game and Engine Input Documentation >
+
+	- Engine -
+
+		Movement
+			W : front
+			S : rear
+			A : left
+			D : right
+			Q : Down
+			E : Up
+			Mouse : Camera Control
+
+		Serializer
+			F5 : save file
+			F9 : load file
+
+		Game Modes
+			F1 : Player Mode
+			F2 : God Mode
+			F3 : Developer Mode
+
+		Interactions
+			Left Click : Destroy / Erase
+			Right Click : Create / Construct
+			Middle Click : Cancel
+
+
+	- Game -
+		
+		Input
+			W : front
+			S : rear
+			A : left
+			D : right
+			Mouse : Camera Control
+
+			E : Interact
+
+			1 : Fire Skill
+			2 : Earth Skill
+
+			
+
+
+

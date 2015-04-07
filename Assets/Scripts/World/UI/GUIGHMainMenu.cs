@@ -1,0 +1,139 @@
+﻿using UnityEngine;
+using UnityEngine.UI;
+using System.Collections;
+
+public class GUIGHMainMenu : MonoBehaviour 
+{
+    GameObject mainMenu;
+    GameObject texturePackMenu;
+
+    Texture2D selectedAtlas;
+
+    void Awake()
+    {
+        GameGUI.GHMainMenu = transform.parent.FindChild("GH Main Menu").gameObject;
+
+        mainMenu = transform.parent.FindChild("GH Main Menu").FindChild("Main Menu").gameObject;
+        texturePackMenu = transform.parent.FindChild("GH Main Menu").FindChild("Texture Pack Menu").gameObject;
+
+        selectedAtlas = (Texture2D)Global.G1.mainTexture;
+
+        mainMenu.SetActive(true);
+        texturePackMenu.SetActive(false);
+    }
+
+
+    void OnGUI()
+    {
+        if (texturePackMenu.activeSelf)
+            GUI.DrawTexture(new Rect(Screen.width * 3 / 5, 20, Screen.width * 2 / 5 - 20, Screen.width * 2 / 5 - 20), selectedAtlas);
+    }
+
+    // New Game
+    public void NewGameButton()
+    {
+            //Global.world.worldObj.GetComponent<GameManager>().gameSerializer.Load(Global.world, Global.player, "NewGameGH");
+
+            // World preparation
+            Global.mainCamera.cameraObj.GetComponent<Camera>().renderingPath = RenderingPath.DeferredLighting;
+
+            foreach (Transform child in Global.world.worldObj.transform)
+                GameObject.Destroy(child.gameObject);
+
+            GameObject.Destroy(Global.world.geometryController);
+            GameObject.Destroy(Global.world.eventsController);
+            GameObject.Destroy(Global.world.interactivesController);
+            GameObject.Destroy(Global.world.enemiesController);
+            GameObject.Destroy(Global.world.emitersController);
+
+            // Player
+            Global.player.playerObj.transform.position = new Vector3(34.5f, 1, 17);
+            Global.player.playerObj.transform.eulerAngles = new Vector3(0, 160, 0);
+
+            // Camera
+            Global.mainCamera.cameraObj.GetComponent<Camera>().backgroundColor = new Color32(255, 166, 71, 255);
+
+            // Sun
+            Global.sun.sunObj.transform.position = new Vector3(13, 30, 100);
+            Global.sun.sunObj.transform.eulerAngles = new Vector3(14.59f, 171, 1.1f);
+            Global.sun.sunObj.transform.GetComponent<Light>().color = new Color32(230, 174, 71, 255);
+            Global.sun.lensFlare.color = new Color32(255, 141, 0, 255);
+            Global.sun.sunObj.transform.GetComponent<Light>().color = new Color32(230, 174, 71, 255);
+
+            // Renderer
+            RenderSettings.ambientLight = new Color32(43, 45, 37, 255);
+ 
+        GameFlow.gameState = GameFlow.GameState.GAME;
+        Deactivate();
+    }
+
+
+    public void LoadGAmeButton()
+    {
+        GameFlow.gameState = GameFlow.GameState.GAME;
+        Deactivate();
+    }
+
+
+    public void DeveloperButton()
+    {
+        GameFlow.gameState = GameFlow.GameState.GAME;
+        Deactivate();
+    }
+
+
+    public void TexturePackButton()
+    {
+        mainMenu.SetActive(false);
+        texturePackMenu.SetActive(true);
+    }
+
+
+    public void ExitGame()
+    {
+        Application.Quit();
+    }
+
+
+    // Texture Pack
+    public void Ginestral1Button()
+    {
+        GameFlow.selectedAtlas = Global.G1;
+        selectedAtlas = (Texture2D)Global.G1.mainTexture;
+        ResetWorld();
+    }
+
+
+    public void Planned1Button()
+    {
+        GameFlow.selectedAtlas = Global.P1;
+        selectedAtlas = (Texture2D)Global.P1.mainTexture;
+        ResetWorld();
+    }
+
+
+    // General
+    public void BackButton()
+    {
+        mainMenu.SetActive(true);
+        texturePackMenu.SetActive(false);
+    }
+
+
+    // Internal
+    private void ResetWorld()
+    {
+        // Destroy existing emiters
+        GameObject[] chunks = GameObject.FindGameObjectsWithTag("Chunk");
+        foreach (GameObject chunkObj in chunks)
+            GameObject.Destroy(chunkObj);
+
+        Global.world.Init();
+    }
+
+
+    private void Deactivate()
+    {
+        GameGUI.GHMainMenu.SetActive(false);
+    }
+}

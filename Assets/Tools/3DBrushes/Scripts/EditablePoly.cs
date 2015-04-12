@@ -12,6 +12,19 @@ public class EditablePoly : MonoBehaviour
     [HideInInspector] public bool editable = false;
 
 
+    public void OnBeginEdit()
+    {
+
+    }
+
+
+    public void OnExitEdit()
+    {
+
+    }
+
+
+    // Called via editor
     public void FreezeTransformations()
     {
         GameObject go = new GameObject();

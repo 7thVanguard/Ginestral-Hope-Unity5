@@ -71,6 +71,9 @@ public class GameManager : MonoBehaviour
         skill.Init(Global.world, Global.player, Global.mainCamera, skill);
 
         gameSerializer = new GameSerializer();
+
+        // Music Init
+        GameMusic.Init();
     }
 
 
@@ -144,7 +147,7 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        // Generic Update
+        // Generic Updates
         GameMusic.Update();
 
 

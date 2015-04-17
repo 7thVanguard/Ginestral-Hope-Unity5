@@ -3,9 +3,17 @@ using System.Collections;
 
 public class GameMusic
 {
+    private static AudioSource playerAudio;
+
     public static bool playing = false;
     public static bool fadingOut = false;
     public static bool fadingIn = true;
+
+
+    public static void Init()
+    {
+        playerAudio = Global.player.playerObj.transform.FindChild("MusicPlayer").GetComponent<AudioSource>();
+    }
 
 
     public static void Update()
@@ -22,7 +30,7 @@ public class GameMusic
         {
             if (GameFlow.gameState == GameFlow.GameState.MENU)
             {
-                Global.player.playerObj.transform.FindChild("MusicPlayer").GetComponent<AudioSource>().Play();
+                playerAudio.Play();
                 playing = true;
             }
         }

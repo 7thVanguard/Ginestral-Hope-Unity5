@@ -3,7 +3,7 @@ using System.Collections;
 
 [RequireComponent(typeof(SphereCollider))]
 [RequireComponent(typeof(AudioSource))]
-public class GRL_SoundAmbientArea : MonoBehaviour 
+public class GRL_SoundSphere : MonoBehaviour
 {
     private float volume;
 

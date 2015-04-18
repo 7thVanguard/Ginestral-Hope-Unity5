@@ -104,6 +104,25 @@ public static class EventsLib
             GUI.color = new Color(1, 1, 1, 1);
         }
     }
+    public static GameObject DrawOutlineShader(GameObject parentObj, GameObject outline)
+    {
+        outline = new GameObject("Outline");
+        outline.transform.parent = parentObj.transform;
+
+        outline.transform.localPosition = Vector3.zero;
+        outline.transform.localEulerAngles = Vector3.zero;
+        outline.transform.localScale = Vector3.one;
+
+        outline.AddComponent<MeshFilter>();
+        outline.AddComponent<MeshRenderer>();
+        outline.GetComponent<MeshFilter>().mesh = parentObj.transform.GetComponent<MeshFilter>().mesh;
+
+        outline.GetComponent<Renderer>().material.shader = Shader.Find("Ginestral/Silhouette Only");
+        outline.GetComponent<Renderer>().material.SetColor("_OutlineColor", Color.red);
+        outline.GetComponent<Renderer>().material.SetFloat("_Outline", 0.008f);
+
+        return outline;
+    }
     public static void DrawInteractivity()
     {
         GUI.DrawTextureWithTexCoords(new Rect(Screen.width * 2 / 3, Screen.height / 2 - 30, 60, 60), (Texture2D)Resources.Load("UI/Interactivity"),

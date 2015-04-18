@@ -3,10 +3,18 @@ using System.Collections;
 
 public class GRL_PressurePlate : MonoBehaviour 
 {
+    private GameObject outline;
+
     private const float nonPressedHeight = -0.05f;
     private const float pressedHeight = -0.15f;
 
     public bool emitting;
+
+
+    void Awake()
+    {
+        outline = EventsLib.DrawOutlineShader(transform.parent.gameObject, outline);
+    }
 
 
     void Update()

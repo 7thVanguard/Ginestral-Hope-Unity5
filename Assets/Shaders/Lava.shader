@@ -1,4 +1,4 @@
-﻿Shader "Palaui/Lava" {
+﻿Shader "Ginestral/Lava" {
 	Properties {
 		_MainTex ("Base (RGB)", 2D) = "white" {}
 		_Alpha ("Alpha", float) = 0.8

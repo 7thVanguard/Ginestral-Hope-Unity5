@@ -35,21 +35,6 @@ public class EditablePoly : MonoBehaviour
     }
 
 
-    void Update()
-    {
-        if (enabled)
-        {
-            
-        }
-    }
-
-
-    public void OnExitEdit()
-    {
-
-    }
-
-
     public void AdaptMesh()
     {
         GameObject go = new GameObject();
@@ -59,7 +44,6 @@ public class EditablePoly : MonoBehaviour
         for (int i = 0; i < vertexObject.Length; i++)
         {
             vertices[i] = vertexObject[i].transform.position;
-            Debug.Log(vertexObject[i].transform.position);
         }
 
         // Assign the new vertices to our mesh

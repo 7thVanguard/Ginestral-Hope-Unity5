@@ -37,7 +37,6 @@ public class MainCamera
     public float maxAngleSight;
     public float distance;
     public float objectiveDistance;
-    public float minDistance;
     public float maxDistance;
     public bool isMoving;
 
@@ -56,7 +55,6 @@ public class MainCamera
         distance = 3;
         objectiveDistance = 3;
 
-        minDistance = 3;
         maxDistance = 3;
     }
 

@@ -69,18 +69,14 @@ public class CameraMovement
                 else
                     mainCamera.isMoving = false;
 
+                // Camera distance clamp
                 if (mainCamera.objectiveDistance > mainCamera.maxDistance)
                     mainCamera.objectiveDistance = mainCamera.maxDistance;
                 else if (mainCamera.objectiveDistance < mainCamera.maxDistance && (mainCamera.isMoving || player.isMoving))
                     mainCamera.objectiveDistance += 7.5f * Time.deltaTime;
 
-                Screen.lockCursor = true;
+                Cursor.visible = false;
             }
-
-
-            // Zoom adapt
-            if (mainCamera.objectiveDistance < mainCamera.distance && (mainCamera.isMoving || player.isMoving))
-                mainCamera.objectiveDistance += 7.5f * Time.deltaTime;
 
             // Angle sight clamp
             mainCamera.angleSight = ClampAngle(mainCamera.angleSight, mainCamera.minAngleSight, mainCamera.maxAngleSight);

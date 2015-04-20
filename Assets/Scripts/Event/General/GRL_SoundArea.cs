@@ -32,7 +32,6 @@ public class GRL_SoundArea : MonoBehaviour
                 }
                 else
                     GetComponent<AudioSource>().volume -= 0.2f * Time.deltaTime;
-
             }
             else
             {

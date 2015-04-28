@@ -1,13 +1,26 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using UnityEditor;
 
 public class GUIGHMainMenu : MonoBehaviour 
 {
     GameObject mainMenu;
     GameObject texturePackMenu;
 
+    GameObject buttonNewGame;
+    GameObject buttonExitGame;
+
+    GameObject blackSpace;
+
     Texture2D selectedAtlas;
+
+    float menuColor = 0;
+    float alphaCounterBlackScreen = 0;
+
+    bool newGame = false;
+    bool fadingIn = false;
+    bool fadingOut = false;
 
     void Awake()
     {
@@ -16,10 +29,71 @@ public class GUIGHMainMenu : MonoBehaviour
         mainMenu = transform.parent.FindChild("GH Main Menu").FindChild("Main Menu").gameObject;
         texturePackMenu = transform.parent.FindChild("GH Main Menu").FindChild("Texture Pack Menu").gameObject;
 
+        buttonNewGame = transform.parent.FindChild("GH Main Menu").FindChild("Main Menu").FindChild("BTN New Game").gameObject;
+        buttonExitGame = transform.parent.FindChild("GH Main Menu").FindChild("Main Menu").FindChild("BTN Exit Game").gameObject;
+
+        blackSpace = transform.parent.FindChild("Black Space").gameObject;
+
         selectedAtlas = (Texture2D)Global.G1.mainTexture;
 
         mainMenu.SetActive(true);
         texturePackMenu.SetActive(false);
+        blackSpace.SetActive(false);
+    }
+
+
+    void Update()
+    {
+        // Alpha buttons animation
+        if (menuColor < 1)
+        {
+            menuColor += Time.deltaTime / 4;
+            buttonNewGame.GetComponent<Image>().color = new Color(1, 1, 1, menuColor);
+            buttonExitGame.GetComponent<Image>().color = new Color(1, 1, 1, menuColor);
+
+            buttonNewGame.transform.FindChild("Text").GetComponent<Text>().color = new Color(0, 0, 0, menuColor);
+            buttonExitGame.transform.FindChild("Text").GetComponent<Text>().color = new Color(0, 0, 0, menuColor);
+        }
+        else if (menuColor > 1)
+        {
+            menuColor = 1;
+            buttonNewGame.GetComponent<Image>().color = new Color(1, 1, 1, menuColor);
+            buttonExitGame.GetComponent<Image>().color = new Color(1, 1, 1, menuColor);
+
+            buttonNewGame.transform.FindChild("Text").GetComponent<Text>().color = new Color(0, 0, 0, menuColor);
+            buttonExitGame.transform.FindChild("Text").GetComponent<Text>().color = new Color(0, 0, 0, menuColor);
+        }
+
+        // Fade in and out at new game
+        if (newGame)
+        {
+            if (fadingIn)
+            {
+                if (alphaCounterBlackScreen < 1)
+                    alphaCounterBlackScreen += 1 * Time.deltaTime / 2;
+                else
+                {
+                    alphaCounterBlackScreen = 1;
+                    fadingIn = false;
+                    fadingOut = true;
+                    GameFlow.gameState = GameFlow.GameState.GAME;
+                    Deactivate();
+                }
+            }
+            else if (fadingOut)
+            {
+                if (alphaCounterBlackScreen > 0)
+                    alphaCounterBlackScreen -= 1 * Time.deltaTime / 2;
+                else
+                {
+                    alphaCounterBlackScreen = 0;
+                    newGame = false;
+                    fadingOut = false;
+                }
+            }
+            
+            blackSpace.GetComponent<Image>().color = new Color(0, 0, 0, alphaCounterBlackScreen);
+        }
     }
 
 
@@ -32,39 +106,41 @@ public class GUIGHMainMenu : MonoBehaviour
     // New Game
     public void NewGameButton()
     {
-            //Global.world.worldObj.GetComponent<GameManager>().gameSerializer.Load(Global.world, Global.player, "NewGameGH");
+        //Global.world.worldObj.GetComponent<GameManager>().gameSerializer.Load(Global.world, Global.player, "NewGameGH");
 
-            // World preparation
-            Global.mainCamera.cameraObj.GetComponent<Camera>().renderingPath = RenderingPath.DeferredLighting;
+        // World preparation
+        Global.mainCamera.cameraObj.GetComponent<Camera>().renderingPath = RenderingPath.DeferredLighting;
 
-            foreach (Transform child in Global.world.worldObj.transform)
-                GameObject.Destroy(child.gameObject);
+        foreach (Transform child in Global.world.worldObj.transform)
+            GameObject.Destroy(child.gameObject);
 
-            GameObject.Destroy(Global.world.geometryController);
-            GameObject.Destroy(Global.world.eventsController);
-            GameObject.Destroy(Global.world.interactivesController);
-            GameObject.Destroy(Global.world.enemiesController);
-            GameObject.Destroy(Global.world.emitersController);
+        GameObject.Destroy(Global.world.geometryController);
+        GameObject.Destroy(Global.world.eventsController);
+        GameObject.Destroy(Global.world.interactivesController);
+        GameObject.Destroy(Global.world.enemiesController);
+        GameObject.Destroy(Global.world.emitersController);
 
-            // Player
-            Global.player.playerObj.transform.position = new Vector3(34.5f, 1, 17);
-            Global.player.playerObj.transform.eulerAngles = new Vector3(0, 160, 0);
+        // Player
+        Global.player.playerObj.transform.position = new Vector3(34.5f, 1, 17);
+        Global.player.playerObj.transform.eulerAngles = new Vector3(0, 160, 0);
 
-            // Camera
-            Global.mainCamera.cameraObj.GetComponent<Camera>().backgroundColor = new Color32(255, 166, 71, 255);
+        // Camera
+        Global.mainCamera.cameraObj.GetComponent<Camera>().backgroundColor = new Color32(255, 166, 71, 255);
 
-            // Sun
-            Global.sun.sunObj.transform.position = new Vector3(13, 30, 100);
-            Global.sun.sunObj.transform.eulerAngles = new Vector3(14.59f, 171, 1.1f);
-            Global.sun.sunObj.transform.GetComponent<Light>().color = new Color32(230, 174, 71, 255);
-            Global.sun.lensFlare.color = new Color32(255, 141, 0, 255);
-            Global.sun.sunObj.transform.GetComponent<Light>().color = new Color32(230, 174, 71, 255);
+        // Sun
+        Global.sun.sunObj.transform.position = new Vector3(13, 30, 100);
+        Global.sun.sunObj.transform.eulerAngles = new Vector3(14.59f, 171, 1.1f);
+        Global.sun.sunObj.transform.GetComponent<Light>().color = new Color32(230, 174, 71, 255);
+        Global.sun.lensFlare.color = new Color32(255, 141, 0, 255);
+        Global.sun.sunObj.transform.GetComponent<Light>().color = new Color32(230, 174, 71, 255);
 
-            // Renderer
-            RenderSettings.ambientLight = new Color32(43, 45, 37, 255);
- 
-        GameFlow.gameState = GameFlow.GameState.GAME;
-        Deactivate();
+        // Renderer
+        RenderSettings.ambientLight = new Color32(43, 45, 37, 255);
+
+        // Fade in and out
+        newGame = true;
+        fadingIn = true;
+        blackSpace.SetActive(true);
     }
 
 

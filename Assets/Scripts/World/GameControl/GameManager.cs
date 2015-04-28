@@ -81,7 +81,8 @@ public class GameManager : MonoBehaviour
     {
         if (GameFlow.gameState == GameFlow.GameState.MENU)
         {
-            Screen.lockCursor = false;
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
         }
         else if (GameFlow.gameState == GameFlow.GameState.GAME)
         {
@@ -132,16 +133,23 @@ public class GameManager : MonoBehaviour
 
             // Cursor control
             if (GameFlow.onInterface || GameFlow.pause)
-                Screen.lockCursor = false;
+            {
+                Cursor.visible = true;
+                Cursor.lockState = CursorLockMode.None;
+            }
             else
             {
                 if (GameFlow.gameMode != GameFlow.GameMode.PLAYER)
                 {
                     if (Input.GetKey(KeyCode.LeftControl))
-                        Screen.lockCursor = false;
+                    {
+                        Cursor.visible = false;
+                        Cursor.lockState = CursorLockMode.Locked;
+                    }
                     else
                     {
-                        Screen.lockCursor = true;
+                        Cursor.visible = true;
+                        Cursor.lockState = CursorLockMode.Locked;
                     }
                 }
             }

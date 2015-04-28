@@ -14,8 +14,8 @@ public class NGGH_EndLevel : MonoBehaviour
 
     void Start()
     {
-        sevenV = (Texture2D)Resources.Load("GUI/Ginestral Hope GUI/7V");
-        blackSpace = (Texture2D)Resources.Load("GUI/Ginestral Hope GUI/BlackScreen");
+        sevenV = (Texture2D)Resources.Load("UI/7V");
+        blackSpace = (Texture2D)Resources.Load("UI/BlackScreen");
     }
 
 

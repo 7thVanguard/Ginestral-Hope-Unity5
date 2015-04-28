@@ -5,6 +5,8 @@ public class GameMusic
 {
     private static AudioSource playerAudio;
 
+    public static float maxVolume = 1;
+
     public static bool playing = false;
     public static bool fadingOut = false;
     public static bool fadingIn = true;

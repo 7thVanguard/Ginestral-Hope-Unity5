@@ -6,9 +6,11 @@ using UnityEditor;
 public class GUIGHMainMenu : MonoBehaviour 
 {
     GameObject mainMenu;
+    GameObject optionsMenu;
     GameObject texturePackMenu;
 
     GameObject buttonNewGame;
+    GameObject buttonOptions;
     GameObject buttonExitGame;
 
     GameObject blackSpace;
@@ -27,9 +29,11 @@ public class GUIGHMainMenu : MonoBehaviour
         GameGUI.GHMainMenu = transform.parent.FindChild("GH Main Menu").gameObject;
 
         mainMenu = transform.parent.FindChild("GH Main Menu").FindChild("Main Menu").gameObject;
+        optionsMenu = transform.parent.FindChild("GH Main Menu").FindChild("Options Menu").gameObject;
         texturePackMenu = transform.parent.FindChild("GH Main Menu").FindChild("Texture Pack Menu").gameObject;
 
         buttonNewGame = transform.parent.FindChild("GH Main Menu").FindChild("Main Menu").FindChild("BTN New Game").gameObject;
+        buttonOptions = transform.parent.FindChild("GH Main Menu").FindChild("Main Menu").FindChild("BTN Options").gameObject;
         buttonExitGame = transform.parent.FindChild("GH Main Menu").FindChild("Main Menu").FindChild("BTN Exit Game").gameObject;
 
         blackSpace = transform.parent.FindChild("Black Space").gameObject;
@@ -49,18 +53,22 @@ public class GUIGHMainMenu : MonoBehaviour
         {
             menuColor += Time.deltaTime / 4;
             buttonNewGame.GetComponent<Image>().color = new Color(1, 1, 1, menuColor);
+            buttonOptions.GetComponent<Image>().color = new Color(1, 1, 1, menuColor);
             buttonExitGame.GetComponent<Image>().color = new Color(1, 1, 1, menuColor);
 
             buttonNewGame.transform.FindChild("Text").GetComponent<Text>().color = new Color(0, 0, 0, menuColor);
+            buttonOptions.transform.FindChild("Text").GetComponent<Text>().color = new Color(0, 0, 0, menuColor);
             buttonExitGame.transform.FindChild("Text").GetComponent<Text>().color = new Color(0, 0, 0, menuColor);
         }
         else if (menuColor > 1)
         {
             menuColor = 1;
             buttonNewGame.GetComponent<Image>().color = new Color(1, 1, 1, menuColor);
+            buttonOptions.GetComponent<Image>().color = new Color(1, 1, 1, menuColor);
             buttonExitGame.GetComponent<Image>().color = new Color(1, 1, 1, menuColor);
 
             buttonNewGame.transform.FindChild("Text").GetComponent<Text>().color = new Color(0, 0, 0, menuColor);
+            buttonOptions.transform.FindChild("Text").GetComponent<Text>().color = new Color(0, 0, 0, menuColor);
             buttonExitGame.transform.FindChild("Text").GetComponent<Text>().color = new Color(0, 0, 0, menuColor);
         }
 
@@ -144,8 +152,14 @@ public class GUIGHMainMenu : MonoBehaviour
         blackSpace.SetActive(true);
     }
 
+    public void OptionsButton()
+    {
+        mainMenu.SetActive(false);
+        optionsMenu.SetActive(true);
+    }
 
-    public void LoadGAmeButton()
+
+    public void LoadGameButton()
     {
         GameFlow.gameState = GameFlow.GameState.GAME;
         Deactivate();
@@ -194,6 +208,7 @@ public class GUIGHMainMenu : MonoBehaviour
     {
         mainMenu.SetActive(true);
         texturePackMenu.SetActive(false);
+        optionsMenu.SetActive(false);
     }
 
 
@@ -206,6 +221,12 @@ public class GUIGHMainMenu : MonoBehaviour
             GameObject.Destroy(chunkObj);
 
         Global.world.Init();
+    }
+
+
+    public void SliderMusicVolume()
+    {
+        GameMusic.maxVolume = transform.parent.FindChild("GH Main Menu").FindChild("Options Menu").FindChild("SLD Music Volume").GetComponent<Slider>().value;
     }
 
 

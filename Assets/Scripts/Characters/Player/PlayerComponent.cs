@@ -27,6 +27,7 @@ public class PlayerComponent : MonoBehaviour
 
     void Update()
     {
+        Global.player.playerObj.transform.FindChild("MusicPlayer").GetComponent<AudioSource>().volume = GameMusic.maxVolume;
         // Hit animation
         //if (animCounter > 0)
         //{

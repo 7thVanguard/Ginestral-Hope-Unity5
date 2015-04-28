@@ -89,7 +89,7 @@ public class GUIGHMainMenu : MonoBehaviour
                     alphaCounterBlackScreen = 0;
                     newGame = false;
                     fadingOut = false;
-                    blackSpace.SetActive(true);
+                    blackSpace.SetActive(false);
                 }
             }
             

@@ -29,7 +29,7 @@ public class GRL_SoundSphere : MonoBehaviour
         if (GetComponent<AudioSource>().clip != null)
             if (other.tag == "Player")
             {
-                GetComponent<AudioSource>().volume = (1 - Vector3.Distance(Global.player.playerObj.transform.position, transform.position) / GetComponent<AudioSource>().maxDistance) * volume * GameMusic.maxVolume;
+                GetComponent<AudioSource>().volume = (1 - Vector3.Distance(Global.player.playerObj.transform.position, transform.position) / GetComponent<AudioSource>().maxDistance) * volume * GameMusic.ambientVolume * GameMusic.masterVolume;
             }
     }
 

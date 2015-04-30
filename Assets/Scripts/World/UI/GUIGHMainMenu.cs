@@ -224,9 +224,27 @@ public class GUIGHMainMenu : MonoBehaviour
     }
 
 
+    public void SliderMasterVolume()
+    {
+        GameMusic.masterVolume = transform.parent.FindChild("GH Main Menu").FindChild("Options Menu").FindChild("SLD Master Volume").GetComponent<Slider>().value;
+    }
+
+
     public void SliderMusicVolume()
     {
-        GameMusic.maxVolume = transform.parent.FindChild("GH Main Menu").FindChild("Options Menu").FindChild("SLD Music Volume").GetComponent<Slider>().value;
+        GameMusic.musicVolume = transform.parent.FindChild("GH Main Menu").FindChild("Options Menu").FindChild("SLD Music Volume").GetComponent<Slider>().value;
+    }
+    
+
+    public void SliderAmbientVolume()
+    {
+        GameMusic.ambientVolume = transform.parent.FindChild("GH Main Menu").FindChild("Options Menu").FindChild("SLD Ambient Volume").GetComponent<Slider>().value;
+    }
+
+
+    public void SliderFXVolume()
+    {
+        GameMusic.FXVolume = transform.parent.FindChild("GH Main Menu").FindChild("Options Menu").FindChild("SLD FX Volume").GetComponent<Slider>().value;
     }
 
 

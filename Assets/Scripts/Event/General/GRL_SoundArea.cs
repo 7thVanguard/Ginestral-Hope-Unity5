@@ -35,10 +35,10 @@ public class GRL_SoundArea : MonoBehaviour
             }
             else
             {
-                if (GetComponent<AudioSource>().volume <= volume * GameMusic.maxVolume)
+                if (GetComponent<AudioSource>().volume <= volume * GameMusic.musicVolume * GameMusic.masterVolume)
                     GetComponent<AudioSource>().volume += 0.2f * Time.deltaTime;
                 else
-                    GetComponent<AudioSource>().volume = volume * GameMusic.maxVolume;
+                    GetComponent<AudioSource>().volume = volume * GameMusic.musicVolume * GameMusic.masterVolume;
             }
         }
     }

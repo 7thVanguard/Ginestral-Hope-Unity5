@@ -5,7 +5,10 @@ public class GameMusic
 {
     private static AudioSource playerAudio;
 
-    public static float maxVolume = 1;
+    public static float masterVolume = 1;
+    public static float musicVolume = 1;
+    public static float ambientVolume = 1;
+    public static float FXVolume = 1;
 
     public static bool playing = false;
     public static bool fadingOut = false;

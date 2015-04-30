@@ -248,6 +248,12 @@ public class GUIGHMainMenu : MonoBehaviour
     {
         GameMusic.FXVolume = transform.parent.FindChild("GH Main Menu").FindChild("Options Menu").FindChild("SLD FX Volume").GetComponent<Slider>().value;
     }
+    
+    
+    public void SliderGraphicsQuality()
+    {
+        QualitySettings.SetQualityLevel((int)transform.parent.FindChild("GH Main Menu").FindChild("Options Menu").FindChild("SLD Graphics Quality").GetComponent<Slider>().value);
+    }
 
 
     private void Deactivate()

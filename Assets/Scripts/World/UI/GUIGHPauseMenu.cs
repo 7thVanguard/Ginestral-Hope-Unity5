@@ -17,6 +17,12 @@ public class GUIGHPauseMenu : MonoBehaviour
     }
 
 
+    public void OptionsButton()
+    {
+        GameGUI.GHMainMenu.SetActive(true);
+    }
+
+
     public void MainMenuButton()
     {
         GameFlow.gameState = GameFlow.GameState.MENU;

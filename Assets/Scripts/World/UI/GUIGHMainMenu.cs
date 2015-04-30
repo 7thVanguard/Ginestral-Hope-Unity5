@@ -29,10 +29,12 @@ public class GUIGHMainMenu : MonoBehaviour
     {
         GameGUI.GHMainMenu = transform.parent.FindChild("GH Main Menu").gameObject;
 
+        // Planes
         mainMenu = transform.parent.FindChild("GH Main Menu").FindChild("Main Menu").gameObject;
         optionsMenu = transform.parent.FindChild("GH Main Menu").FindChild("Options Menu").gameObject;
         texturePackMenu = transform.parent.FindChild("GH Main Menu").FindChild("Texture Pack Menu").gameObject;
 
+        // Buttons
         buttonNewGame = transform.parent.FindChild("GH Main Menu").FindChild("Main Menu").FindChild("BTN New Game").gameObject;
         buttonOptions = transform.parent.FindChild("GH Main Menu").FindChild("Main Menu").FindChild("BTN Options").gameObject;
         buttonExitGame = transform.parent.FindChild("GH Main Menu").FindChild("Main Menu").FindChild("BTN Exit Game").gameObject;
@@ -40,6 +42,10 @@ public class GUIGHMainMenu : MonoBehaviour
         blackSpace = transform.parent.FindChild("Black Space").gameObject;
 
         selectedAtlas = (Texture2D)Global.G1.mainTexture;
+
+        // Sliders
+        transform.parent.FindChild("GH Main Menu").FindChild("Options Menu").FindChild("SLD Graphics Quality").GetComponent<Slider>().value = QualitySettings.GetQualityLevel();
+
 
         mainMenu.SetActive(true);
         texturePackMenu.SetActive(false);
@@ -86,7 +92,12 @@ public class GUIGHMainMenu : MonoBehaviour
                     alphaCounterBlackScreen = 1;
                     fadingIn = false;
                     fadingOut = true;
+
+                    // Prepare for the options pause menu
                     GameFlow.gameState = GameFlow.GameState.GAME;
+                    mainMenu.SetActive(false);
+                    optionsMenu.SetActive(true);
+                    texturePackMenu.SetActive(false);
                     Deactivate();
                 }
             }
@@ -151,6 +162,7 @@ public class GUIGHMainMenu : MonoBehaviour
         // Fade in and out
         newGame = true;
         fadingIn = true;
+
         blackSpace.SetActive(true);
     }
 
@@ -208,9 +220,16 @@ public class GUIGHMainMenu : MonoBehaviour
     // General
     public void BackButton()
     {
-        mainMenu.SetActive(true);
-        texturePackMenu.SetActive(false);
-        optionsMenu.SetActive(false);
+        if (GameFlow.gameState == GameFlow.GameState.MENU)
+        {
+            mainMenu.SetActive(true);
+            texturePackMenu.SetActive(false);
+            optionsMenu.SetActive(false);
+        }
+        else
+        {
+            GameGUI.GHMainMenu.SetActive(false);
+        }
     }
 
 

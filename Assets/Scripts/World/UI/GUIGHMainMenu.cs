@@ -43,6 +43,7 @@ public class GUIGHMainMenu : MonoBehaviour
 
         mainMenu.SetActive(true);
         texturePackMenu.SetActive(false);
+        optionsMenu.SetActive(false);
         blackSpace.SetActive(false);
     }
 

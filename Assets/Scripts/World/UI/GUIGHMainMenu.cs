@@ -24,6 +24,7 @@ public class GUIGHMainMenu : MonoBehaviour
     bool fadingIn = false;
     bool fadingOut = false;
 
+
     void Awake()
     {
         GameGUI.GHMainMenu = transform.parent.FindChild("GH Main Menu").gameObject;

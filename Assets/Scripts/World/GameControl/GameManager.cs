@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using XInputDotNetPure;
 
 public class GameManager : MonoBehaviour
 {
@@ -13,7 +14,8 @@ public class GameManager : MonoBehaviour
     // Main control classes
     private Enemy enemy;
     private Skill skill;
-
+    private GamePadState padState;
+    private PlayerIndex padIndex;
 
     // Save
     public GameSerializer gameSerializer;
@@ -79,6 +81,9 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
+        // Gamepad
+        padState = GamePad.GetState(padIndex);
+
         if (GameFlow.gameState == GameFlow.GameState.MENU)
         {
             Cursor.visible = true;
@@ -120,7 +125,7 @@ public class GameManager : MonoBehaviour
             //+ Controllers
             activeController.Update();
 
-            if (Input.GetKeyUp(KeyCode.Escape))
+            if ((Input.GetKeyUp(KeyCode.Escape)) || ((padState.IsConnected) && (padState.Buttons.Start == ButtonState.Released)))
             {
                 if (!GameFlow.onInterface)
                     GameFlow.pause = !GameFlow.pause;

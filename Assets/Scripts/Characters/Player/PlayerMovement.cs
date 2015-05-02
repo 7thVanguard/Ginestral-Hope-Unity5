@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using XInputDotNetPure;
 
 
 public class PlayerMovement
@@ -8,6 +9,8 @@ public class PlayerMovement
     private Player player;
     private MainCamera mainCamera;
 
+    private GamePadState padState;
+    private PlayerIndex padIndex;
     
     private Vector3 objectiveDirection;
     private Vector3 interpolateDirection;
@@ -39,7 +42,7 @@ public class PlayerMovement
         // Jump
         if (player.controller.isGrounded)
         {
-            if (Input.GetKey(KeyCode.Space))
+            if ((Input.GetKey(KeyCode.Space)) || ((padState.IsConnected) && (padState.Buttons.A == ButtonState.Released)))
             {
                 objectiveDirection = new Vector3(objectiveDirection.x, player.jumpInitialSpeed, objectiveDirection.z);
             }
@@ -95,8 +98,12 @@ public class PlayerMovement
 
     private void HorizontalMovement(float speed, float root)
     {
+        // Gamepad
+        padState = GamePad.GetState(padIndex);
+
         player.isMoving = true;
 
+        // Keyboard
         // Assign a direction depending on the input introduced
         if ((Input.GetKey(KeyCode.W)) && (Input.GetKey(KeyCode.A)))
             objectiveDirection = new Vector3(-root, objectiveDirection.y, root);
@@ -122,6 +129,11 @@ public class PlayerMovement
                 player.isMoving = false;
             }
         }
+
+        // GamePad
+        if (padState.IsConnected)
+            if ((padState.ThumbSticks.Left.X != 0) || (padState.ThumbSticks.Left.Y != 0))
+                objectiveDirection = new Vector3(padState.ThumbSticks.Left.X * speed, objectiveDirection.y, padState.ThumbSticks.Left.Y * speed);
 
         // Player looking at movement direction
         if (player.isMoving)

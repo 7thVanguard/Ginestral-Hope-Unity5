@@ -1,10 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
+using XInputDotNetPure;
 
 public class CameraMovement
 {
     Player player;
     MainCamera mainCamera;
+
+    private GamePadState padState;
+    private PlayerIndex padIndex;
 
     RaycastHit impact;
 
@@ -28,6 +32,9 @@ public class CameraMovement
 
     public void Update()
     {
+        // Gamepad
+        padState = GamePad.GetState(padIndex);
+
         if (GameFlow.gameState == GameFlow.GameState.GAME && !GameFlow.onInterface)
         {
             if (GameFlow.gameMode == GameFlow.GameMode.DEVELOPER)
@@ -62,10 +69,22 @@ public class CameraMovement
                 {
                     mainCamera.objectivePosition += Input.GetAxis("Mouse X") * mainCamera.mouseSensitivityX;
                     mainCamera.angleSight -= Input.GetAxis("Mouse Y") * mainCamera.mouseSensitivityY;
+
+                    // Pad input
+                    if (padState.IsConnected)
+                    {
+                        mainCamera.objectivePosition += padState.ThumbSticks.Right.X * mainCamera.mouseSensitivityX;
+                        mainCamera.angleSight -= padState.ThumbSticks.Right.Y * mainCamera.mouseSensitivityY;
+                    }
                 }
 
                 if (Input.GetAxis("Mouse X") != 0 || Input.GetAxis("Mouse Y") != 0)
                     mainCamera.isMoving = true;
+                else if (padState.IsConnected)
+                {
+                    if (padState.ThumbSticks.Right.X != 0 || padState.ThumbSticks.Right.Y != 0)
+                        mainCamera.isMoving = true;
+                }
                 else
                     mainCamera.isMoving = false;
 

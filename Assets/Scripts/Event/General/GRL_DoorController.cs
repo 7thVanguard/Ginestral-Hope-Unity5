@@ -9,6 +9,8 @@ public class GRL_DoorController : MonoBehaviour
     public GameObject secondDoor;
     public Vector3 firstDoorObjectivePosition;
     public Vector3 secondDoorObjectivePosition;
+    private Vector3 firstDoorBasePosition;
+    private Vector3 secondDoorBasePosition;
 
     public Color ambient;
 
@@ -18,6 +20,13 @@ public class GRL_DoorController : MonoBehaviour
     private bool active;
 
     private bool inTrigger = false;
+
+
+    void Start()
+    {
+        firstDoorBasePosition = firstDoor.transform.position;
+        secondDoorBasePosition = secondDoor.transform.position;
+    }
 
 
     void Update()
@@ -30,6 +39,14 @@ public class GRL_DoorController : MonoBehaviour
             timeCounter -= Time.deltaTime;
             if (timeCounter < 0)
                 active = false;
+        }
+
+        // Reset
+        if (GameFlow.resetState == GameFlow.ResetState.Reset)
+        {
+            active = false;
+            firstDoor.transform.position = firstDoorBasePosition;
+            secondDoor.transform.position = secondDoorBasePosition;
         }
     }
 

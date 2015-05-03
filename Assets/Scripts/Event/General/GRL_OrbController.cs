@@ -26,6 +26,16 @@ public class GRL_OrbController : MonoBehaviour
             if (active)
                 finished = (EventsLib.GoAroundPlayer(greenOrb));
 
+        // Reset
+        if (GameFlow.resetState == GameFlow.ResetState.Reset)
+            if (finished)
+            {
+                finished = false;
+                active = false;
+                greenOrb = GameObject.Instantiate((GameObject)Resources.Load("Particle Systems/Prefabs/Green Orb")) as GameObject;
+                greenOrb.transform.parent = this.transform;
+                greenOrb.transform.localPosition = Vector3.zero;
+            }
     }
 
 

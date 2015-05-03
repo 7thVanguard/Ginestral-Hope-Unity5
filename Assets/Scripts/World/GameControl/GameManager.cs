@@ -185,6 +185,12 @@ public class GameManager : MonoBehaviour
             // Removes the reseted chunk from the list
             Global.world.chunksToReset.Remove(Global.world.chunksToReset[0]);
         }
+
+        // Reset gameplay
+        if (GameFlow.resetState == GameFlow.ResetState.New)
+            GameFlow.resetState = GameFlow.ResetState.Reset;
+        else if (GameFlow.resetState == GameFlow.ResetState.Reset)
+            GameFlow.resetState = GameFlow.ResetState.End;
     }
 
 

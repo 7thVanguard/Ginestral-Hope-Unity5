@@ -16,6 +16,7 @@ public class FireThrower : MonoBehaviour
 
 	void Update ()
     {
+        /*
         // We wait for the beginning
         if (beginDelay > 0)
             beginDelay -= Time.deltaTime;
@@ -45,5 +46,6 @@ public class FireThrower : MonoBehaviour
                 fireBall.GetComponent<FireBallBehaviour>().damage = damage;
             }
         }
+         * */
 	}
 }

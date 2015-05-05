@@ -104,7 +104,7 @@ public static class EventsLib
             GUI.color = new Color(1, 1, 1, 1);
         }
     }
-    public static GameObject DrawOutlineShader(GameObject parentObj, GameObject outline)
+    public static GameObject DrawOutlineShader(GameObject parentObj, GameObject outline, float outlineValue, Color color)
     {
         outline = new GameObject("Outline");
         outline.transform.parent = parentObj.transform;
@@ -118,8 +118,8 @@ public static class EventsLib
         outline.GetComponent<MeshFilter>().mesh = parentObj.transform.GetComponent<MeshFilter>().mesh;
 
         outline.GetComponent<Renderer>().material.shader = Shader.Find("Ginestral/Silhouette Only");
-        outline.GetComponent<Renderer>().material.SetColor("_OutlineColor", Color.red);
-        outline.GetComponent<Renderer>().material.SetFloat("_Outline", 0.008f);
+        outline.GetComponent<Renderer>().material.SetColor("_OutlineColor", color);
+        outline.GetComponent<Renderer>().material.SetFloat("_Outline", outlineValue);
 
         return outline;
     }

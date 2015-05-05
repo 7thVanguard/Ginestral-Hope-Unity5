@@ -39,7 +39,7 @@ public class GRL_SignalPlatform : MonoBehaviour
     void OnTriggerStay(Collider other)
     {
         if (other.tag == "Player")
-            other.transform.parent = transform;
+            other.transform.parent = transform.FindChild("Collider");
     }
 
 

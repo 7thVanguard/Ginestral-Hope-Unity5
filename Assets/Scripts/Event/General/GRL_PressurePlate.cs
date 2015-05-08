@@ -13,7 +13,7 @@ public class GRL_PressurePlate : MonoBehaviour
 
     void Awake()
     {
-        outline = EventsLib.DrawOutlineShader(transform.parent.gameObject, outline, 0.020f, Color.green);
+        
     }
 
 

@@ -22,6 +22,7 @@ public class GUIGHMainMenu : MonoBehaviour
 
     bool newGame = false;
     bool fadingIn = false;
+    bool loading = false;
     bool fadingOut = false;
 
 
@@ -56,6 +57,14 @@ public class GUIGHMainMenu : MonoBehaviour
 
     void Update()
     {
+        if (Input.GetKeyUp(KeyCode.R))
+        {
+            newGame = true;
+            fadingIn = true;
+
+            blackSpace.SetActive(true);
+        }
+
         // Alpha buttons animation
         if (menuColor < 1)
         {
@@ -91,7 +100,7 @@ public class GUIGHMainMenu : MonoBehaviour
                 {
                     alphaCounterBlackScreen = 1;
                     fadingIn = false;
-                    fadingOut = true;
+                    loading = true;
 
                     // Prepare for the options pause menu
                     GameFlow.gameState = GameFlow.GameState.GAME;
@@ -100,6 +109,13 @@ public class GUIGHMainMenu : MonoBehaviour
                     texturePackMenu.SetActive(false);
                     Deactivate();
                 }
+            }
+            else if (loading)
+            {
+                PrepareNewGame();
+
+                loading = false;
+                fadingOut = true;
             }
             else if (fadingOut)
             {
@@ -128,43 +144,6 @@ public class GUIGHMainMenu : MonoBehaviour
     // New Game
     public void NewGameButton()
     {
-        //Global.world.worldObj.GetComponent<GameManager>().gameSerializer.Load(Global.world, Global.player, "NewGameGH");
-
-        // World preparation
-        Global.mainCamera.cameraObj.GetComponent<Camera>().renderingPath = RenderingPath.DeferredLighting;
-
-        foreach (Transform child in Global.world.worldObj.transform)
-            GameObject.Destroy(child.gameObject);
-
-        GameObject.Destroy(Global.world.geometryController);
-        GameObject.Destroy(Global.world.eventsController);
-        GameObject.Destroy(Global.world.interactivesController);
-        GameObject.Destroy(Global.world.enemiesController);
-        GameObject.Destroy(Global.world.emitersController);
-
-        // Player
-        Global.player.playerObj.transform.position = new Vector3(34.5f, 1, 17);
-        Global.player.playerObj.transform.eulerAngles = new Vector3(0, 160, 0);
-        Global.player.orbsCollected = 0;
-
-        // Camera
-        Global.mainCamera.cameraObj.GetComponent<Camera>().backgroundColor = new Color32(255, 166, 71, 255);
-
-        // Sun
-        Global.sun.sunObj.transform.position = new Vector3(13, 30, 100);
-        Global.sun.sunObj.transform.eulerAngles = new Vector3(14.59f, 171, 1.1f);
-        Global.sun.sunObj.transform.GetComponent<Light>().color = new Color32(230, 174, 71, 255);
-        Global.sun.lensFlare.color = new Color32(255, 141, 0, 255);
-        Global.sun.sunObj.transform.GetComponent<Light>().color = new Color32(230, 174, 71, 255);
-
-        // Renderer
-        RenderSettings.ambientLight = new Color32(43, 45, 37, 255);
-
-        // Reset
-        GameFlow.resetState = GameFlow.ResetState.New;
-        GameFlow.readyToReset = true;
-
-        // Fade in and out
         newGame = true;
         fadingIn = true;
 
@@ -277,6 +256,44 @@ public class GUIGHMainMenu : MonoBehaviour
     public void SliderGraphicsQuality()
     {
         QualitySettings.SetQualityLevel((int)transform.parent.FindChild("GH Main Menu").FindChild("Options Menu").FindChild("SLD Graphics Quality").GetComponent<Slider>().value);
+    }
+
+
+    private void PrepareNewGame()
+    {
+        // World preparation
+        Global.mainCamera.cameraObj.GetComponent<Camera>().renderingPath = RenderingPath.DeferredLighting;
+
+        foreach (Transform child in Global.world.worldObj.transform)
+            GameObject.Destroy(child.gameObject);
+
+        GameObject.Destroy(Global.world.geometryController);
+        GameObject.Destroy(Global.world.eventsController);
+        GameObject.Destroy(Global.world.interactivesController);
+        GameObject.Destroy(Global.world.enemiesController);
+        GameObject.Destroy(Global.world.emitersController);
+
+        // Player
+        Global.player.playerObj.transform.position = new Vector3(34.5f, 1, 17);
+        Global.player.playerObj.transform.eulerAngles = new Vector3(0, 160, 0);
+        Global.player.orbsCollected = 0;
+
+        // Camera
+        Global.mainCamera.cameraObj.GetComponent<Camera>().backgroundColor = new Color32(255, 166, 71, 255);
+
+        // Sun
+        Global.sun.sunObj.transform.position = new Vector3(13, 30, 100);
+        Global.sun.sunObj.transform.eulerAngles = new Vector3(14.59f, 171, 1.1f);
+        Global.sun.sunObj.transform.GetComponent<Light>().color = new Color32(230, 174, 71, 255);
+        Global.sun.lensFlare.color = new Color32(255, 141, 0, 255);
+        Global.sun.sunObj.transform.GetComponent<Light>().color = new Color32(230, 174, 71, 255);
+
+        // Renderer
+        RenderSettings.ambientLight = new Color32(43, 45, 37, 255);
+
+        // Reset
+        GameFlow.resetState = GameFlow.ResetState.New;
+        GameFlow.readyToReset = true;
     }
 
 

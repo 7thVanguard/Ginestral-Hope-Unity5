@@ -35,7 +35,7 @@ public class CameraMovement
         // Gamepad
         padState = GamePad.GetState(padIndex);
 
-        if (GameFlow.gameState == GameFlow.GameState.GAME && !GameFlow.onInterface)
+        if (GameFlow.gameState == GameFlow.GameState.GAME && !GameFlow.onInterface && !GameFlow.onCameraTravel)
         {
             if (GameFlow.gameMode == GameFlow.GameMode.DEVELOPER)
             {

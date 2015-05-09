@@ -32,6 +32,7 @@ public static class GameFlow
     public static bool readyToReset = false;
     public static bool pause = false;
     public static bool onInterface = false;
+    public static bool onCameraTravel = false;
     public static bool loading = false;
 
     public static bool orbCollected = false;

@@ -73,6 +73,7 @@ public static class EventsLib
         {
             GameObject.Destroy(obj);
             Global.player.orbsCollected++;
+            GameFlow.orbCollected = true;
             return true;
         }
         else

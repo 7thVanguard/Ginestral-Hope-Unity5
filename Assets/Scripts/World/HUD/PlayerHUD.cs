@@ -7,10 +7,8 @@ public class PlayerHUD
     private Texture2D lifeEmpty;
     private Texture2D coin;
 
-    private Color orbColor = Color.white;
-
-    private float collectedOrbMargin = 0;
     private int margin = 5;
+    private int collectorYposition = 0;
 
 
     public void Start()
@@ -36,45 +34,14 @@ public class PlayerHUD
 
 
         // Orbs
-        float textureSize = Screen.width / 60;
-
         GUI.skin.label.fontSize = 30;
         GUI.skin.font = (Font)Resources.Load("Fonts/Amigo-Regular");
 
-        // Texture parameters
-        if (GameFlow.orbCollected)
-        {
-            GameFlow.orbCollected = false;
-            orbColor.g = 0;
-            orbColor.b = 0;
-            collectedOrbMargin = textureSize / 2;
-        }
-        else
-        {
-            if (orbColor.g < 1)
-            {
-                orbColor.g += Time.deltaTime / 3;
-                orbColor.b += Time.deltaTime / 3;
 
-                collectedOrbMargin = (textureSize / 2) * (1 - orbColor.g);
-            }
-            else
-            {
-                orbColor.g = 1;
-                orbColor.b = 1;
-
-                collectedOrbMargin = 0;
-            }
-        }
-
-        GUI.color = orbColor;
-        GUI.DrawTextureWithTexCoords(new Rect(Screen.width / 2 - textureSize - collectedOrbMargin / 2, margin - collectedOrbMargin / 2, 2 * textureSize + collectedOrbMargin, 2 * textureSize + collectedOrbMargin), coin, 
+        GUI.DrawTextureWithTexCoords(new Rect(Screen.width / 2 - Screen.width / 60, margin + collectorYposition, Screen.width / 30, Screen.width / 30), coin, 
                                      new Rect(0, 0, 1, 1));
-        GUI.color = Color.white;
 
-
-        // Draw text
-        GUI.Label(new Rect(margin + Screen.width / 2 + Screen.width / 60, margin, Screen.width / 3, Screen.width / 3), 
+        GUI.Label(new Rect(margin + Screen.width / 2 + Screen.width / 60, margin + collectorYposition, Screen.width / 3, Screen.width / 30), 
                   "x " + Global.player.orbsCollected);
     }
 }

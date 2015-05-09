@@ -29,6 +29,7 @@ public static class GameFlow
 	// Flow
     public enum ResetState { New, Reset, End }
     public static ResetState resetState = ResetState.End;
+    public static bool readyToReset = false;
     public static bool pause = false;
     public static bool onInterface = false;
     public static bool loading = false;

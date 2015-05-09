@@ -10,12 +10,23 @@ public class NGGH_NewLevel : MonoBehaviour
 
 	void Update ()
     {
-        if (GameFlow.resetState == GameFlow.ResetState.Reset)
+        if (GameFlow.readyToReset)
+        {
+            foreach (GameObject gameObject in Spawn)
+                gameObject.SetActive(true);
+            foreach (GameObject gameObject in Despawn)
+                gameObject.SetActive(true);
+        }
+
+        // Despawn when everything has been reset
+        if (GameFlow.resetState == GameFlow.ResetState.End && GameFlow.readyToReset)
         {
             foreach (GameObject gameObject in Spawn)
                 gameObject.SetActive(true);
             foreach (GameObject gameObject in Despawn)
                 gameObject.SetActive(false);
+
+            GameFlow.readyToReset = false;
         }
 	}
 }

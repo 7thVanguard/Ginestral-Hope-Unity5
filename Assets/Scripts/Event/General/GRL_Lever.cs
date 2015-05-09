@@ -20,6 +20,18 @@ public class GRL_Lever : MonoBehaviour
     }
 
 
+    void Update()
+    {
+        // Reset
+        if (GameFlow.resetState == GameFlow.ResetState.Reset)
+            emitting = false;
+
+        if (emitting)
+            transform.FindChild("Pull").localRotation = Quaternion.Lerp(transform.FindChild("Pull").localRotation, Quaternion.Euler(45, 0, 0), 0.1f);
+        else
+            transform.FindChild("Pull").localRotation = Quaternion.Lerp(transform.FindChild("Pull").localRotation, Quaternion.Euler(315, 0, 0), 0.1f);
+    }
+
     void OnTriggerStay(Collider other)
     {
         inTrigger = true;
@@ -40,19 +52,11 @@ public class GRL_Lever : MonoBehaviour
 
 
             if (emitting)
-            {
-                transform.FindChild("Pull").localRotation = Quaternion.Lerp(transform.FindChild("Pull").localRotation, Quaternion.Euler(45, 0, 0), 0.1f);
-
                 foreach (GameObject go in List)
                     go.SetActive(true);
-            }
             else
-            {
-                transform.FindChild("Pull").localRotation = Quaternion.Lerp(transform.FindChild("Pull").localRotation, Quaternion.Euler(315, 0, 0), 0.1f);
-
                 foreach (GameObject go in List)
                     go.SetActive(false);
-            }
         }
     }
 

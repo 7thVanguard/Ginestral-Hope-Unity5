@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using System.Collections;
-using System.Collections.Generic;
 
 public class NGGH_ThirdInstanceWagon : MonoBehaviour
 {
@@ -53,7 +52,8 @@ public class NGGH_ThirdInstanceWagon : MonoBehaviour
 
     void OnGUI()
     {
-        if (inTrigger)
-            EventsLib.DrawInteractivity();
+        if (!finish)
+            if (inTrigger)
+                EventsLib.DrawInteractivity();
     }
 }

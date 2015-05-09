@@ -30,8 +30,11 @@ public class PlayerGameController : GameController
 
         if (!GameFlow.pause && !GameFlow.loading)
         {
-            playerMovement.NormalMovementUpdate();
-            playerCombat.Update();
+            if (player.currentLife > 0)
+            {
+                playerMovement.NormalMovementUpdate();
+                playerCombat.Update();
+            }
             cameraMovement.Update();
             cameraRaycast.Update();
         }

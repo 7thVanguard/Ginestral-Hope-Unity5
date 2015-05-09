@@ -29,6 +29,7 @@ public class Player
 
     // Animation
     public int damageAnimTime = 5;
+    public int animationCoolDown = 0;
 
     // Skills
     public bool unlockedSkillFireBall = false;

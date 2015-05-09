@@ -28,6 +28,9 @@ public class PlayerMovement
 
     public void NormalMovementUpdate()
     {
+        if (Input.GetKeyUp(KeyCode.B))
+            player.playerObj.GetComponent<PlayerComponent>().Damage(1);
+
         // Calculates the module of the speed
         float root = Mathf.Sqrt(player.runSpeed * player.runSpeed / 2);
 
@@ -161,15 +164,28 @@ public class PlayerMovement
 
     private void Animation(string animationName, bool grounded, bool air)
     {
-        if (grounded)
+        if (player.currentLife > 0)
         {
-            if (player.controller.isGrounded)
-                player.playerObj.transform.FindChild("Mesh").GetComponent<Animation>().CrossFade(animationName);
-        }
-        else if (air)
-        {
-            if (!player.controller.isGrounded)
-                player.playerObj.transform.FindChild("Mesh").GetComponent<Animation>().CrossFade(animationName);
+            if (player.animationCoolDown == 0)
+            {
+                // Basic animation
+                if (grounded)
+                {
+                    if (player.controller.isGrounded)
+                        player.playerObj.transform.FindChild("Mesh").GetComponent<Animation>().CrossFade(animationName);
+                }
+                else if (air)
+                {
+                    if (!player.controller.isGrounded)
+                        player.playerObj.transform.FindChild("Mesh").GetComponent<Animation>().CrossFade(animationName);
+                }
+            }
+            else
+            {
+                player.animationCoolDown--;
+                if (player.isMoving)
+                    player.animationCoolDown = 0;
+            }
         }
     }
 }

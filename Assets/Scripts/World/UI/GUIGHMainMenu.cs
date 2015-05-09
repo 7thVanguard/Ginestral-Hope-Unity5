@@ -341,7 +341,10 @@ public class GUIGHMainMenu : MonoBehaviour
         // Player
         Global.player.playerObj.transform.position = new Vector3(34.5f, 1, 17);
         Global.player.playerObj.transform.eulerAngles = new Vector3(0, 160, 0);
+        Global.player.currentLife = Global.player.maxLife;
         Global.player.orbsCollected = 0;
+
+        Global.player.playerObj.transform.FindChild("Mesh").GetComponent<Animation>().Play("Idle");
 
         // Camera
         Global.mainCamera.cameraObj.GetComponent<Camera>().backgroundColor = new Color32(255, 166, 71, 255);

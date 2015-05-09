@@ -45,6 +45,8 @@ public class GRL_Lever : MonoBehaviour
                     emitting = !emitting;
                     keepPressed = true;
                     transform.GetComponent<AudioSource>().Play();
+                    Global.player.playerObj.transform.FindChild("Mesh").GetComponent<Animation>().Play("Interact");
+                    Global.player.animationCoolDown = 40;
                 }
             }
             else if (Input.GetKeyUp(KeyCode.E))

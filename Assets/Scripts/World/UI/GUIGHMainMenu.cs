@@ -17,13 +17,19 @@ public class GUIGHMainMenu : MonoBehaviour
 
     Texture2D selectedAtlas;
 
-    float menuColor = 0;
+    Color menuColor = Color.black;
+    float menualphaColor = 0;
     float alphaCounterBlackScreen = 0;
 
+    // Menu control
     bool newGame = false;
     bool fadingIn = false;
     bool loading = false;
     bool fadingOut = false;
+
+    bool pointerInNewButton = false;
+    bool pointerInOptionsButton = false;
+    bool pointerInExitButton = false;
 
 
     void Awake()
@@ -63,30 +69,6 @@ public class GUIGHMainMenu : MonoBehaviour
             fadingIn = true;
 
             blackSpace.SetActive(true);
-        }
-
-        // Alpha buttons animation
-        if (menuColor < 1)
-        {
-            menuColor += Time.deltaTime / 4;
-            buttonNewGame.GetComponent<Image>().color = new Color(1, 1, 1, menuColor);
-            buttonOptions.GetComponent<Image>().color = new Color(1, 1, 1, menuColor);
-            buttonExitGame.GetComponent<Image>().color = new Color(1, 1, 1, menuColor);
-
-            buttonNewGame.transform.FindChild("Text").GetComponent<Text>().color = new Color(0, 0, 0, menuColor);
-            buttonOptions.transform.FindChild("Text").GetComponent<Text>().color = new Color(0, 0, 0, menuColor);
-            buttonExitGame.transform.FindChild("Text").GetComponent<Text>().color = new Color(0, 0, 0, menuColor);
-        }
-        else if (menuColor > 1)
-        {
-            menuColor = 1;
-            buttonNewGame.GetComponent<Image>().color = new Color(1, 1, 1, menuColor);
-            buttonOptions.GetComponent<Image>().color = new Color(1, 1, 1, menuColor);
-            buttonExitGame.GetComponent<Image>().color = new Color(1, 1, 1, menuColor);
-
-            buttonNewGame.transform.FindChild("Text").GetComponent<Text>().color = new Color(0, 0, 0, menuColor);
-            buttonOptions.transform.FindChild("Text").GetComponent<Text>().color = new Color(0, 0, 0, menuColor);
-            buttonExitGame.transform.FindChild("Text").GetComponent<Text>().color = new Color(0, 0, 0, menuColor);
         }
 
         // Fade in and out at new game
@@ -129,8 +111,61 @@ public class GUIGHMainMenu : MonoBehaviour
                     blackSpace.SetActive(false);
                 }
             }
-            
+
             blackSpace.GetComponent<Image>().color = new Color(0, 0, 0, alphaCounterBlackScreen);
+        }
+
+        // Update only if we are int he main menu
+        if (GameGUI.GHMainMenu.activeSelf)
+        {
+            // Alpha buttons animation
+            // Initial fade
+            if (menualphaColor == 0)
+            {
+                menualphaColor += Time.deltaTime / 4;
+                buttonNewGame.transform.FindChild("Text").GetComponent<Text>().color = new Color(0, 0, 0, menualphaColor);
+                buttonOptions.transform.FindChild("Text").GetComponent<Text>().color = new Color(0, 0, 0, menualphaColor);
+                buttonExitGame.transform.FindChild("Text").GetComponent<Text>().color = new Color(0, 0, 0, menualphaColor);
+            }
+            else if (menualphaColor < 1)
+            {
+                menualphaColor += Time.deltaTime / 4;
+                buttonNewGame.GetComponent<Image>().color = new Color(1, 1, 1, menualphaColor);
+                buttonOptions.GetComponent<Image>().color = new Color(1, 1, 1, menualphaColor);
+                buttonExitGame.GetComponent<Image>().color = new Color(1, 1, 1, menualphaColor);
+
+                buttonNewGame.transform.FindChild("Text").GetComponent<Text>().color += new Color(0, 0, 0, menualphaColor - buttonNewGame.transform.FindChild("Text").GetComponent<Text>().color.a);
+                buttonOptions.transform.FindChild("Text").GetComponent<Text>().color += new Color(0, 0, 0, menualphaColor - buttonOptions.transform.FindChild("Text").GetComponent<Text>().color.a);
+                buttonExitGame.transform.FindChild("Text").GetComponent<Text>().color += new Color(0, 0, 0, menualphaColor - buttonExitGame.transform.FindChild("Text").GetComponent<Text>().color.a);
+            }
+            else if (menualphaColor > 1)
+            {
+                menualphaColor = 1;
+                buttonNewGame.GetComponent<Image>().color = new Color(1, 1, 1, menualphaColor);
+                buttonOptions.GetComponent<Image>().color = new Color(1, 1, 1, menualphaColor);
+                buttonExitGame.GetComponent<Image>().color = new Color(1, 1, 1, menualphaColor);
+
+                buttonNewGame.transform.FindChild("Text").GetComponent<Text>().color += new Color(0, 0, 0, 1 - buttonNewGame.transform.FindChild("Text").GetComponent<Text>().color.a);
+                buttonOptions.transform.FindChild("Text").GetComponent<Text>().color += new Color(0, 0, 0, 1 - buttonOptions.transform.FindChild("Text").GetComponent<Text>().color.a);
+                buttonExitGame.transform.FindChild("Text").GetComponent<Text>().color += new Color(0, 0, 0, 1 - buttonExitGame.transform.FindChild("Text").GetComponent<Text>().color.a);
+            }
+
+
+            // Button events
+            if (pointerInNewButton)
+                buttonNewGame.transform.FindChild("Text").GetComponent<Text>().color = Color.Lerp(buttonNewGame.transform.FindChild("Text").GetComponent<Text>().color, new Color32(80, 40, 10, (byte)(255 * menualphaColor)), 0.1f);
+            else
+                buttonNewGame.transform.FindChild("Text").GetComponent<Text>().color = Color.Lerp(buttonNewGame.transform.FindChild("Text").GetComponent<Text>().color, new Color(0, 0, 0, menualphaColor), 0.1f);
+
+            if (pointerInOptionsButton)
+                buttonOptions.transform.FindChild("Text").GetComponent<Text>().color = Color.Lerp(buttonOptions.transform.FindChild("Text").GetComponent<Text>().color, new Color32(80, 40, 10, (byte)(255 * menualphaColor)), 0.1f);
+            else
+                buttonOptions.transform.FindChild("Text").GetComponent<Text>().color = Color.Lerp(buttonOptions.transform.FindChild("Text").GetComponent<Text>().color, new Color(0, 0, 0, menualphaColor), 0.1f);
+
+            if (pointerInExitButton)
+                buttonExitGame.transform.FindChild("Text").GetComponent<Text>().color = Color.Lerp(buttonExitGame.transform.FindChild("Text").GetComponent<Text>().color, new Color32(80, 40, 10, (byte)(255 * menualphaColor)), 0.1f);
+            else
+                buttonExitGame.transform.FindChild("Text").GetComponent<Text>().color = Color.Lerp(buttonExitGame.transform.FindChild("Text").GetComponent<Text>().color, new Color(0, 0, 0, menualphaColor), 0.1f);
         }
     }
 
@@ -148,6 +183,36 @@ public class GUIGHMainMenu : MonoBehaviour
         fadingIn = true;
 
         blackSpace.SetActive(true);
+    }
+
+    public void OnPointerEnterNewButton()
+    {
+        pointerInNewButton = true;
+    }
+
+    public void OnPointerExitNewButton()
+    {
+        pointerInNewButton = false;
+    }
+
+    public void OnPointerEnterOptionsButton()
+    {
+        pointerInOptionsButton = true;
+    }
+
+    public void OnPointerExitOptionsButton()
+    {
+        pointerInOptionsButton = false;
+    }
+
+    public void OnPointerEnterExitButton()
+    {
+        pointerInExitButton = true;
+    }
+
+    public void OnPointerExitExitButton()
+    {
+        pointerInExitButton = false;
     }
 
     public void OptionsButton()

@@ -34,6 +34,8 @@ public static class GameFlow
     public static bool onInterface = false;
     public static bool loading = false;
 
+    public static bool orbCollected = false;
+
 
     // Selection
     public static Material selectedAtlas = Global.G1;

@@ -13,7 +13,7 @@ public class EventComponent : MonoBehaviour
         if (this.name != "none")
         {
             this.gameObject.name = this.name;
-            UnityEngineInternal.APIUpdaterRuntimeServices.AddComponent(this.gameObject, "Assets/Scripts/Event/EventComponent.cs (16,13)", this.name);
+            // UnityEngineInternal.APIUpdaterRuntimeServices.AddComponent(this.gameObject, "Assets/Scripts/Event/EventComponent.cs (16,13)", this.name);
         }
 	}
 }

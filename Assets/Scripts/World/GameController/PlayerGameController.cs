@@ -35,6 +35,7 @@ public class PlayerGameController : GameController
                 playerMovement.NormalMovementUpdate();
                 playerCombat.Update();
             }
+
             cameraMovement.Update();
             cameraRaycast.Update();
         }

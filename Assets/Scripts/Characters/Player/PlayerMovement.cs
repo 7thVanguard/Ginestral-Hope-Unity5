@@ -9,8 +9,9 @@ public class PlayerMovement
     private Player player;
     private MainCamera mainCamera;
 
-    private GamePadState padState;
-    private PlayerIndex padIndex;
+    //private GamePadState padState;
+    //private GamePadState previousPadState;
+    //private PlayerIndex padIndex;
     
     private Vector3 objectiveDirection;
     private Vector3 interpolateDirection;
@@ -28,6 +29,9 @@ public class PlayerMovement
 
     public void NormalMovementUpdate()
     {
+        //padState = GamePad.GetState(padIndex);
+
+        // Auto damage
         if (Input.GetKeyUp(KeyCode.B))
             player.playerObj.GetComponent<PlayerComponent>().Damage(1);
 
@@ -45,7 +49,7 @@ public class PlayerMovement
         // Jump
         if (player.controller.isGrounded)
         {
-            if ((Input.GetKey(KeyCode.Space)) || ((padState.IsConnected) && (padState.Buttons.A == ButtonState.Released)))
+            if ((Input.GetKey(KeyCode.Space))/* || padState.Buttons.A == ButtonState.Pressed*/)
             {
                 objectiveDirection = new Vector3(objectiveDirection.x, player.jumpInitialSpeed, objectiveDirection.z);
             }
@@ -101,9 +105,6 @@ public class PlayerMovement
 
     private void HorizontalMovement(float speed, float root)
     {
-        // Gamepad
-        padState = GamePad.GetState(padIndex);
-
         player.isMoving = true;
 
         // Keyboard
@@ -134,9 +135,8 @@ public class PlayerMovement
         }
 
         // GamePad
-        if (padState.IsConnected)
-            if ((padState.ThumbSticks.Left.X != 0) || (padState.ThumbSticks.Left.Y != 0))
-                objectiveDirection = new Vector3(padState.ThumbSticks.Left.X * speed, objectiveDirection.y, padState.ThumbSticks.Left.Y * speed);
+        //if ((padState.ThumbSticks.Left.X != 0) || (padState.ThumbSticks.Left.Y != 0))
+        //    objectiveDirection = new Vector3(padState.ThumbSticks.Left.X * speed, objectiveDirection.y, padState.ThumbSticks.Left.Y * speed);
 
         // Player looking at movement direction
         if (player.isMoving)

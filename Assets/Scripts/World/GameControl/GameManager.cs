@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     private Enemy enemy;
     private Skill skill;
     //private GamePadState padState;
+    //private GamePadState preaviousPadState;
     //private PlayerIndex padIndex;
 
     // Save
@@ -82,7 +83,7 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         // Gamepad
-        // padState = GamePad.GetState(padIndex);
+        //padState = GamePad.GetState(padIndex);
 
         if (GameFlow.gameState == GameFlow.GameState.MENU)
         {
@@ -125,7 +126,7 @@ public class GameManager : MonoBehaviour
             //+ Controllers
             activeController.Update();
 
-            if ((Input.GetKeyUp(KeyCode.Escape))/* || ((padState.IsConnected) && (padState.Buttons.Start == ButtonState.Released))*/)
+            if ((Input.GetKeyUp(KeyCode.Escape))/* || padState.Buttons.Start == ButtonState.Pressed*/)
             {
                 if (!GameFlow.onInterface)
                     GameFlow.pause = !GameFlow.pause;

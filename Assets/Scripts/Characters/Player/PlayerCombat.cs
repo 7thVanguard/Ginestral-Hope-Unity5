@@ -29,7 +29,7 @@ public class PlayerCombat
         if (mainCamera.raycast.distance < detectionDistance && mainCamera.raycast.distance != 0)
         {
             if (mainCamera.raycast.collider == null) { }
-            else if (mainCamera.raycast.collider.tag == "Enemy")
+            else if (mainCamera.raycast.collider.CompareTag("Enemy"))
                 target = mainCamera.raycast.transform.gameObject;
         }
 

@@ -3,10 +3,14 @@ using System.Collections;
 
 public class GUIGHPauseMenu : MonoBehaviour
 {
+    GameObject waterMark;
+
     void Awake()
     {
         GameGUI.GHPauseMenu = transform.parent.FindChild("GH Pause Menu").gameObject;
         GameGUI.GHPauseMenu.SetActive(false);
+
+        waterMark = transform.parent.FindChild("WaterMark").gameObject;
     }
 
 
@@ -14,6 +18,15 @@ public class GUIGHPauseMenu : MonoBehaviour
     {
         GameFlow.pause = false;
         Deactivate();
+    }
+
+
+    public void WaterMarkButton()
+    {
+        if (waterMark.activeSelf == true)
+            waterMark.SetActive(false);
+        else
+            waterMark.SetActive(true);
     }
 
 

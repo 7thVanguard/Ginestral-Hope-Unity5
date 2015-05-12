@@ -23,8 +23,6 @@ public class GRL_PressurePlate : MonoBehaviour
             transform.parent.localPosition = new Vector3(0, Mathf.Lerp(transform.parent.localPosition.y, pressedHeight, 0.1f), 0);
         else
             transform.parent.localPosition = new Vector3(0, Mathf.Lerp(transform.parent.localPosition.y, nonPressedHeight, 0.1f), 0);
-
-        EventsLib.FadeMaterialEmission(transform.parent.GetComponent<Renderer>().material);
     }
 
 

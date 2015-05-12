@@ -28,7 +28,7 @@ public class PlayerGameController : GameController
     {
         base.Update();
 
-        if (!GameFlow.pause)
+        if (!GameFlow.pause && !GameFlow.onInterface && !GameFlow.onCameraTravel)
         {
             if (player.currentLife > 0)
             {

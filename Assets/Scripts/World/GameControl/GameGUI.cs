@@ -7,4 +7,5 @@ public static class GameGUI
     public static GameObject GHPauseMenu;
     public static GameObject dimensionalMarket;
     public static GameObject developerMode;
+    public static GameObject codexMode;
 }

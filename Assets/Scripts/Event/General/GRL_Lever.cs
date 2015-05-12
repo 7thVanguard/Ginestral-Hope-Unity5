@@ -30,8 +30,6 @@ public class GRL_Lever : MonoBehaviour
             transform.FindChild("Pull").localRotation = Quaternion.Lerp(transform.FindChild("Pull").localRotation, Quaternion.Euler(45, 0, 0), 0.1f);
         else
             transform.FindChild("Pull").localRotation = Quaternion.Lerp(transform.FindChild("Pull").localRotation, Quaternion.Euler(315, 0, 0), 0.1f);
-
-        EventsLib.FadeMaterialEmission(transform.FindChild("Box").GetComponent<Renderer>().material);
     }
 
     void OnTriggerStay(Collider other)

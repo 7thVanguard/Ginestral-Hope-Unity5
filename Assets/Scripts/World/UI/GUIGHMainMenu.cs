@@ -152,19 +152,37 @@ public class GUIGHMainMenu : MonoBehaviour
 
             // Button events
             if (pointerInNewButton)
+            {
                 buttonNewGame.transform.FindChild("Text").GetComponent<Text>().color = Color.Lerp(buttonNewGame.transform.FindChild("Text").GetComponent<Text>().color, new Color32(80, 40, 10, (byte)(255 * menualphaColor)), 0.1f);
+                buttonNewGame.transform.FindChild("Text").localScale = Vector3.Lerp(buttonNewGame.transform.FindChild("Text").localScale, new Vector3(1.2f, 1.2f, 1), 0.1f);
+            }
             else
+            {
                 buttonNewGame.transform.FindChild("Text").GetComponent<Text>().color = Color.Lerp(buttonNewGame.transform.FindChild("Text").GetComponent<Text>().color, new Color(0, 0, 0, menualphaColor), 0.1f);
+                buttonNewGame.transform.FindChild("Text").localScale = Vector3.Lerp(buttonNewGame.transform.FindChild("Text").localScale, Vector3.one, 0.1f);
+            }
 
             if (pointerInOptionsButton)
+            {
                 buttonOptions.transform.FindChild("Text").GetComponent<Text>().color = Color.Lerp(buttonOptions.transform.FindChild("Text").GetComponent<Text>().color, new Color32(80, 40, 10, (byte)(255 * menualphaColor)), 0.1f);
+                buttonOptions.transform.FindChild("Text").localScale = Vector3.Lerp(buttonOptions.transform.FindChild("Text").localScale, new Vector3(1.2f, 1.2f, 1), 0.1f);
+            }
             else
+            {
                 buttonOptions.transform.FindChild("Text").GetComponent<Text>().color = Color.Lerp(buttonOptions.transform.FindChild("Text").GetComponent<Text>().color, new Color(0, 0, 0, menualphaColor), 0.1f);
+                buttonOptions.transform.FindChild("Text").localScale = Vector3.Lerp(buttonOptions.transform.FindChild("Text").localScale, Vector3.one, 0.1f);
+            }
 
             if (pointerInExitButton)
+            {
                 buttonExitGame.transform.FindChild("Text").GetComponent<Text>().color = Color.Lerp(buttonExitGame.transform.FindChild("Text").GetComponent<Text>().color, new Color32(80, 40, 10, (byte)(255 * menualphaColor)), 0.1f);
+                buttonExitGame.transform.FindChild("Text").localScale = Vector3.Lerp(buttonExitGame.transform.FindChild("Text").localScale, new Vector3(1.2f, 1.2f, 1), 0.1f);
+            }
             else
+            {
                 buttonExitGame.transform.FindChild("Text").GetComponent<Text>().color = Color.Lerp(buttonExitGame.transform.FindChild("Text").GetComponent<Text>().color, new Color(0, 0, 0, menualphaColor), 0.1f);
+                buttonExitGame.transform.FindChild("Text").localScale = Vector3.Lerp(buttonExitGame.transform.FindChild("Text").localScale, Vector3.one, 0.1f);
+            }
         }
     }
 

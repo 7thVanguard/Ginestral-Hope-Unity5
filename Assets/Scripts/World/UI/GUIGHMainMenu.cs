@@ -13,6 +13,7 @@ public class GUIGHMainMenu : MonoBehaviour
     GameObject buttonExitGame;
 
     GameObject blackSpace;
+    GameObject waterMark;
 
     Texture2D selectedAtlas;
 
@@ -46,6 +47,7 @@ public class GUIGHMainMenu : MonoBehaviour
         buttonExitGame = transform.parent.FindChild("GH Main Menu").FindChild("Main Menu").FindChild("BTN Exit Game").gameObject;
 
         blackSpace = transform.parent.FindChild("Black Space").gameObject;
+        waterMark = transform.parent.FindChild("WaterMark").gameObject;
 
         selectedAtlas = (Texture2D)Global.G1.mainTexture;
 
@@ -308,6 +310,15 @@ public class GUIGHMainMenu : MonoBehaviour
             GameObject.Destroy(chunkObj);
 
         Global.world.Init();
+    }
+
+
+    public void WaterMarkButton()
+    {
+        if (waterMark.activeSelf == true)
+            waterMark.SetActive(false);
+        else
+            waterMark.SetActive(true);
     }
 
 

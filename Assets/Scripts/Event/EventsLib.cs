@@ -124,6 +124,15 @@ public static class EventsLib
 
         return outline;
     }
+    public static void FadeMaterialEmission(Material material)
+    {
+        float emissionValue = Mathf.PingPong(Time.time / 2, 1.0f);
+
+        Color baseColor = Color.white;
+        Color finalColor = baseColor * Mathf.LinearToGammaSpace(emissionValue);
+
+        material.SetColor("_EmissionColor", finalColor);
+    }
     public static void DrawInteractivity()
     {
         GUI.DrawTextureWithTexCoords(new Rect(Screen.width * 2 / 3, Screen.height / 2 - 30, 60, 60), (Texture2D)Resources.Load("UI/Interactivity"),

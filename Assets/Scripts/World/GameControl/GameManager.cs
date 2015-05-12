@@ -14,9 +14,9 @@ public class GameManager : MonoBehaviour
     // Main control classes
     private Enemy enemy;
     private Skill skill;
-    //private GamePadState padState;
-    //private GamePadState preaviousPadState;
-    //private PlayerIndex padIndex;
+    private GamePadState padState;
+    private GamePadState previousPadState;
+    private PlayerIndex padIndex;
 
     // Save
     public GameSerializer gameSerializer;
@@ -83,7 +83,7 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         // Gamepad
-        //padState = GamePad.GetState(padIndex);
+        padState = GamePad.GetState(padIndex);
 
         if (GameFlow.gameState == GameFlow.GameState.MENU)
         {
@@ -126,7 +126,7 @@ public class GameManager : MonoBehaviour
             //+ Controllers
             activeController.Update();
 
-            if ((Input.GetKeyUp(KeyCode.Escape))/* || padState.Buttons.Start == ButtonState.Pressed*/)
+            if ((Input.GetKeyUp(KeyCode.Escape)) || (padState.Buttons.Start == ButtonState.Pressed && previousPadState.Buttons.Start == ButtonState.Released))
             {
                 if (!GameFlow.onInterface)
                     GameFlow.pause = !GameFlow.pause;
@@ -192,6 +192,8 @@ public class GameManager : MonoBehaviour
             GameFlow.resetState = GameFlow.ResetState.Reset;
         else if (GameFlow.resetState == GameFlow.ResetState.Reset)
             GameFlow.resetState = GameFlow.ResetState.End;
+
+        previousPadState = padState;
     }
 
 

@@ -4,8 +4,6 @@ using System.Collections;
 public class GRL_Codex : MonoBehaviour
 {
     public int tableNumber;
-
-    private bool active = false;
     private bool inTrigger = false;
 	
 	void Update () 
@@ -20,11 +18,9 @@ public class GRL_Codex : MonoBehaviour
         {
             inTrigger = true;
 
-            if (Input.GetKey(KeyCode.E))
-            {
-                active = true;
-                GameGUI.codexMode.GetComponent<GUICodexMode>().ActivateTable(tableNumber);
-            }
+            if (!GameFlow.onInterface)
+                if (Input.GetKey(KeyCode.E))
+                    GameGUI.codexMode.GetComponent<GUICodexMode>().ActivateTable(tableNumber);
         }
     }
 
@@ -39,7 +35,7 @@ public class GRL_Codex : MonoBehaviour
     void OnGUI()
     {
         if (inTrigger)
-            if (!active)
+            if (!GameFlow.onInterface)
                 EventsLib.DrawInteractivity();
     }
 }

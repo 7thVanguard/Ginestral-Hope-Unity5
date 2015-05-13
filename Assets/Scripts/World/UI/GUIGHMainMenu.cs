@@ -390,6 +390,7 @@ public class GUIGHMainMenu : MonoBehaviour
         Global.sun.sunObj.transform.GetComponent<Light>().color = new Color32(230, 174, 71, 255);
         Global.sun.lensFlare.color = new Color32(255, 141, 0, 255);
         Global.sun.sunObj.transform.GetComponent<Light>().color = new Color32(230, 174, 71, 255);
+        Global.sun.sunObj.transform.GetComponent<Light>().enabled = false;
 
         // Renderer
         RenderSettings.ambientLight = new Color32(43, 45, 37, 255);

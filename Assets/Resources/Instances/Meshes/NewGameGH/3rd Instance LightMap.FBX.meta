@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 7d9c47a7a0571104f907926ddd1fa0e3
-timeCreated: 1431531638
+guid: 2966ffb186efc4d45ba1d538c635fb10
+timeCreated: 1431550232
 licenseType: Free
 ModelImporter:
   serializedVersion: 18
@@ -9,7 +9,7 @@ ModelImporter:
     400000: //RootNode
     2300000: //RootNode
     3300000: //RootNode
-    4300000: ThirdIntance
+    4300000: Geometry001
   materials:
     importMaterials: 1
     materialName: 0

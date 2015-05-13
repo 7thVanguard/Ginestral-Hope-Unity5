@@ -16,6 +16,7 @@ public class GRL_SoundArea : MonoBehaviour
         volume = GetComponent<AudioSource>().volume;
 
         GetComponent<AudioSource>().maxDistance = Mathf.Sqrt(Mathf.Pow(GetComponent<BoxCollider>().size.x / 2, 2) + Mathf.Pow(GetComponent<BoxCollider>().size.z / 2, 2));
+        GetComponent<AudioSource>().volume = 0;
     }
 
 
@@ -31,12 +32,12 @@ public class GRL_SoundArea : MonoBehaviour
                     GetComponent<AudioSource>().Stop();
                 }
                 else
-                    GetComponent<AudioSource>().volume -= 0.2f * Time.deltaTime;
+                    GetComponent<AudioSource>().volume -= 0.2f * Time.deltaTime * volume;
             }
             else
             {
                 if (GetComponent<AudioSource>().volume <= volume * GameMusic.musicVolume * GameMusic.masterVolume)
-                    GetComponent<AudioSource>().volume += 0.2f * Time.deltaTime;
+                    GetComponent<AudioSource>().volume += 0.2f * Time.deltaTime * volume;
                 else
                     GetComponent<AudioSource>().volume = volume * GameMusic.musicVolume * GameMusic.masterVolume;
             }

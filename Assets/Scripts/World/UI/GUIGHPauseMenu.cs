@@ -21,18 +21,17 @@ public class GUIGHPauseMenu : MonoBehaviour
     }
 
 
-    public void WaterMarkButton()
+    public void CreditsButton()
     {
-        if (waterMark.activeSelf == true)
-            waterMark.SetActive(false);
-        else
-            waterMark.SetActive(true);
+        GameGUI.GHMainMenu.SetActive(true);
+        GameGUI.GHMainMenu.transform.FindChild("Credits Menu").gameObject.SetActive(true);
     }
 
 
     public void OptionsButton()
     {
         GameGUI.GHMainMenu.SetActive(true);
+        GameGUI.GHMainMenu.transform.FindChild("Options Menu").gameObject.SetActive(true);
     }
 
 

@@ -7,6 +7,7 @@ public class GUIGHMainMenu : MonoBehaviour
     GameObject mainMenu;
     GameObject optionsMenu;
     GameObject texturePackMenu;
+    GameObject creditsMenu;
 
     GameObject buttonNewGame;
     GameObject buttonOptions;
@@ -40,6 +41,7 @@ public class GUIGHMainMenu : MonoBehaviour
         mainMenu = transform.parent.FindChild("GH Main Menu").FindChild("Main Menu").gameObject;
         optionsMenu = transform.parent.FindChild("GH Main Menu").FindChild("Options Menu").gameObject;
         texturePackMenu = transform.parent.FindChild("GH Main Menu").FindChild("Texture Pack Menu").gameObject;
+        creditsMenu = transform.parent.FindChild("GH Main Menu").FindChild("Credits Menu").gameObject;
 
         // Buttons
         buttonNewGame = transform.parent.FindChild("GH Main Menu").FindChild("Main Menu").FindChild("BTN New Game").gameObject;
@@ -58,6 +60,7 @@ public class GUIGHMainMenu : MonoBehaviour
         mainMenu.SetActive(true);
         texturePackMenu.SetActive(false);
         optionsMenu.SetActive(false);
+        creditsMenu.SetActive(false);
         blackSpace.SetActive(false);
     }
 
@@ -88,8 +91,9 @@ public class GUIGHMainMenu : MonoBehaviour
                     // Prepare for the options pause menu
                     GameFlow.gameState = GameFlow.GameState.GAME;
                     mainMenu.SetActive(false);
-                    optionsMenu.SetActive(true);
+                    optionsMenu.SetActive(false);
                     texturePackMenu.SetActive(false);
+                    creditsMenu.SetActive(false);
                     Deactivate();
                 }
             }
@@ -297,6 +301,8 @@ public class GUIGHMainMenu : MonoBehaviour
         else
         {
             GameGUI.GHMainMenu.SetActive(false);
+            optionsMenu.SetActive(false);
+            creditsMenu.SetActive(false);
         }
     }
 

@@ -102,7 +102,7 @@ public class CameraMovement
             // Camera position 
             mainCamera.previousPosition = mainCamera.cameraObj.transform.position;
             mainCamera.position = player.playerObj.transform.position + mainCamera.offset - (rotation * Vector3.forward * mainCamera.objectiveDistance);
-            mainCamera.interpolatedPosition = Vector3.Lerp(mainCamera.previousPosition, mainCamera.position, 0.75f);
+            mainCamera.interpolatedPosition = Vector3.Lerp(mainCamera.previousPosition, mainCamera.position, 0.4f);
             mainCamera.controller.Move(mainCamera.interpolatedPosition - mainCamera.previousPosition);
 
             // Blocked view detection
@@ -114,8 +114,8 @@ public class CameraMovement
                 if ((!impact.transform.gameObject.CompareTag("MainCamera") && !impact.transform.gameObject.CompareTag("Player")) || impact.distance > mainCamera.maxDistance + 0.5f)
                 {
                     // Reallocates the camera
-                    float advancedDistance = Vector3.Distance(playerInScreenPosition, impact.point) - 0.5f;
-                    mainCamera.objectiveDistance = Vector3.Distance(playerInScreenPosition, impact.point) - 0.5f;
+                    float advancedDistance = Vector3.Distance(playerInScreenPosition, impact.point) - 0.2f;
+                    mainCamera.objectiveDistance = Vector3.Distance(playerInScreenPosition, impact.point) - 0.2f;
                     mainCamera.cameraObj.transform.position = player.playerObj.transform.position + mainCamera.offset - (rotation * Vector3.forward * advancedDistance);
                 }
             }

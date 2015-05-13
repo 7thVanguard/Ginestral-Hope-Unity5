@@ -52,10 +52,10 @@ public class MainCamera
         minAngleSight = -85;
         maxAngleSight = 85;
 
-        distance = 3;
-        objectiveDistance = 3;
+        distance = 2.5f;
+        objectiveDistance = 2.5f;
 
-        maxDistance = 2;
+        maxDistance = 2.5f;
     }
 
 

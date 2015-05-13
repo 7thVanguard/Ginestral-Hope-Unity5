@@ -39,6 +39,10 @@ public class GUIGHPauseMenu : MonoBehaviour
     {
         GameFlow.gameState = GameFlow.GameState.MENU;
         GameFlow.pause = false;
+
+        GameMusic.fadingIn = true;
+        GameMusic.fadingOut = false;
+
         GameGUI.GHPauseMenu.SetActive(false);
         GameGUI.GHMainMenu.SetActive(true);
         transform.parent.FindChild("GH Main Menu").FindChild("Main Menu").gameObject.SetActive(true);

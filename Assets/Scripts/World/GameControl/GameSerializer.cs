@@ -121,8 +121,8 @@ public class GameSerializer
             file.Close();
 
             // Music
-            GameMusic.SelectClips(saveName);
-            Global.player.playerObj.transform.FindChild("MusicPlayer").GetComponent<AudioSource>().volume = 0;
+            //GameMusic.SelectClips(saveName);
+            //Global.player.playerObj.transform.FindChild("MusicPlayer").GetComponent<AudioSource>().volume = 0;
             GameMusic.fadingIn = true;
 
             // Orbs

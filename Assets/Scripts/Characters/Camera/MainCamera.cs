@@ -55,7 +55,7 @@ public class MainCamera
         distance = 3;
         objectiveDistance = 3;
 
-        maxDistance = 3;
+        maxDistance = 2;
     }
 
 

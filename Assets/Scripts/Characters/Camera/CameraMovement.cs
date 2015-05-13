@@ -111,7 +111,7 @@ public class CameraMovement
             // Raycast with an objective
             if (Physics.Linecast(playerInScreenPosition, mainCamera.cameraObj.transform.position, out impact))
             {
-                if (!impact.transform.gameObject.CompareTag("MainCamera") && !impact.transform.gameObject.CompareTag("Player"))
+                if ((!impact.transform.gameObject.CompareTag("MainCamera") && !impact.transform.gameObject.CompareTag("Player")) || impact.distance > mainCamera.maxDistance + 0.5f)
                 {
                     // Reallocates the camera
                     float advancedDistance = Vector3.Distance(playerInScreenPosition, impact.point) - 0.5f;

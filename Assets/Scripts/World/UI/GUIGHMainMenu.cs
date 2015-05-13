@@ -401,6 +401,10 @@ public class GUIGHMainMenu : MonoBehaviour
         // Renderer
         RenderSettings.ambientLight = new Color32(43, 45, 37, 255);
 
+        // Music
+        GameMusic.fadingOut = true;
+        GameMusic.fadingIn = false;
+
         // Reset
         GameFlow.resetState = GameFlow.ResetState.New;
         GameFlow.readyToReset = true;

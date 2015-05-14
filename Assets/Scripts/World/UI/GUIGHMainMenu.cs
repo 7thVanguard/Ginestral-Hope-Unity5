@@ -17,16 +17,20 @@ public class GUIGHMainMenu : MonoBehaviour
     GameObject waterMark;
 
     AudioSource audioSource;
+    AudioSource movieSource;
 
+    MovieTexture movie;
     Texture2D selectedAtlas;
 
     Color menuColor = Color.black;
     float menualphaColor = 0;
     float alphaCounterBlackScreen = 0;
+    float movieTimeCounter;
 
     // Menu control
     bool newGame = false;
     bool fadingIn = false;
+    bool moviePlaying = false;
     bool loading = false;
     bool fadingOut = false;
 
@@ -40,6 +44,7 @@ public class GUIGHMainMenu : MonoBehaviour
         GameGUI.GHMainMenu = transform.parent.FindChild("GH Main Menu").gameObject;
 
         audioSource = transform.parent.GetComponent<AudioSource>();
+        movieSource = transform.GetComponent<AudioSource>();
 
         // Planes
         mainMenu = transform.parent.FindChild("GH Main Menu").FindChild("Main Menu").gameObject;
@@ -55,6 +60,8 @@ public class GUIGHMainMenu : MonoBehaviour
         blackSpace = transform.parent.FindChild("Black Space").gameObject;
         waterMark = transform.parent.FindChild("WaterMark").gameObject;
 
+        movie = (MovieTexture)Resources.Load("Cinematics/Cinematic01_English");
+        movieTimeCounter = movie.duration;
         selectedAtlas = (Texture2D)Global.G1.mainTexture;
 
         // Sliders
@@ -91,10 +98,12 @@ public class GUIGHMainMenu : MonoBehaviour
                 {
                     alphaCounterBlackScreen = 1;
                     fadingIn = false;
-                    loading = true;
+                    moviePlaying = true;
+                    movie.Play();
+                    movieSource.Play();
+                    Global.player.playerObj.transform.FindChild("MusicPlayer").gameObject.SetActive(false);
 
                     // Prepare for the options pause menu
-                    GameFlow.gameState = GameFlow.GameState.GAME;
                     mainMenu.SetActive(false);
                     optionsMenu.SetActive(false);
                     texturePackMenu.SetActive(false);
@@ -102,9 +111,29 @@ public class GUIGHMainMenu : MonoBehaviour
                     Deactivate();
                 }
             }
+            else if (moviePlaying)
+            {
+                movieTimeCounter -= Time.deltaTime;
+
+                if (Input.GetKey(KeyCode.Space))
+                    movieTimeCounter = 0;
+
+                if (movieTimeCounter <= 0)
+                {
+                    Global.player.playerObj.transform.FindChild("MusicPlayer").gameObject.SetActive(true);
+                    movieSource.Stop();
+                    movie.Stop();
+
+                    loading = true;
+                    moviePlaying = false;
+
+                    GameFlow.gameState = GameFlow.GameState.GAME;
+                }
+            }
             else if (loading)
             {
                 PrepareNewGame();
+
 
                 loading = false;
                 fadingOut = true;
@@ -202,6 +231,9 @@ public class GUIGHMainMenu : MonoBehaviour
     {
         if (texturePackMenu.activeSelf)
             GUI.DrawTexture(new Rect(Screen.width * 3 / 5, 20, Screen.width * 2 / 5 - 20, Screen.width * 2 / 5 - 20), selectedAtlas);
+
+        if (movie.isPlaying)
+            GUI.DrawTexture(new Rect(0, 0, Screen.width, Screen.height), movie);
     }
 
     // New Game

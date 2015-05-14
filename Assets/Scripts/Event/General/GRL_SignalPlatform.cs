@@ -10,6 +10,7 @@ public class GRL_SignalPlatform : MonoBehaviour
     public bool toEndPos = false;
 
     private float interpolation;
+    private bool musicPlaying = false;
 
 
     void Sttart()
@@ -33,6 +34,23 @@ public class GRL_SignalPlatform : MonoBehaviour
 
         interpolation = Mathf.Clamp(interpolation, 0, 1);
         transform.position = Vector3.Slerp(nonActivePosition, activePosition, interpolation);
+
+        if (Vector3.Distance(transform.position, activePosition) > 0.2f && Vector3.Distance(transform.position, nonActivePosition) > 0.2f)
+        {
+            if (!transform.GetComponent<AudioSource>().isPlaying)
+                transform.GetComponent<AudioSource>().Play();
+
+            if (transform.GetComponent<AudioSource>().volume < 1)
+                transform.GetComponent<AudioSource>().volume += Time.deltaTime;
+        }
+        else
+        {
+            if (transform.GetComponent<AudioSource>().volume > 0)
+                transform.GetComponent<AudioSource>().volume -= Time.deltaTime;
+
+            if (transform.GetComponent<AudioSource>().volume == 0)
+                transform.GetComponent<AudioSource>().Stop();
+        }
     }
 
 

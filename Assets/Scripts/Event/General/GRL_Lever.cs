@@ -26,10 +26,13 @@ public class GRL_Lever : MonoBehaviour
         if (GameFlow.resetState == GameFlow.ResetState.Reset)
             emitting = false;
 
-        if (emitting)
-            transform.FindChild("Pull").localRotation = Quaternion.Lerp(transform.FindChild("Pull").localRotation, Quaternion.Euler(45, 0, 0), 0.1f);
-        else
-            transform.FindChild("Pull").localRotation = Quaternion.Lerp(transform.FindChild("Pull").localRotation, Quaternion.Euler(315, 0, 0), 0.1f);
+        if (!GameFlow.pause)
+        {
+            if (emitting)
+                transform.FindChild("Pull").localRotation = Quaternion.Lerp(transform.FindChild("Pull").localRotation, Quaternion.Euler(45, 0, 0), 0.1f);
+            else
+                transform.FindChild("Pull").localRotation = Quaternion.Lerp(transform.FindChild("Pull").localRotation, Quaternion.Euler(315, 0, 0), 0.1f);
+        }
     }
 
     void OnTriggerStay(Collider other)
@@ -38,27 +41,30 @@ public class GRL_Lever : MonoBehaviour
 
         if (other.tag == "Player")
         {
-            if (Input.GetKey(KeyCode.E))
+            if (other.GetComponent<CharacterController>().isGrounded)
             {
-                if (!keepPressed)
+                if (Input.GetKey(KeyCode.E))
                 {
-                    emitting = !emitting;
-                    keepPressed = true;
-                    transform.GetComponent<AudioSource>().Play();
-                    Global.player.playerObj.transform.FindChild("Mesh").GetComponent<Animation>().Play("Interact");
-                    Global.player.animationCoolDown = 40;
+                    if (!keepPressed)
+                    {
+                        emitting = !emitting;
+                        keepPressed = true;
+                        transform.GetComponent<AudioSource>().Play();
+                        Global.player.playerObj.transform.FindChild("Mesh").GetComponent<Animation>().Play("Interact");
+                        Global.player.animationCoolDown = 40;
+                    }
                 }
+                else if (Input.GetKeyUp(KeyCode.E))
+                    keepPressed = false;
+
+
+                if (emitting)
+                    foreach (GameObject go in List)
+                        go.SetActive(true);
+                else
+                    foreach (GameObject go in List)
+                        go.SetActive(false);
             }
-            else if (Input.GetKeyUp(KeyCode.E))
-                keepPressed = false;
-
-
-            if (emitting)
-                foreach (GameObject go in List)
-                    go.SetActive(true);
-            else
-                foreach (GameObject go in List)
-                    go.SetActive(false);
         }
     }
 

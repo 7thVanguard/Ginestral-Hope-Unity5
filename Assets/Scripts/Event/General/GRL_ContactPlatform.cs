@@ -20,13 +20,33 @@ public class GRL_ContactPlatform : MonoBehaviour
 
     void Update()
     {
-        if (onStay)
-            interpolation += Time.deltaTime / duration;
-        else
-            interpolation -= Time.deltaTime / duration;
+        if (!GameFlow.pause)
+        {
+            if (onStay)
+                interpolation += Time.deltaTime / duration;
+            else
+                interpolation -= Time.deltaTime / duration;
 
-        interpolation = Mathf.Clamp(interpolation, 0, 1);
-        transform.position = Vector3.Slerp(initialPosition, endPosition, interpolation);
+            interpolation = Mathf.Clamp(interpolation, 0, 1);
+            transform.position = Vector3.Slerp(initialPosition, endPosition, interpolation);
+
+            if (Vector3.Distance(transform.position, endPosition) > 0.2f && Vector3.Distance(transform.position, initialPosition) > 0.2f)
+            {
+                if (!transform.GetComponent<AudioSource>().isPlaying)
+                    transform.GetComponent<AudioSource>().Play();
+
+                if (transform.GetComponent<AudioSource>().volume < 1)
+                    transform.GetComponent<AudioSource>().volume += Time.deltaTime;
+            }
+            else
+            {
+                if (transform.GetComponent<AudioSource>().volume > 0)
+                    transform.GetComponent<AudioSource>().volume -= Time.deltaTime;
+
+                if (transform.GetComponent<AudioSource>().volume == 0)
+                    transform.GetComponent<AudioSource>().Stop();
+            }
+        }
     }
 
 

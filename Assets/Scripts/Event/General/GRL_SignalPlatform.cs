@@ -10,7 +10,7 @@ public class GRL_SignalPlatform : MonoBehaviour
     public bool toEndPos = false;
 
     private float interpolation;
-    private bool musicPlaying = false;
+    private bool onStay = false;
 
 
     void Sttart()
@@ -22,34 +22,37 @@ public class GRL_SignalPlatform : MonoBehaviour
 
     void Update()
     {
-        if (emitter.GetComponent<GRL_PressurePlate>() != null)
-            toEndPos = emitter.GetComponent<GRL_PressurePlate>().emitting;
-        else if (emitter.GetComponent<GRL_Lever>() != null)
-            toEndPos = emitter.GetComponent<GRL_Lever>().emitting;
-
-        if (toEndPos)
-            interpolation += Time.deltaTime / duration;
-        else
-            interpolation -= Time.deltaTime / duration;
-
-        interpolation = Mathf.Clamp(interpolation, 0, 1);
-        transform.position = Vector3.Slerp(nonActivePosition, activePosition, interpolation);
-
-        if (Vector3.Distance(transform.position, activePosition) > 0.2f && Vector3.Distance(transform.position, nonActivePosition) > 0.2f)
+        if (!GameFlow.pause)
         {
-            if (!transform.GetComponent<AudioSource>().isPlaying)
-                transform.GetComponent<AudioSource>().Play();
+            if (emitter.GetComponent<GRL_PressurePlate>() != null)
+                toEndPos = emitter.GetComponent<GRL_PressurePlate>().emitting;
+            else if (emitter.GetComponent<GRL_Lever>() != null)
+                toEndPos = emitter.GetComponent<GRL_Lever>().emitting;
 
-            if (transform.GetComponent<AudioSource>().volume < 1)
-                transform.GetComponent<AudioSource>().volume += Time.deltaTime;
-        }
-        else
-        {
-            if (transform.GetComponent<AudioSource>().volume > 0)
-                transform.GetComponent<AudioSource>().volume -= Time.deltaTime;
+            if (toEndPos)
+                interpolation += Time.deltaTime / duration;
+            else
+                interpolation -= Time.deltaTime / duration;
 
-            if (transform.GetComponent<AudioSource>().volume == 0)
-                transform.GetComponent<AudioSource>().Stop();
+            interpolation = Mathf.Clamp(interpolation, 0, 1);
+            transform.position = Vector3.Slerp(nonActivePosition, activePosition, interpolation);
+
+            if (Vector3.Distance(transform.position, activePosition) > 0.2f && Vector3.Distance(transform.position, nonActivePosition) > 0.2f)
+            {
+                if (!transform.GetComponent<AudioSource>().isPlaying)
+                    transform.GetComponent<AudioSource>().Play();
+
+                if (transform.GetComponent<AudioSource>().volume < 1)
+                    transform.GetComponent<AudioSource>().volume += Time.deltaTime;
+            }
+            else
+            {
+                if (transform.GetComponent<AudioSource>().volume > 0)
+                    transform.GetComponent<AudioSource>().volume -= Time.deltaTime;
+
+                if (transform.GetComponent<AudioSource>().volume == 0)
+                    transform.GetComponent<AudioSource>().Stop();
+            }
         }
     }
 
@@ -57,13 +60,19 @@ public class GRL_SignalPlatform : MonoBehaviour
     void OnTriggerStay(Collider other)
     {
         if (other.tag == "Player")
-            other.transform.parent = transform.FindChild("Collider");
+        {
+            onStay = true;
+            Global.player.playerObj.transform.parent = transform;
+        }
     }
 
 
     void OnTriggerExit(Collider other)
     {
         if (other.tag == "Player")
-            other.transform.parent = null;
+        {
+            onStay = false;
+            Global.player.playerObj.transform.parent = null;
+        }
     }
 }

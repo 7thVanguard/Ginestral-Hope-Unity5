@@ -17,7 +17,7 @@ public class FireBallBehaviour : MonoBehaviour
     private float initialxplosionCounter = 1.66f;
     private float explosionCounter;
 
-    private Light light;
+    //private Light light;
     private float maxLightIntensity = 4;
     private float maxLightRange = 30;
 
@@ -86,13 +86,13 @@ public class FireBallBehaviour : MonoBehaviour
 
                     // Explosion relative
                     transform.FindChild("Explosion").gameObject.SetActive(true);
-                    light = transform.FindChild("Explosion").GetComponent<Light>();
+                    //light = transform.FindChild("Explosion").GetComponent<Light>();
                 }
 
                 // Explosion relative
                 explosionCounter -= Time.deltaTime;
-                light.intensity = maxLightIntensity * explosionCounter / initialxplosionCounter;
-                light.range = maxLightRange * explosionCounter / initialxplosionCounter;
+                //light.intensity = maxLightIntensity * explosionCounter / initialxplosionCounter;
+                //light.range = maxLightRange * explosionCounter / initialxplosionCounter;
 
 
                 if (explosionCounter <= 0)

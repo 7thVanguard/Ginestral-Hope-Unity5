@@ -9,6 +9,8 @@ public class PlayerMovement
     private Player player;
     private MainCamera mainCamera;
 
+    private AudioSource audioFX;
+
     private GamePadState padState;
     private GamePadState previousPadState;
     private PlayerIndex padIndex;
@@ -16,6 +18,8 @@ public class PlayerMovement
     private Vector3 objectiveDirection;
     private Vector3 interpolateDirection;
 
+    private float maxVolume;
+    private float audioFramesCounter;
     private int jumpAnimationCounter = 0;
 
 
@@ -24,6 +28,9 @@ public class PlayerMovement
         this.world = world;
         this.player = player;
         this.mainCamera = mainCamera;
+
+        audioFX = player.playerObj.transform.FindChild("FXPlayer").GetComponent<AudioSource>();
+        maxVolume = audioFX.volume;
     }
 
 
@@ -52,6 +59,8 @@ public class PlayerMovement
             if ((Input.GetKey(KeyCode.Space)) || (padState.Buttons.A == ButtonState.Pressed && previousPadState.Buttons.A == ButtonState.Released))
             {
                 objectiveDirection = new Vector3(objectiveDirection.x, player.jumpInitialSpeed, objectiveDirection.z);
+                audioFX.clip = (AudioClip)Resources.Load("Audio/FX/Jump");
+                audioFX.Play();
             }
             else
                 objectiveDirection.y = 0;
@@ -161,6 +170,20 @@ public class PlayerMovement
             Animation("Run", true, false); 
         else
             Animation("Idle", true, false); 
+
+        // Sound
+        audioFX.volume = GameMusic.FXVolume * maxVolume;
+
+        if (player.controller.isGrounded)
+            if (player.isMoving)
+                if (audioFramesCounter <= 0)
+                {
+                    audioFX.clip = (AudioClip)Resources.Load("Audio/FX/Land 2");
+                    audioFX.Play();
+
+                    audioFramesCounter = 0.35f;
+                }
+        audioFramesCounter -= Time.deltaTime;
     }
 
 

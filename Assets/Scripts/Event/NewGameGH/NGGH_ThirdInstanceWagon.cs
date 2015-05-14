@@ -7,6 +7,7 @@ public class NGGH_ThirdInstanceWagon : MonoBehaviour
     public CameraTravel cameraTravel = CameraTravel.Step1;
 
     private Animation animator;
+    private AudioSource audio;
 
     private bool inTrigger = false;
     private bool activated = false;
@@ -23,6 +24,7 @@ public class NGGH_ThirdInstanceWagon : MonoBehaviour
 	{
 		animator = transform.parent.GetComponent<Animation>();
 		animator["Anim01"].speed = 0.5f;
+        audio = transform.parent.GetComponent<AudioSource>();
 	}
 
 
@@ -60,6 +62,9 @@ public class NGGH_ThirdInstanceWagon : MonoBehaviour
                             animator["Anim01"].speed = 0.25f;
                             animator.Play();
 
+                            audio.volume = GameMusic.FXVolume;
+                            audio.Play();
+
                             cameraTravel = CameraTravel.Step2;
                         }
                     }
@@ -86,6 +91,11 @@ public class NGGH_ThirdInstanceWagon : MonoBehaviour
 
                         Global.mainCamera.cameraObj.transform.position = Vector3.Lerp(cameraPivotPosition, cameraInitialPosition, timeCounter);
                         Global.mainCamera.cameraObj.transform.rotation = Quaternion.Lerp(cameraPivotRotation, cameraInitialRotation, timeCounter);
+
+                        if (audio.volume > 0)
+                            audio.volume -= Time.deltaTime;
+                        else if (audio.volume <= 0)
+                            audio.Stop();
 
                         if (timeCounter < 1)
                             timeCounter += Time.deltaTime / 2;

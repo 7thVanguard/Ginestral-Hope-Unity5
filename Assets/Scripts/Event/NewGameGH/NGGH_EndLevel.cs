@@ -45,11 +45,22 @@ public class NGGH_EndLevel : MonoBehaviour
     {
         if (active)
         {
-            GUI.color = new Color32(0, 0, 0, (byte)alphaCounterBlackScreen);
-            GUI.DrawTextureWithTexCoords(new Rect(0, 0, Screen.width, Screen.height), blackSpace, new Rect(0, 0, 1, 1));
+            if (!GameFlow.pause)
+            {
+                GUI.color = new Color32(0, 0, 0, (byte)alphaCounterBlackScreen);
+                GUI.DrawTextureWithTexCoords(new Rect(0, 0, Screen.width, Screen.height), blackSpace, new Rect(0, 0, 1, 1));
 
-            GUI.color = new Color32(255, 255, 255, (byte)alphaCounter7V);
-            GUI.DrawTextureWithTexCoords(new Rect(Screen.width / 4, Screen.height / 3, Screen.width / 2, Screen.height / 6), sevenV, new Rect(0, 0, 1, 1));
+                GUI.color = new Color32(255, 255, 255, (byte)alphaCounter7V);
+                GUI.DrawTextureWithTexCoords(new Rect(Screen.width / 4, Screen.height / 3, Screen.width / 2, Screen.height / 6), sevenV, new Rect(0, 0, 1, 1));
+            }
+            else
+            {
+                GUI.color = new Color32(0, 0, 0, 0);
+                GUI.DrawTextureWithTexCoords(new Rect(0, 0, Screen.width, Screen.height), blackSpace, new Rect(0, 0, 1, 1));
+
+                GUI.color = new Color32(255, 255, 255, 0);
+                GUI.DrawTextureWithTexCoords(new Rect(Screen.width / 4, Screen.height / 3, Screen.width / 2, Screen.height / 6), sevenV, new Rect(0, 0, 1, 1));
+            }
         }
         else
         {

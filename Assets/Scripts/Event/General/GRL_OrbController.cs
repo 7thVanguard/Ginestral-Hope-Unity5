@@ -24,7 +24,14 @@ public class GRL_OrbController : MonoBehaviour
     {
         if (!finished)
             if (active)
+            {
                 finished = (EventsLib.GoAroundPlayer(greenOrb));
+                if (finished)
+                {
+                    transform.GetComponent<AudioSource>().volume = GameMusic.FXVolume;
+                    transform.GetComponent<AudioSource>().Play();
+                }
+            }
 
         // Reset
         if (GameFlow.resetState == GameFlow.ResetState.Reset)

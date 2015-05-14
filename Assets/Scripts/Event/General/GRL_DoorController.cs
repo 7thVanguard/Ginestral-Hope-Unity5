@@ -7,6 +7,7 @@ public class GRL_DoorController : MonoBehaviour
 
     public GameObject firstDoor;
     public GameObject secondDoor;
+    public AudioSource audio;
     public Vector3 firstDoorObjectivePosition;
     public Vector3 secondDoorObjectivePosition;
     private Vector3 firstDoorBasePosition;
@@ -26,6 +27,7 @@ public class GRL_DoorController : MonoBehaviour
     {
         firstDoorBasePosition = firstDoor.transform.position;
         secondDoorBasePosition = secondDoor.transform.position;
+        audio = firstDoor.transform.parent.FindChild("Marco").GetComponent<AudioSource>();
     }
 
 
@@ -70,6 +72,9 @@ public class GRL_DoorController : MonoBehaviour
                 {
                     if (Input.GetKey(KeyCode.E))
                     {
+                        if (!active)
+                            audio.Play();
+
                         EventsLib.SetRenderambient(ambient);
                         EventsLib.SetDoorOpenDoubleSlider(firstDoor, firstDoorObjectivePosition, secondDoor, secondDoorObjectivePosition);
 

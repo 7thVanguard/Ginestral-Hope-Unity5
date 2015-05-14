@@ -4,6 +4,7 @@ using System.Collections;
 public class NGGH_FirstInstanceColumn : MonoBehaviour 
 {
     public GameObject column;
+    private float timeToSound = 0;
     private bool finish = false;
 
 
@@ -16,6 +17,14 @@ public class NGGH_FirstInstanceColumn : MonoBehaviour
             column.GetComponent<Animation>().Play();
             finish = false;
         }
+
+        if (timeToSound > 0)
+        {
+            timeToSound -= Time.deltaTime;
+            
+            if (timeToSound <= 0)
+                column.GetComponent<AudioSource>().Play();
+        }
     }
 
 
@@ -26,6 +35,7 @@ public class NGGH_FirstInstanceColumn : MonoBehaviour
             {
                 column.GetComponent<Animation>()["Take 001"].speed = 1;
                 column.GetComponent<Animation>().Play();
+                timeToSound = 0.5f;
                 finish = true;
             }
     }

@@ -16,6 +16,8 @@ public class GUIGHMainMenu : MonoBehaviour
     GameObject blackSpace;
     GameObject waterMark;
 
+    AudioSource audioSource;
+
     Texture2D selectedAtlas;
 
     Color menuColor = Color.black;
@@ -36,6 +38,8 @@ public class GUIGHMainMenu : MonoBehaviour
     void Awake()
     {
         GameGUI.GHMainMenu = transform.parent.FindChild("GH Main Menu").gameObject;
+
+        audioSource = transform.parent.GetComponent<AudioSource>();
 
         // Planes
         mainMenu = transform.parent.FindChild("GH Main Menu").FindChild("Main Menu").gameObject;
@@ -203,6 +207,8 @@ public class GUIGHMainMenu : MonoBehaviour
     // New Game
     public void NewGameButton()
     {
+        audioSource.Play();
+
         newGame = true;
         fadingIn = true;
 
@@ -241,6 +247,8 @@ public class GUIGHMainMenu : MonoBehaviour
 
     public void OptionsButton()
     {
+        audioSource.Play();
+
         mainMenu.SetActive(false);
         optionsMenu.SetActive(true);
     }
@@ -248,6 +256,8 @@ public class GUIGHMainMenu : MonoBehaviour
 
     public void LoadGameButton()
     {
+        audioSource.Play();
+
         GameFlow.gameState = GameFlow.GameState.GAME;
         Deactivate();
     }
@@ -255,6 +265,8 @@ public class GUIGHMainMenu : MonoBehaviour
 
     public void DeveloperButton()
     {
+        audioSource.Play();
+
         GameFlow.gameState = GameFlow.GameState.GAME;
         Deactivate();
     }
@@ -262,6 +274,8 @@ public class GUIGHMainMenu : MonoBehaviour
 
     public void TexturePackButton()
     {
+        audioSource.Play();
+
         mainMenu.SetActive(false);
         texturePackMenu.SetActive(true);
     }
@@ -269,6 +283,8 @@ public class GUIGHMainMenu : MonoBehaviour
 
     public void ExitGame()
     {
+        audioSource.Play();
+
         Application.Quit();
     }
 
@@ -276,6 +292,8 @@ public class GUIGHMainMenu : MonoBehaviour
     // Texture Pack
     public void Ginestral1Button()
     {
+        audioSource.Play();
+
         GameFlow.selectedAtlas = Global.G1;
         selectedAtlas = (Texture2D)Global.G1.mainTexture;
         ResetWorld();
@@ -284,6 +302,8 @@ public class GUIGHMainMenu : MonoBehaviour
 
     public void Planned1Button()
     {
+        audioSource.Play();
+
         GameFlow.selectedAtlas = Global.P1;
         selectedAtlas = (Texture2D)Global.P1.mainTexture;
         ResetWorld();
@@ -293,6 +313,8 @@ public class GUIGHMainMenu : MonoBehaviour
     // General
     public void BackButton()
     {
+        audioSource.Play();
+
         if (GameFlow.gameState == GameFlow.GameState.MENU)
         {
             mainMenu.SetActive(true);
@@ -322,6 +344,8 @@ public class GUIGHMainMenu : MonoBehaviour
 
     public void WaterMarkButton()
     {
+        audioSource.Play();
+
         if (waterMark.activeSelf == true)
             waterMark.SetActive(false);
         else

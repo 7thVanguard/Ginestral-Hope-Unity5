@@ -4,9 +4,13 @@ using System.Collections;
 public class GUIGHPauseMenu : MonoBehaviour
 {
     GameObject waterMark;
+    AudioSource audioSource;
+
 
     void Awake()
     {
+        audioSource = transform.parent.GetComponent<AudioSource>();
+
         GameGUI.GHPauseMenu = transform.parent.FindChild("GH Pause Menu").gameObject;
         GameGUI.GHPauseMenu.SetActive(false);
 
@@ -16,6 +20,8 @@ public class GUIGHPauseMenu : MonoBehaviour
 
     public void ContinueButton()
     {
+        audioSource.Play();
+
         GameFlow.pause = false;
         Deactivate();
     }
@@ -23,6 +29,8 @@ public class GUIGHPauseMenu : MonoBehaviour
 
     public void CreditsButton()
     {
+        audioSource.Play();
+
         GameGUI.GHMainMenu.SetActive(true);
         GameGUI.GHMainMenu.transform.FindChild("Credits Menu").gameObject.SetActive(true);
     }
@@ -30,6 +38,8 @@ public class GUIGHPauseMenu : MonoBehaviour
 
     public void OptionsButton()
     {
+        audioSource.Play();
+
         GameGUI.GHMainMenu.SetActive(true);
         GameGUI.GHMainMenu.transform.FindChild("Options Menu").gameObject.SetActive(true);
     }
@@ -37,6 +47,8 @@ public class GUIGHPauseMenu : MonoBehaviour
 
     public void MainMenuButton()
     {
+        audioSource.Play();
+
         GameFlow.gameState = GameFlow.GameState.MENU;
         GameFlow.pause = false;
 

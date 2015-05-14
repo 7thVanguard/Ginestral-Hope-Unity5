@@ -20,7 +20,11 @@ public class GRL_Codex : MonoBehaviour
 
             if (!GameFlow.onInterface)
                 if (Input.GetKey(KeyCode.E))
+                {
                     GameGUI.codexMode.GetComponent<GUICodexMode>().ActivateTable(tableNumber);
+                    transform.GetComponent<AudioSource>().volume = GameMusic.FXVolume;
+                    transform.GetComponent<AudioSource>().Play();
+                }
         }
     }
 

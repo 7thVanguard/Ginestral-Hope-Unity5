@@ -56,6 +56,7 @@ public class GUIGHMainMenu : MonoBehaviour
         // Sliders
         transform.parent.FindChild("GH Main Menu").FindChild("Options Menu").FindChild("SLD Graphics Quality").GetComponent<Slider>().value = QualitySettings.GetQualityLevel();
         transform.parent.FindChild("GH Main Menu").FindChild("Options Menu").FindChild("SLD Mouse Sensitivity").GetComponent<Slider>().value = Global.mainCamera.mouseSensitivityX;
+        transform.parent.FindChild("GH Main Menu").FindChild("Options Menu").FindChild("SLD FX Volume").GetComponent<Slider>().value = 0.8f;
 
         mainMenu.SetActive(true);
         texturePackMenu.SetActive(false);

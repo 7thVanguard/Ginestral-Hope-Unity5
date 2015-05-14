@@ -7,7 +7,7 @@ public class FireBallBehaviour : MonoBehaviour
 
     // Trajectory
     public Vector3 direction;
-    private float speed = 25;
+    private float speed = 17;
     private bool isColliding;
 
     // Fire
@@ -81,7 +81,7 @@ public class FireBallBehaviour : MonoBehaviour
                 {
                     Destroy(transform.FindChild("Ball").gameObject);
                     Destroy(transform.FindChild("Glow").gameObject);
-                    Destroy(transform.FindChild("Light").gameObject);
+                    //Destroy(transform.FindChild("Light").gameObject);
                     Destroy(transform.FindChild("Trail").gameObject);
 
                     // Explosion relative

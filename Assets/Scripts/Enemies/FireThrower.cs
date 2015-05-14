@@ -16,14 +16,13 @@ public class FireThrower : MonoBehaviour
 
 	void Update ()
     {
-        /*
         // We wait for the beginning
         if (beginDelay > 0)
-            beginDelay -= Time.deltaTime;
+            beginDelay -= Time.deltaTime / 3;
         // We make sure the list is not empty
         else if (List.Count > 0)
         {
-            timeCounter += Time.deltaTime;
+            timeCounter += Time.deltaTime / 3;
 
             if (timeCounter >= objectiveTime)
             {
@@ -44,8 +43,10 @@ public class FireThrower : MonoBehaviour
                 fireBall.AddComponent<FireBallBehaviour>();
                 fireBall.GetComponent<FireBallBehaviour>().direction = transform.up;
                 fireBall.GetComponent<FireBallBehaviour>().damage = damage;
+
+                transform.GetComponent<AudioSource>().volume = GameMusic.FXVolume;
+                transform.GetComponent<AudioSource>().Play();
             }
         }
-         * */
 	}
 }

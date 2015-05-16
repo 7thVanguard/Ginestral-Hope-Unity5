@@ -38,7 +38,7 @@ public class World
     {
         this.worldObj = world;
 
-        // Init();
+        Init();
 
         worldObj.AddComponent<HUD>();
     }

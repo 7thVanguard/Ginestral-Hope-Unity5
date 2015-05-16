@@ -39,6 +39,12 @@ public class GameManager : MonoBehaviour
         Global.world.worldObj.GetComponent<HUD>().Init(Global.player);                                      // Initialize HUD
         VoxelsList.PostInit(Global.world, Global.mainCamera);
 
+        DontDestroyOnLoad(transform.gameObject);
+        DontDestroyOnLoad(Global.world.worldObj);
+        DontDestroyOnLoad(Global.player.playerObj);
+        DontDestroyOnLoad(Global.mainCamera.cameraObj);
+        DontDestroyOnLoad(Global.sun.sunObj);
+
 
         //+ Controllers Init
         Controller = new Dictionary<string, GameController>();
@@ -195,12 +201,6 @@ public class GameManager : MonoBehaviour
             GameFlow.resetState = GameFlow.ResetState.End;
 
         previousPadState = padState;
-    }
-
-
-    public void Reset()
-    {
-        Awake();
     }
 
 

@@ -44,6 +44,7 @@ public class GUIGHMainMenu : MonoBehaviour
 
     void Awake()
     {
+        DontDestroyOnLoad(transform.parent.gameObject);
         GameGUI.GHMainMenu = transform.parent.FindChild("GH Main Menu").gameObject;
 
         audioSource = transform.parent.GetComponent<AudioSource>();
@@ -351,6 +352,7 @@ public class GUIGHMainMenu : MonoBehaviour
     {
         audioSource.Play();
 
+        Application.LoadLevel(2);
         GameFlow.gameState = GameFlow.GameState.GAME;
         Deactivate();
     }
@@ -409,6 +411,7 @@ public class GUIGHMainMenu : MonoBehaviour
     public void CatacombsButton()
     {
         audioSource.Play();
+        Application.LoadLevel(1);
 
         newGame = true;
         fadingIn = true;

@@ -44,6 +44,6 @@ public static class GameFlow
     public static string selectedGeometry = "Wooden Bridge 6m";
     public static string selectedInteractive = "Wooden Plank";
     public static string selectedTerrain = "Grass";
-    public static string selectedVoxel = "P1(0, 7)";
+    public static string selectedVoxel = "(0, 0)";
     public static string selectedEnemy = "Normal Slime";
 }

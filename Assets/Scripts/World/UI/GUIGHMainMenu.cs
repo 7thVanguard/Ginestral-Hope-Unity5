@@ -8,9 +8,11 @@ public class GUIGHMainMenu : MonoBehaviour
     GameObject optionsMenu;
     GameObject texturePackMenu;
     GameObject creditsMenu;
+    GameObject selecteLevelMenu;
 
     GameObject buttonNewGame;
     GameObject buttonOptions;
+    GameObject buttonLevel;
     GameObject buttonExitGame;
 
     GameObject blackSpace;
@@ -36,6 +38,7 @@ public class GUIGHMainMenu : MonoBehaviour
 
     bool pointerInNewButton = false;
     bool pointerInOptionsButton = false;
+    bool pointerInLevelButton = false;
     bool pointerInExitButton = false;
 
 
@@ -51,17 +54,20 @@ public class GUIGHMainMenu : MonoBehaviour
         optionsMenu = transform.parent.FindChild("GH Main Menu").FindChild("Options Menu").gameObject;
         texturePackMenu = transform.parent.FindChild("GH Main Menu").FindChild("Texture Pack Menu").gameObject;
         creditsMenu = transform.parent.FindChild("GH Main Menu").FindChild("Credits Menu").gameObject;
+        selecteLevelMenu = transform.parent.FindChild("GH Main Menu").FindChild("Select Level Menu").gameObject;
 
         // Buttons
         buttonNewGame = transform.parent.FindChild("GH Main Menu").FindChild("Main Menu").FindChild("BTN New Game").gameObject;
         buttonOptions = transform.parent.FindChild("GH Main Menu").FindChild("Main Menu").FindChild("BTN Options").gameObject;
+        buttonLevel = transform.parent.FindChild("GH Main Menu").FindChild("Main Menu").FindChild("BTN Select Level").gameObject;
         buttonExitGame = transform.parent.FindChild("GH Main Menu").FindChild("Main Menu").FindChild("BTN Exit Game").gameObject;
+        
 
         blackSpace = transform.parent.FindChild("Black Space").gameObject;
         waterMark = transform.parent.FindChild("WaterMark").gameObject;
 
         movie = (MovieTexture)Resources.Load("Cinematics/Cinematic01_English");
-        movieTimeCounter = movie.duration;
+        movieTimeCounter = 0;
         selectedAtlas = (Texture2D)Global.G1.mainTexture;
 
         // Sliders
@@ -73,6 +79,7 @@ public class GUIGHMainMenu : MonoBehaviour
         texturePackMenu.SetActive(false);
         optionsMenu.SetActive(false);
         creditsMenu.SetActive(false);
+        selecteLevelMenu.SetActive(false);
         blackSpace.SetActive(false);
     }
 
@@ -164,6 +171,7 @@ public class GUIGHMainMenu : MonoBehaviour
                 menualphaColor += Time.deltaTime / 4;
                 buttonNewGame.transform.FindChild("Text").GetComponent<Text>().color = new Color(0, 0, 0, menualphaColor);
                 buttonOptions.transform.FindChild("Text").GetComponent<Text>().color = new Color(0, 0, 0, menualphaColor);
+                buttonLevel.transform.FindChild("Text").GetComponent<Text>().color = new Color(0, 0, 0, menualphaColor);
                 buttonExitGame.transform.FindChild("Text").GetComponent<Text>().color = new Color(0, 0, 0, menualphaColor);
             }
             else if (menualphaColor < 1)
@@ -171,10 +179,12 @@ public class GUIGHMainMenu : MonoBehaviour
                 menualphaColor += Time.deltaTime / 4;
                 buttonNewGame.GetComponent<Image>().color = new Color(1, 1, 1, menualphaColor);
                 buttonOptions.GetComponent<Image>().color = new Color(1, 1, 1, menualphaColor);
+                buttonLevel.GetComponent<Image>().color = new Color(1, 1, 1, menualphaColor);
                 buttonExitGame.GetComponent<Image>().color = new Color(1, 1, 1, menualphaColor);
 
                 buttonNewGame.transform.FindChild("Text").GetComponent<Text>().color += new Color(0, 0, 0, menualphaColor - buttonNewGame.transform.FindChild("Text").GetComponent<Text>().color.a);
                 buttonOptions.transform.FindChild("Text").GetComponent<Text>().color += new Color(0, 0, 0, menualphaColor - buttonOptions.transform.FindChild("Text").GetComponent<Text>().color.a);
+                buttonLevel.transform.FindChild("Text").GetComponent<Text>().color += new Color(0, 0, 0, menualphaColor - buttonOptions.transform.FindChild("Text").GetComponent<Text>().color.a);
                 buttonExitGame.transform.FindChild("Text").GetComponent<Text>().color += new Color(0, 0, 0, menualphaColor - buttonExitGame.transform.FindChild("Text").GetComponent<Text>().color.a);
             }
             else if (menualphaColor > 1)
@@ -182,10 +192,12 @@ public class GUIGHMainMenu : MonoBehaviour
                 menualphaColor = 1;
                 buttonNewGame.GetComponent<Image>().color = new Color(1, 1, 1, menualphaColor);
                 buttonOptions.GetComponent<Image>().color = new Color(1, 1, 1, menualphaColor);
+                buttonLevel.GetComponent<Image>().color = new Color(1, 1, 1, menualphaColor);
                 buttonExitGame.GetComponent<Image>().color = new Color(1, 1, 1, menualphaColor);
 
                 buttonNewGame.transform.FindChild("Text").GetComponent<Text>().color += new Color(0, 0, 0, 1 - buttonNewGame.transform.FindChild("Text").GetComponent<Text>().color.a);
                 buttonOptions.transform.FindChild("Text").GetComponent<Text>().color += new Color(0, 0, 0, 1 - buttonOptions.transform.FindChild("Text").GetComponent<Text>().color.a);
+                buttonLevel.transform.FindChild("Text").GetComponent<Text>().color += new Color(0, 0, 0, 1 - buttonOptions.transform.FindChild("Text").GetComponent<Text>().color.a);
                 buttonExitGame.transform.FindChild("Text").GetComponent<Text>().color += new Color(0, 0, 0, 1 - buttonExitGame.transform.FindChild("Text").GetComponent<Text>().color.a);
             }
 
@@ -213,6 +225,17 @@ public class GUIGHMainMenu : MonoBehaviour
                 buttonOptions.transform.FindChild("Text").localScale = Vector3.Lerp(buttonOptions.transform.FindChild("Text").localScale, Vector3.one, 0.1f);
             }
 
+            if (pointerInLevelButton)
+            {
+                buttonLevel.transform.FindChild("Text").GetComponent<Text>().color = Color.Lerp(buttonLevel.transform.FindChild("Text").GetComponent<Text>().color, new Color32(80, 40, 10, (byte)(255 * menualphaColor)), 0.1f);
+                buttonLevel.transform.FindChild("Text").localScale = Vector3.Lerp(buttonLevel.transform.FindChild("Text").localScale, new Vector3(1.2f, 1.2f, 1), 0.1f);
+            }
+            else
+            {
+                buttonLevel.transform.FindChild("Text").GetComponent<Text>().color = Color.Lerp(buttonLevel.transform.FindChild("Text").GetComponent<Text>().color, new Color(0, 0, 0, menualphaColor), 0.1f);
+                buttonLevel.transform.FindChild("Text").localScale = Vector3.Lerp(buttonLevel.transform.FindChild("Text").localScale, Vector3.one, 0.1f);
+            }
+
             if (pointerInExitButton)
             {
                 buttonExitGame.transform.FindChild("Text").GetComponent<Text>().color = Color.Lerp(buttonExitGame.transform.FindChild("Text").GetComponent<Text>().color, new Color32(80, 40, 10, (byte)(255 * menualphaColor)), 0.1f);
@@ -236,6 +259,7 @@ public class GUIGHMainMenu : MonoBehaviour
             GUI.DrawTexture(new Rect(0, 0, Screen.width, Screen.height), movie);
     }
 
+
     // New Game
     public void NewGameButton()
     {
@@ -245,37 +269,56 @@ public class GUIGHMainMenu : MonoBehaviour
         fadingIn = true;
 
         blackSpace.SetActive(true);
+        movieTimeCounter = movie.duration;
     }
+
 
     public void OnPointerEnterNewButton()
     {
         pointerInNewButton = true;
     }
 
+
     public void OnPointerExitNewButton()
     {
         pointerInNewButton = false;
     }
+
 
     public void OnPointerEnterOptionsButton()
     {
         pointerInOptionsButton = true;
     }
 
+
     public void OnPointerExitOptionsButton()
     {
         pointerInOptionsButton = false;
     }
+
+    public void OnPointerEnterLevelButton()
+    {
+        pointerInLevelButton = true;
+    }
+
+
+    public void OnPointerExitLevelButton()
+    {
+        pointerInLevelButton = false;
+    }
+
 
     public void OnPointerEnterExitButton()
     {
         pointerInExitButton = true;
     }
 
+
     public void OnPointerExitExitButton()
     {
         pointerInExitButton = false;
     }
+
 
     public void OptionsButton()
     {
@@ -283,6 +326,15 @@ public class GUIGHMainMenu : MonoBehaviour
 
         mainMenu.SetActive(false);
         optionsMenu.SetActive(true);
+    }
+
+
+    public void SelectLevelButton()
+    {
+        audioSource.Play();
+
+        mainMenu.SetActive(false);
+        selecteLevelMenu.SetActive(true);
     }
 
 
@@ -342,6 +394,29 @@ public class GUIGHMainMenu : MonoBehaviour
     }
 
 
+    // Levels
+    public void CaverninaButton()
+    {
+        audioSource.Play();
+
+        newGame = true;
+        fadingIn = true;
+
+        blackSpace.SetActive(true);
+    }
+
+
+    public void CatacombsButton()
+    {
+        audioSource.Play();
+
+        newGame = true;
+        fadingIn = true;
+
+        blackSpace.SetActive(true);
+    }
+
+
     // General
     public void BackButton()
     {
@@ -352,6 +427,7 @@ public class GUIGHMainMenu : MonoBehaviour
             mainMenu.SetActive(true);
             texturePackMenu.SetActive(false);
             optionsMenu.SetActive(false);
+            selecteLevelMenu.SetActive(false);
         }
         else
         {

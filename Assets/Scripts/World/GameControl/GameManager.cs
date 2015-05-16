@@ -22,6 +22,7 @@ public class GameManager : MonoBehaviour
     public GameSerializer gameSerializer;
     public string saveName;
 
+
     void Awake()
     {
         // Basic variables, activated in PreInit
@@ -194,6 +195,12 @@ public class GameManager : MonoBehaviour
             GameFlow.resetState = GameFlow.ResetState.End;
 
         previousPadState = padState;
+    }
+
+
+    public void Reset()
+    {
+        Awake();
     }
 
 

@@ -236,6 +236,29 @@ public class VoxelsList
                   10);
         dictionary.Add(selectedVoxel.name, selectedVoxel);
 
+        selectedVoxel = InitVoxel(VoxelState.SOLID, VoxelType.ORGANIC, "(6, 3)",
+                  1, 5, false, 1, 6, false, 1, 6, false,
+                  1, 6, false, 1, 6, false, 1, 5, false,
+                  10);
+        dictionary.Add(selectedVoxel.name, selectedVoxel);
+
+        selectedVoxel = InitVoxel(VoxelState.SOLID, VoxelType.ORGANIC, "(7, 3)",
+                  5, 4, false, 5, 4, false, 5, 4, false,
+                  5, 4, false, 5, 4, false, 5, 4, false,
+                  10);
+        dictionary.Add(selectedVoxel.name, selectedVoxel);
+
+        selectedVoxel = InitVoxel(VoxelState.SOLID, VoxelType.ORGANIC, "(0, 4)",
+                  5, 5, false, 5, 5, false, 5, 5, false,
+                  5, 5, false, 5, 5, false, 5, 5, false,
+                  10);
+        dictionary.Add(selectedVoxel.name, selectedVoxel);
+
+        selectedVoxel = InitVoxel(VoxelState.SOLID, VoxelType.ORGANIC, "(1, 4)",
+                  1, 5, false, 1, 5, false, 1, 5, false,
+                  1, 5, false, 1, 5, false, 1, 5, false,
+                  10);
+        dictionary.Add(selectedVoxel.name, selectedVoxel);
     }
 
 

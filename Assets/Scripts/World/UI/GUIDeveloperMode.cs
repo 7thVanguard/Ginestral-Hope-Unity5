@@ -158,7 +158,7 @@ public class GUIDeveloperMode : MonoBehaviour
         EventUI.SetActive(true);
 
         HUD.cubeMarker.SetActive(false);
-        GameFlow.developerWorldTools = GameFlow.DeveloperWorldTools.EVENT;
+        GameFlow.developerWorldTools = GameFlow.DeveloperWorldTools.CHANGECHUNKSIZE;
     }
 
 

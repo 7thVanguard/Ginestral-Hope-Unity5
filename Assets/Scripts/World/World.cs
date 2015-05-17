@@ -97,30 +97,36 @@ public class World
         geometryController.transform.eulerAngles = Vector3.zero;
         geometryController.transform.localScale = Vector3.one;
         geometryController.name = "Geometry Controller";
+        GameObject.DontDestroyOnLoad(geometryController);
 
         interactivesController.transform.position = Vector3.zero;
         interactivesController.transform.eulerAngles = Vector3.zero;
         interactivesController.transform.localScale = Vector3.one;
         interactivesController.name = "Interactives Controller";
+        GameObject.DontDestroyOnLoad(interactivesController);
 
         enemiesController.transform.position = Vector3.zero;
         enemiesController.transform.eulerAngles = Vector3.zero;
         enemiesController.transform.localScale = Vector3.one;
         enemiesController.name = "Enemies Controller";
+        GameObject.DontDestroyOnLoad(enemiesController);
 
         eventsController.transform.position = Vector3.zero;
         eventsController.transform.eulerAngles = Vector3.zero;
         eventsController.transform.localScale = Vector3.one;
         eventsController.name = "Events Controller";
+        GameObject.DontDestroyOnLoad(eventsController);
 
         emitersController.transform.position = Vector3.zero;
         emitersController.transform.eulerAngles = Vector3.zero;
         emitersController.transform.localScale = Vector3.one;
         emitersController.name = "Emitters Controller";
+        GameObject.DontDestroyOnLoad(emitersController);
 
         creationsController.transform.position = Vector3.zero;
         creationsController.transform.eulerAngles = Vector3.zero;
         creationsController.transform.localScale = Vector3.one;
         creationsController.name = "Creations Controller";
+        GameObject.DontDestroyOnLoad(creationsController);
     }
 }

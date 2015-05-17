@@ -43,9 +43,9 @@ public class DevConstructionToolsManager
     private void Remove(World world, Player player, MainCamera mainCamera)
     {
         if (mainCamera.raycast.transform.tag == "Chunk")
-        {
             VoxelsToolManager.Remove(world, player, mainCamera);
-        }
+        else if (GameFlow.selectedTool == GameFlow.SelectedTool.EVENT)
+            EventsToolManager.Remove(world, player, mainCamera);
     }
 
 

@@ -109,7 +109,8 @@ public class DeveloperInputController : AbstractInputsController
             }
             else if (GameFlow.selectedTool == GameFlow.SelectedTool.EVENT)
             {
-
+                if (Input.GetKey(KeyCode.Alpha1))
+                    GameFlow.developerWorldTools = GameFlow.DeveloperWorldTools.CHANGECHUNKSIZE;
             }
         }
         

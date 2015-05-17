@@ -156,8 +156,8 @@ public class GameManager : MonoBehaviour
                 {
                     if (Input.GetKey(KeyCode.LeftControl))
                     {
-                        Cursor.visible = false;
-                        Cursor.lockState = CursorLockMode.Locked;
+                        Cursor.visible = true;
+                        Cursor.lockState = CursorLockMode.None;
                     }
                     else
                     {

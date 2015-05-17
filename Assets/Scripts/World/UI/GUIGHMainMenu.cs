@@ -69,7 +69,7 @@ public class GUIGHMainMenu : MonoBehaviour
 
         movie = (MovieTexture)Resources.Load("Cinematics/Cinematic01_English");
         movieTimeCounter = 0;
-        selectedAtlas = (Texture2D)Global.G1.mainTexture;
+        selectedAtlas = (Texture2D)Global.MineAtlas.mainTexture;
 
         // Sliders
         transform.parent.FindChild("GH Main Menu").FindChild("Options Menu").FindChild("SLD Graphics Quality").GetComponent<Slider>().value = QualitySettings.GetQualityLevel();
@@ -142,7 +142,6 @@ public class GUIGHMainMenu : MonoBehaviour
             else if (loading)
             {
                 PrepareNewGame();
-
 
                 loading = false;
                 fadingOut = true;
@@ -356,6 +355,8 @@ public class GUIGHMainMenu : MonoBehaviour
 
         Application.LoadLevel(1);
         GameFlow.gameState = GameFlow.GameState.GAME;
+        GameFlow.gameMode = GameFlow.GameMode.DEVELOPER;
+        RenderSettings.ambientLight = new Color(0.5f, 0.5f, 0.5f, 1);
         Deactivate();
     }
 
@@ -382,8 +383,8 @@ public class GUIGHMainMenu : MonoBehaviour
     {
         audioSource.Play();
 
-        GameFlow.selectedAtlas = Global.G1;
-        selectedAtlas = (Texture2D)Global.G1.mainTexture;
+        GameFlow.selectedAtlas = Global.MineAtlas;
+        selectedAtlas = (Texture2D)Global.MineAtlas.mainTexture;
         ResetWorld();
     }
 
@@ -392,8 +393,8 @@ public class GUIGHMainMenu : MonoBehaviour
     {
         audioSource.Play();
 
-        GameFlow.selectedAtlas = Global.P1;
-        selectedAtlas = (Texture2D)Global.P1.mainTexture;
+        GameFlow.selectedAtlas = Global.FireAtlas;
+        selectedAtlas = (Texture2D)Global.FireAtlas.mainTexture;
         ResetWorld();
     }
 

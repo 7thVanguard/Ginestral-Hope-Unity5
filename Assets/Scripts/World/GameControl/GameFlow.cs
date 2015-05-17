@@ -23,7 +23,7 @@ public static class GameFlow
     public static DeveloperVoxelTools developerVoxelTools = DeveloperVoxelTools.SINGLE;
 
     public enum DeveloperWorldTools { EVENT, CHANGECHUNKSIZE }
-    public static DeveloperWorldTools developerWorldTools = DeveloperWorldTools.EVENT;
+    public static DeveloperWorldTools developerWorldTools = DeveloperWorldTools.CHANGECHUNKSIZE;
 
 
 	// Flow
@@ -39,7 +39,7 @@ public static class GameFlow
 
 
     // Selection
-    public static Material selectedAtlas = Global.G1;
+    public static Material selectedAtlas = Global.FireAtlas;
 
     public static string selectedGeometry = "Wooden Bridge 6m";
     public static string selectedInteractive = "Wooden Plank";

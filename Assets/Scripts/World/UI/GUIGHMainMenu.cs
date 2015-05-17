@@ -116,6 +116,7 @@ public class GUIGHMainMenu : MonoBehaviour
                     optionsMenu.SetActive(false);
                     texturePackMenu.SetActive(false);
                     creditsMenu.SetActive(false);
+                    selecteLevelMenu.SetActive(false);
                     Deactivate();
                 }
             }
@@ -265,6 +266,7 @@ public class GUIGHMainMenu : MonoBehaviour
     public void NewGameButton()
     {
         audioSource.Play();
+        Application.LoadLevel(2);
 
         newGame = true;
         fadingIn = true;
@@ -352,7 +354,7 @@ public class GUIGHMainMenu : MonoBehaviour
     {
         audioSource.Play();
 
-        Application.LoadLevel(2);
+        Application.LoadLevel(1);
         GameFlow.gameState = GameFlow.GameState.GAME;
         Deactivate();
     }
@@ -400,6 +402,7 @@ public class GUIGHMainMenu : MonoBehaviour
     public void CaverninaButton()
     {
         audioSource.Play();
+        Application.LoadLevel(2);
 
         newGame = true;
         fadingIn = true;
@@ -411,7 +414,7 @@ public class GUIGHMainMenu : MonoBehaviour
     public void CatacombsButton()
     {
         audioSource.Play();
-        Application.LoadLevel(1);
+        Application.LoadLevel(3);
 
         newGame = true;
         fadingIn = true;

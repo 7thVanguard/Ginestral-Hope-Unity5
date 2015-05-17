@@ -55,6 +55,8 @@ public class DevConstructionToolsManager
         {
             if (GameFlow.selectedTool == GameFlow.SelectedTool.VOXEL)
                 VoxelsToolManager.Place(world, player, mainCamera);
+            else if (GameFlow.selectedTool == GameFlow.SelectedTool.EVENT)
+                EventsToolManager.Place(world, player, mainCamera);
         }
     }
 
@@ -70,5 +72,7 @@ public class DevConstructionToolsManager
     {
         if (GameFlow.selectedTool == GameFlow.SelectedTool.VOXEL)
             VoxelsToolManager.Detect(world, player, mainCamera);
+        else if (GameFlow.selectedTool == GameFlow.SelectedTool.EVENT)
+            EventsToolManager.Detect(world, player, mainCamera);
     }
 }

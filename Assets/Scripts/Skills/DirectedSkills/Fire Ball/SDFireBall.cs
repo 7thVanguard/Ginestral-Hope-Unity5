@@ -13,7 +13,7 @@ public class SDFireBall : SkillDirected
         base.player = player;
         base.mainCamera = mainCamera;
 
-        fireBall = (GameObject)Resources.Load("Props/Skills/Fire Ball/Fire Ball");
+        fireBall = (GameObject)Resources.Load("Particle Systems/Prefabs/Fire Ball");
 
         // Global
         ID = "Fire Ball";

@@ -523,6 +523,7 @@ public class GUIGHMainMenu : MonoBehaviour
         Global.player.playerObj.transform.position = new Vector3(34.5f, 1, 17);
         Global.player.playerObj.transform.eulerAngles = new Vector3(0, 160, 0);
         Global.player.currentLife = Global.player.maxLife;
+        Global.player.fireCharges = 3;
         Global.player.orbsCollected = 0;
 
         Global.player.playerObj.transform.FindChild("Mesh").GetComponent<Animation>().Play("Idle");

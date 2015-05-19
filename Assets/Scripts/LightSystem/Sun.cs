@@ -39,5 +39,7 @@ public class Sun
 
         sunObj.AddComponent<LightSystemBehaviour>();
         sunObj.GetComponent<LightSystemBehaviour>().Init(Global.player, this, lensFlare);
+
+        lensFlare.color = Color.black;
     }
 }

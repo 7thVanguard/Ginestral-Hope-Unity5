@@ -113,7 +113,12 @@ public class DeveloperInputController : AbstractInputsController
                     GameFlow.developerWorldTools = GameFlow.DeveloperWorldTools.CHANGECHUNKSIZE;
             }
         }
-        
+
+        if (Input.GetKey(KeyCode.RightShift))
+        {
+            if (Input.GetKeyUp(KeyCode.Alpha1))
+                Application.LoadLevel(4);
+        }
 
         skills.Update(world, player, mainCamera);
 	}

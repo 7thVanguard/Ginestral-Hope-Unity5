@@ -53,7 +53,7 @@ public class SDFireBallBehaviour : MonoBehaviour
                 //+ Impact detection by raycast
                 if (Physics.Raycast(transform.position, direction, out impact, 0.5f))
                     if (impact.transform.gameObject.tag != "Skill")
-                        Impact();
+                        Impact(impact.transform.gameObject);
 
                 //+ Normal movement
                 // if the raycast don't detect a collision
@@ -89,18 +89,18 @@ public class SDFireBallBehaviour : MonoBehaviour
                 {
                     Destroy(transform.FindChild("Ball").gameObject);
                     Destroy(transform.FindChild("Glow").gameObject);
-                    Destroy(transform.FindChild("Light").gameObject);
+                    //Destroy(transform.FindChild("Light").gameObject);
                     Destroy(transform.FindChild("Trail").gameObject);
 
                     // Explosion relative
                     transform.FindChild("Explosion").gameObject.SetActive(true);
-                    light = transform.FindChild("Explosion").GetComponent<Light>();
+                    //light = transform.FindChild("Explosion").GetComponent<Light>();
                 }
 
                 // Explosion relative
                 explosionCounter -= Time.deltaTime;
-                light.intensity = maxLightIntensity * explosionCounter / initialxplosionCounter;
-                light.range = maxLightRange * explosionCounter / initialxplosionCounter;
+                //light.intensity = maxLightIntensity * explosionCounter / initialxplosionCounter;
+                //light.range = maxLightRange * explosionCounter / initialxplosionCounter;
 
 
                 if (explosionCounter <= 0)
@@ -114,11 +114,11 @@ public class SDFireBallBehaviour : MonoBehaviour
     void OnCollisionStay(Collision other)
     {
         if (other.gameObject.tag != "Skill")
-            Impact();
+            Impact(other.transform.gameObject);
     }
 
 
-    private void Impact()
+    private void Impact(GameObject impact)
     {
         // test if already collided (bug solver)
         if (isColliding)
@@ -126,15 +126,14 @@ public class SDFireBallBehaviour : MonoBehaviour
         isColliding = true;
 
         // Impact result
-        if (impact.transform.gameObject.tag == "Enemy")
+        if (impact.tag == "Enemy")
             impact.transform.gameObject.GetComponent<EnemyComponent>().Damage(damage);
-        else if (impact.transform.gameObject.tag == "Player")
+        else if (impact.tag == "Player")
             impact.transform.gameObject.GetComponent<PlayerComponent>().Damage(damage);
-        else if (impact.transform.gameObject.tag == "Geometry")
+        else if (impact.tag == "Fire")
         {
-
+            impact.transform.parent.GetComponent<GRL_FireEmitter>().emitting = true;
+            
         }
-
-        VoxelLib.Explosion(world, impact.point, damage, blastRadius);
     }
 }

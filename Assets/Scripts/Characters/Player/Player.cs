@@ -10,6 +10,7 @@ public class Player
     // Statistics
     public float maxLife = 3;
     public float currentLife = 3;
+    public int fireCharges = 3;
     public int orbsCollected = 0;
 
     // Movement

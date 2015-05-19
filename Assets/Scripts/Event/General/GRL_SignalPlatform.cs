@@ -28,6 +28,8 @@ public class GRL_SignalPlatform : MonoBehaviour
                 toEndPos = emitter.GetComponent<GRL_PressurePlate>().emitting;
             else if (emitter.GetComponent<GRL_Lever>() != null)
                 toEndPos = emitter.GetComponent<GRL_Lever>().emitting;
+            else if (emitter.GetComponent<GRL_FireEmitter>() != null)
+                toEndPos = emitter.GetComponent<GRL_FireEmitter>().emitting;
 
             if (toEndPos)
                 interpolation += Time.deltaTime / duration;

@@ -45,5 +45,19 @@ public class PlayerCombat
             if (Vector2.Distance(new Vector2(circleGizmoScreenPos.x, circleGizmoScreenPos.y), new Vector2(Screen.width / 2, Screen.height / 2)) > Screen.height / 2.5f)
                 target = null;
         }
+        else
+        {
+            if (Input.GetKeyUp(KeyCode.Mouse0))
+            {
+                if (Global.player.fireCharges > 0)
+                {
+                    Skill.Dictionary["Fire Ball"].CastDirected(null, player.playerObj.transform.position, true);
+
+                    Global.player.playerObj.transform.FindChild("Mesh").GetComponent<Animation>().Play("Attack");
+                    Global.player.animationCoolDown = 30;
+                    Global.player.fireCharges--;
+                }
+            }
+        }
     }
 }

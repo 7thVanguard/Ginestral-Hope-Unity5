@@ -28,8 +28,8 @@ public class MainCamera
 
 
     // Camera sensitivity
-    public float mouseSensitivityX = 3.5f;
-    public float mouseSensitivityY = 3.5f;
+    public float mouseSensitivityX = 2.8f;
+    public float mouseSensitivityY = 2.8f;
     public float rotationSensitivity = 0.2f;
 
     // Movement limits

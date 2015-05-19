@@ -7,6 +7,15 @@ public class GRL_FireEmitter : MonoBehaviour
     public bool emitting;
 
 
+    void Update()
+    {
+        if (emitting)
+            transform.FindChild("Fire").gameObject.SetActive(true);
+        else
+            transform.FindChild("Fire").gameObject.SetActive(false);
+    }
+
+
     void OnTriggerStay(Collider other)
     {
         if (emitting)

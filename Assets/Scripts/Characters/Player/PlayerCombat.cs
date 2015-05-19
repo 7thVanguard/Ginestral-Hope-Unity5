@@ -47,15 +47,20 @@ public class PlayerCombat
         }
         else
         {
-            if (Input.GetKeyUp(KeyCode.Mouse0))
+            if (GameFlow.gameMode == GameFlow.GameMode.PLAYER && GameFlow.gameState == GameFlow.GameState.GAME && !GameFlow.pause && !GameFlow.onInterface && !GameFlow.onCameraTravel)
             {
-                if (Global.player.fireCharges > 0)
+                if (Input.GetKeyUp(KeyCode.Mouse0))
                 {
-                    Skill.Dictionary["Fire Ball"].CastDirected(null, player.playerObj.transform.position, true);
+                    if (Global.player.fireCharges > 0)
+                    {
+                        Skill.Dictionary["Fire Ball"].CastDirected(null, player.playerObj.transform.position, true);
 
-                    Global.player.playerObj.transform.FindChild("Mesh").GetComponent<Animation>().Play("Attack");
-                    Global.player.animationCoolDown = 30;
-                    Global.player.fireCharges--;
+                        Global.player.playerObj.transform.FindChild("Mesh").GetComponent<Animation>().Play("Attack");
+                        Global.player.animationCoolDown = 30;
+                        Global.player.fireCharges--;
+
+                        Debug.Log(Global.player.fireCharges);
+                    }
                 }
             }
         }

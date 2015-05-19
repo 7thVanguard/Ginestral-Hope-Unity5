@@ -7,6 +7,8 @@ public class PlayerHUD
     private Texture2D lifeEmpty;
     private Texture2D coin;
 
+    private Texture2D gizmoCross;
+
     private Color orbColor = Color.white;
 
     private float collectedOrbMargin = 0;
@@ -18,6 +20,8 @@ public class PlayerHUD
         lifeFull = (Texture2D)Resources.Load("UI/HUD/LifeFull");
         lifeEmpty = (Texture2D)Resources.Load("UI/HUD/LifeEmpty");
         coin = (Texture2D)Resources.Load("UI/HUD/Coin");
+
+        gizmoCross = TextureCreator.CreateCross(gizmoCross);
     }
 
 
@@ -75,6 +79,10 @@ public class PlayerHUD
 
         // Draw text
         GUI.Label(new Rect(margin + Screen.width / 2 + Screen.width / 60, margin, Screen.width / 3, Screen.width / 3), 
-                  "x " + Global.player.orbsCollected);
+                  "x " + Global.player.orbsCollected + " / 3");
+
+        // Draw Gizmos
+        if (GameFlow.gameMode == GameFlow.GameMode.PLAYER && GameFlow.gameState == GameFlow.GameState.GAME && !GameFlow.pause && !GameFlow.onInterface && !GameFlow.onCameraTravel)
+            GUI.DrawTexture(new Rect(Screen.width / 2 - gizmoCross.width / 2, Screen.height / 2 - gizmoCross.height, gizmoCross.width, gizmoCross.height), gizmoCross);
     }
 }

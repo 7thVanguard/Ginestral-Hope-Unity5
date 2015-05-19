@@ -11,7 +11,6 @@ public class HUD : MonoBehaviour
 
     // gizmos
     public static Texture2D gizmoCircle;
-    private Texture2D gizmoCross;
     private Texture2D translucentSelector;
 
     // Bars
@@ -43,7 +42,6 @@ public class HUD : MonoBehaviour
     {
         playerHUD.Start();
 
-        gizmoCross = TextureCreator.CreateCross(gizmoCross);
         gizmoCircle = TextureCreator.CreateCircle(gizmoCircle);
 
         translucentSelector = TextureCreator.CreatePixel(translucentSelector, new Color(50.0f / 255, 100.0f / 255, 150.0f / 255, 120.0f / 255));    // translucent blue

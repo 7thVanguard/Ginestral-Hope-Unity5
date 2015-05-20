@@ -49,7 +49,7 @@ public class PlayerCombat
         {
             if (GameFlow.gameMode == GameFlow.GameMode.PLAYER && GameFlow.gameState == GameFlow.GameState.GAME && !GameFlow.pause && !GameFlow.onInterface && !GameFlow.onCameraTravel)
             {
-                if (Input.GetKeyUp(KeyCode.Mouse0))
+                if (Input.GetKeyDown(KeyCode.Mouse0))
                 {
                     if (Global.player.fireCharges > 0)
                     {

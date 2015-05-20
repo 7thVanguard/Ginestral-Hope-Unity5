@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class GRL_DoorBrazier : MonoBehaviour 
+public class GRL_FireDoor : MonoBehaviour 
 {
     public GameObject firstBrazier;
     public GameObject secondBrazier;

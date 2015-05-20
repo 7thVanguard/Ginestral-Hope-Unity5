@@ -3,8 +3,15 @@ using System.Collections;
 
 public class GRL_FireEmitter : MonoBehaviour
 {
+    [HideInInspector] public bool startEmitting;
     // Changed from the impact of the fire ball
     public bool emitting;
+    
+
+    void Start()
+    {
+        startEmitting = emitting;
+    }
 
 
     void Update()

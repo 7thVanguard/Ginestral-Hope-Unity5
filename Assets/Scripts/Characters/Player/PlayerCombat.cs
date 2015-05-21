@@ -58,8 +58,6 @@ public class PlayerCombat
                         Global.player.playerObj.transform.FindChild("Mesh").GetComponent<Animation>().Play("Attack");
                         Global.player.animationCoolDown = 30;
                         Global.player.fireCharges--;
-
-                        Debug.Log(Global.player.fireCharges);
                     }
                 }
             }

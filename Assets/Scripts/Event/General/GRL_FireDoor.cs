@@ -7,6 +7,7 @@ public class GRL_FireDoor : MonoBehaviour
     public GameObject secondBrazier;
     public GameObject thirdBrazier;
 
+    [HideInInspector] public bool totalClose;
     public bool close;
     public bool open;
 
@@ -34,30 +35,34 @@ public class GRL_FireDoor : MonoBehaviour
         audio = transform.GetComponent<AudioSource>();
 
         open = false;
+        totalClose = false;
+
+        EventsLib.SetDoorOpenDoubleSlider(lefttDoor, leftDoorBasePosition, rightDoor, rightDoorBasePosition);
 	}
 	
 
 
 	void Update ()
     {
-        if (firstBrazier.GetComponent<GRL_FireEmitter>().emitting)
-            if (secondBrazier.GetComponent<GRL_FireEmitter>().emitting)
-                if (thirdBrazier.GetComponent<GRL_FireEmitter>().emitting)
-                {
-                    if (!open)
+        if (!totalClose)
+            if (firstBrazier.GetComponent<GRL_FireEmitter>().emitting)
+                if (secondBrazier.GetComponent<GRL_FireEmitter>().emitting)
+                    if (thirdBrazier.GetComponent<GRL_FireEmitter>().emitting)
                     {
-                        audio.Play();
-                        EventsLib.SetDoorOpenDoubleSlider(lefttDoor, leftDoorObjectivePosition, rightDoor, rightDoorObjectivePosition);
-                        open = true;
+                        if (!open)
+                        {
+                            audio.Play();
+                            EventsLib.SetDoorOpenDoubleSlider(lefttDoor, leftDoorObjectivePosition, rightDoor, rightDoorObjectivePosition);
+                            open = true;
+                        }
                     }
-                }
 
-        if (open || close)
+        if (open || close || totalClose)
         {
             EventsLib.UpdateDoorOpenDoubleSlider();
         }
 
-        if (close)
+        if (close || totalClose)
         {
             if (open)
             {

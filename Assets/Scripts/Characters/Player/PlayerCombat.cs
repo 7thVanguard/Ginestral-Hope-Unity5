@@ -53,7 +53,7 @@ public class PlayerCombat
                 {
                     if (Global.player.fireCharges > 0)
                     {
-                        Skill.Dictionary["Fire Ball"].CastDirected(null, player.playerObj.transform.position, true);
+                        Skill.Dictionary["Fire Ball"].CastDirected(null, player.playerObj.transform.position + new Vector3(0, 1, 0), true);
 
                         Global.player.playerObj.transform.FindChild("Mesh").GetComponent<Animation>().Play("Attack");
                         Global.player.animationCoolDown = 30;

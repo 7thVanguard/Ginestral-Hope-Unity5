@@ -26,6 +26,7 @@ public class GRL_FireEmitter : MonoBehaviour
     void OnTriggerStay(Collider other)
     {
         if (emitting)
+        {
             if (other.CompareTag("Player"))
                 if (Input.GetKeyUp(KeyCode.Mouse1))
                 {
@@ -33,5 +34,14 @@ public class GRL_FireEmitter : MonoBehaviour
                         Global.player.fireCharges++;
                     emitting = false;
                 }
+        }
+        else
+        {
+            if (other.CompareTag("Fire"))
+            {
+                emitting = true;
+                other.tag = "Untagged";
+            }
+        }
     }
 }

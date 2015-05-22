@@ -51,7 +51,9 @@ public class GRL_FireDoor : MonoBehaviour
                     {
                         if (!open)
                         {
-                            audio.Play();
+                            if (!audio.isPlaying)
+                                audio.Play();
+
                             EventsLib.SetDoorOpenDoubleSlider(lefttDoor, leftDoorObjectivePosition, rightDoor, rightDoorObjectivePosition);
                             open = true;
                         }
@@ -66,7 +68,9 @@ public class GRL_FireDoor : MonoBehaviour
         {
             if (open)
             {
-                audio.Play();
+                if (!audio.isPlaying)
+                    audio.Play();
+
                 EventsLib.SetDoorOpenDoubleSlider(lefttDoor, leftDoorBasePosition, rightDoor, rightDoorBasePosition);
                 open = false;
             }

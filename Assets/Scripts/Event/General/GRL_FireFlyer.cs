@@ -10,12 +10,16 @@ public class GRL_FireFlyer : MonoBehaviour
     public List<Vector3> ControlPoints = new List<Vector3>();
 
     public float speed = 3;
-    public bool emitting = false;
+    public float stationaryTime = 2;
 
-    private float timeCounter;
+    [HideInInspector] public bool emitting = false;
+
+    private float routeTimeCounter = 0;
+    private float stationaryTimeCounter = 0;
     private int positionIndex = 1;
+    private bool stationary = false;
     private bool returning = false;
-    
+
 
     void Update()
     {
@@ -26,32 +30,46 @@ public class GRL_FireFlyer : MonoBehaviour
         }
         else
         {
-            switch (routeType)
+            if (!stationary)
             {
-                case RouteType.Circular:
-                    {
-                        timeCounter += Time.deltaTime / speed;
-                        if (timeCounter >= 1)
+                switch (routeType)
+                {
+                    case RouteType.Circular:
                         {
-                            timeCounter = 0;
+                            routeTimeCounter += Time.deltaTime / speed;
+                            if (routeTimeCounter >= 1)
+                            {
+                                routeTimeCounter = 0;
 
-                            positionIndex++;
-                            if (positionIndex == ControlPoints.Count)
-                                positionIndex = 0;
+                                positionIndex++;
+                                if (positionIndex == ControlPoints.Count)
+                                    positionIndex = 0;
+
+                                stationary = true;
+                            }
+
+                            if (positionIndex == ControlPoints.Count - 1)
+                                transform.position = Vector3.Lerp(ControlPoints[positionIndex], ControlPoints[0], routeTimeCounter);
+                            else
+                                transform.position = Vector3.Lerp(ControlPoints[positionIndex], ControlPoints[positionIndex + 1], routeTimeCounter);
                         }
-
-                        if (positionIndex == ControlPoints.Count - 1)
-                            transform.position = Vector3.Lerp(ControlPoints[positionIndex], ControlPoints[0], timeCounter);
-                        else
-                            transform.position = Vector3.Lerp(ControlPoints[positionIndex], ControlPoints[positionIndex + 1], timeCounter);
-                    }
-                    break;
-                case RouteType.goAndReverse:
-                    break;
-                case RouteType.Random:
-                    break;
-                default:
-                    break;
+                        break;
+                    case RouteType.goAndReverse:
+                        break;
+                    case RouteType.Random:
+                        break;
+                    default:
+                        break;
+                }
+            }
+            else
+            {
+                stationaryTimeCounter += Time.deltaTime;
+                if (stationaryTimeCounter >= stationaryTime)
+                {
+                    stationaryTimeCounter = 0;
+                    stationary = false;
+                }
             }
         }
     }

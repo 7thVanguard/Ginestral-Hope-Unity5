@@ -14,7 +14,7 @@ public class GRL_FireStatue : MonoBehaviour
 
 	void OnTriggerStay(Collider other)
     {
-        if (Input.GetKeyUp(KeyCode.E))
+        if (Input.GetKeyUp(KeyCode.Mouse1))
 	        if (other.CompareTag("Player"))
             {
                 door.GetComponent<GRL_FireDoor>().close = true;

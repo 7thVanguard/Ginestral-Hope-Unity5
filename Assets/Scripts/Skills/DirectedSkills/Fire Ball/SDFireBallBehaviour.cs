@@ -132,7 +132,10 @@ public class SDFireBallBehaviour : MonoBehaviour
             impact.transform.gameObject.GetComponent<PlayerComponent>().Damage(damage);
         else if (impact.tag == "Fire")
         {
-            impact.transform.parent.GetComponent<GRL_FireEmitter>().emitting = true;
+            if (impact.transform.parent.GetComponent<GRL_FireEmitter>() != null)
+                impact.transform.parent.GetComponent<GRL_FireEmitter>().emitting = true;
+            else if (impact.transform.parent.GetComponent<GRL_FireFlyer>() != null)
+                impact.transform.parent.GetComponent<GRL_FireFlyer>().emitting = true;
             
         }
     }

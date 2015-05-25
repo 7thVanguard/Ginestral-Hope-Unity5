@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 92cb69924090f9b49b88439a946ce26a
-timeCreated: 1432572945
+guid: 485104b83e2a3cb40b7890dfd0456bda
+timeCreated: 1432571399
 licenseType: Free
 ModelImporter:
   serializedVersion: 18
@@ -9,7 +9,7 @@ ModelImporter:
     400000: //RootNode
     2300000: //RootNode
     3300000: //RootNode
-    4300000: Level02_Instance02
+    4300000: Arco
   materials:
     importMaterials: 1
     materialName: 0

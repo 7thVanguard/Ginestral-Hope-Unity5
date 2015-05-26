@@ -7,19 +7,29 @@ public class GRL_FireEmitter : MonoBehaviour
     // Changed from the impact of the fire ball
     public bool emitting;
     
+    private AudioSource audio;
 
     void Start()
     {
         startEmitting = emitting;
+        audio = transform.GetComponent<AudioSource>();
     }
 
 
     void Update()
     {
         if (emitting)
+        {
             transform.FindChild("Fire").gameObject.SetActive(true);
+            if (!audio.isPlaying)
+                audio.Play();
+        }
         else
+        {
             transform.FindChild("Fire").gameObject.SetActive(false);
+            if (audio.isPlaying)
+                audio.Stop();
+        }
     }
 
 

@@ -60,8 +60,10 @@ public class NGGH_EndLevel : MonoBehaviour
         }
         else
         {
-            if (inTrigger)
-                EventsLib.DrawInteractivity();
+            if (GameFlow.gameState == GameFlow.GameState.GAME)
+                if (!GameFlow.pause)
+                    if (inTrigger)
+                        EventsLib.DrawInteractivity();
         }
     }
 

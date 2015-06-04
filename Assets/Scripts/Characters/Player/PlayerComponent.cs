@@ -19,7 +19,7 @@ public class PlayerComponent : MonoBehaviour
     void Start()
     {
         // Damage relative
-        player.currentLife = player.maxLife;
+        //player.currentLife = player.maxLife;
         // originalColor = gameObject.renderer.material.color;
         animCounter = 0;
     }

@@ -30,6 +30,8 @@ public class GRL_OrbController : MonoBehaviour
                 {
                     transform.GetComponent<AudioSource>().volume = GameMusic.FXVolume;
                     transform.GetComponent<AudioSource>().Play();
+                    if (Global.player.currentLife < Global.player.maxLife)
+                        Global.player.currentLife++;
                 }
             }
 

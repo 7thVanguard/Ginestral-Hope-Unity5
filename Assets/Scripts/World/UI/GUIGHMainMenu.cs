@@ -520,7 +520,7 @@ public class GUIGHMainMenu : MonoBehaviour
         GameObject.Destroy(Global.world.emitersController);
 
         // Player
-        Global.player.currentLife = Global.player.maxLife;
+        //Global.player.currentLife = Global.player.maxLife;
         Global.player.fireCharges = 3;
         Global.player.orbsCollected = 0;
 

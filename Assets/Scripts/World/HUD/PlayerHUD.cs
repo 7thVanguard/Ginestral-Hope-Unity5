@@ -4,6 +4,7 @@ using System.Collections;
 public class PlayerHUD
 {
     private Texture2D lifeFull;
+    private Texture2D fireFull;
     private Texture2D lifeEmpty;
     private Texture2D coin;
 
@@ -18,6 +19,7 @@ public class PlayerHUD
     public void Start()
     {
         lifeFull = (Texture2D)Resources.Load("UI/HUD/LifeFull");
+        fireFull = (Texture2D)Resources.Load("UI/HUD/Fire");
         lifeEmpty = (Texture2D)Resources.Load("UI/HUD/LifeEmpty");
         coin = (Texture2D)Resources.Load("UI/HUD/Coin");
 
@@ -37,6 +39,12 @@ public class PlayerHUD
                 GUI.DrawTextureWithTexCoords(new Rect(margin * (i + 1) + i * Screen.width / 40, margin, Screen.width / 40, Screen.width / 40), lifeEmpty, 
                                              new Rect(0, 0, 1, 1));
         }
+
+        // Fire
+        if (Application.loadedLevelName != "Cavernina")
+            for (int i = 0; i < Global.player.fireCharges; i++)
+                GUI.DrawTextureWithTexCoords(new Rect((Screen.width - fireFull.width) - (margin * (i + 1) + i * Screen.width / 40), (Screen.height - fireFull.height / 2) - margin, Screen.width / 40, Screen.width / 40), fireFull,
+                                                 new Rect(0, 0, 1, 1));
 
 
         // Orbs

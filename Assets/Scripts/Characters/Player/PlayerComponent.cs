@@ -42,17 +42,20 @@ public class PlayerComponent : MonoBehaviour
 
     public void Damage(float damage)
     {
-        player.currentLife -= damage;
-
         if (player.currentLife > 0)
         {
-            Global.player.playerObj.transform.FindChild("Mesh").GetComponent<Animation>().Play("Hurt");
-            Global.player.animationCoolDown = 30;
-        }
-        else if (player.currentLife == 0)
-        {
-            Global.player.playerObj.transform.FindChild("Mesh").GetComponent<Animation>().Play("Die");
-            Global.player.animationCoolDown = 10000;
+            player.currentLife -= damage;
+
+            if (player.currentLife > 0)
+            {
+                Global.player.playerObj.transform.FindChild("Mesh").GetComponent<Animation>().Play("Hurt");
+                Global.player.animationCoolDown = 30;
+            }
+            else if (player.currentLife <= 0)
+            {
+                Global.player.playerObj.transform.FindChild("Mesh").GetComponent<Animation>().Play("Die");
+                Global.player.animationCoolDown = 10000;
+            }
         }
     }
 

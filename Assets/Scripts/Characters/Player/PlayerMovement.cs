@@ -22,6 +22,8 @@ public class PlayerMovement
     private float audioFramesCounter;
     private int jumpAnimationCounter = 0;
 
+    private bool landing = false;
+
 
     public PlayerMovement(World world, Player player, MainCamera mainCamera)
     {
@@ -56,6 +58,17 @@ public class PlayerMovement
         // Jump
         if (player.controller.isGrounded)
         {
+            // Possible fall damage on landing
+            if (landing)
+            {
+                Debug.Log(objectiveDirection.y);
+
+                if (objectiveDirection.y < -15)
+                {
+                    player.playerObj.transform.GetComponent<PlayerComponent>().Damage(1 + Mathf.Floor(-objectiveDirection.y - 15) / 5);
+                }
+            }
+
             if ((Input.GetKey(KeyCode.Space)) || (padState.Buttons.A == ButtonState.Pressed && previousPadState.Buttons.A == ButtonState.Released))
             {
                 objectiveDirection = new Vector3(objectiveDirection.x, player.jumpInitialSpeed, objectiveDirection.z);
@@ -67,6 +80,9 @@ public class PlayerMovement
 
             // Set back the counter to 0 preventing the jump animation play for little air times
             jumpAnimationCounter = 0;
+
+            // We landed already
+            landing = false;
         }
         else
         {
@@ -74,8 +90,13 @@ public class PlayerMovement
 
             // Jump animation activation
             jumpAnimationCounter++;
-            if (jumpAnimationCounter >= 3)
-                Animation("Jump", false, true); 
+            if (jumpAnimationCounter >= 5)
+            {
+                Animation("Jump", false, true);
+
+                // WHen controller is grounded again, we detect player just landed
+                landing = true;
+            }
         }
 
         // Assign movement

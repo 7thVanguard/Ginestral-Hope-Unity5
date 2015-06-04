@@ -47,20 +47,17 @@ public class PlayerCombat
         }
         else
         {
-            if (GameFlow.gameMode == GameFlow.GameMode.PLAYER && GameFlow.gameState == GameFlow.GameState.GAME && !GameFlow.pause && !GameFlow.onInterface && !GameFlow.onCameraTravel)
-            {
-                if (Input.GetKeyDown(KeyCode.Mouse0))
-                {
-                    if (Global.player.fireCharges > 0)
-                    {
-                        Skill.Dictionary["Fire Ball"].CastDirected(null, player.playerObj.transform.position + new Vector3(0, 1, 0), true);
+            if (Application.loadedLevelName != "Cavernina")
+                if (GameFlow.gameMode == GameFlow.GameMode.PLAYER && GameFlow.gameState == GameFlow.GameState.GAME && !GameFlow.pause && !GameFlow.onInterface && !GameFlow.onCameraTravel)
+                    if (Input.GetKeyDown(KeyCode.Mouse0))
+                        if (Global.player.fireCharges > 0)
+                        {
+                            Skill.Dictionary["Fire Ball"].CastDirected(null, player.playerObj.transform.position + new Vector3(0, 1, 0), true);
 
-                        Global.player.playerObj.transform.FindChild("Mesh").GetComponent<Animation>().Play("Attack");
-                        Global.player.animationCoolDown = 30;
-                        Global.player.fireCharges--;
-                    }
-                }
-            }
+                            Global.player.playerObj.transform.FindChild("Mesh").GetComponent<Animation>().Play("Attack");
+                            Global.player.animationCoolDown = 30;
+                            Global.player.fireCharges--;
+                        }
         }
     }
 }

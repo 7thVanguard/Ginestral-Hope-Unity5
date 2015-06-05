@@ -10,10 +10,6 @@ public class PlayerMovement
     private MainCamera mainCamera;
 
     private AudioSource audioFX;
-
-    private GamePadState padState;
-    private GamePadState previousPadState;
-    private PlayerIndex padIndex;
     
     private Vector3 objectiveDirection;
     private Vector3 interpolateDirection;
@@ -38,8 +34,6 @@ public class PlayerMovement
 
     public void NormalMovementUpdate()
     {
-        padState = GamePad.GetState(padIndex);
-
         // Auto damage
         if (Input.GetKeyUp(KeyCode.B))
             player.playerObj.GetComponent<PlayerComponent>().Damage(1);
@@ -67,7 +61,7 @@ public class PlayerMovement
                 }
             }
 
-            if ((Input.GetKey(KeyCode.Space)) || (padState.Buttons.A == ButtonState.Pressed))
+			if ((Input.GetKey(KeyCode.Space)) || (GameManager.padState.Buttons.A == ButtonState.Pressed))
             {
                 objectiveDirection = new Vector3(objectiveDirection.x, player.jumpInitialSpeed, objectiveDirection.z);
                 audioFX.clip = (AudioClip)Resources.Load("Audio/FX/Jump");
@@ -102,8 +96,6 @@ public class PlayerMovement
 
         // Animation speed Control
         player.playerObj.transform.FindChild("Mesh").GetComponent<Animation>()["Run"].speed = 1.1f;
-
-        previousPadState = padState;
     }
 
 
@@ -165,9 +157,9 @@ public class PlayerMovement
         }
 
         // GamePad
-        if ((padState.ThumbSticks.Left.X != 0) || (padState.ThumbSticks.Left.Y != 0))
+		if ((GameManager.padState.ThumbSticks.Left.X != 0) || (GameManager.padState.ThumbSticks.Left.Y != 0))
 		{
-            objectiveDirection = new Vector3(padState.ThumbSticks.Left.X * speed, objectiveDirection.y, padState.ThumbSticks.Left.Y * speed);
+			objectiveDirection = new Vector3(GameManager.padState.ThumbSticks.Left.X * speed, objectiveDirection.y, GameManager.padState.ThumbSticks.Left.Y * speed);
 			player.isMoving = true;
 		}
 

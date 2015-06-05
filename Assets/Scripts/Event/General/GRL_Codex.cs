@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using XInputDotNetPure;
 
 public class GRL_Codex : MonoBehaviour
 {
@@ -19,7 +20,7 @@ public class GRL_Codex : MonoBehaviour
             inTrigger = true;
 
             if (!GameFlow.onInterface)
-                if (Input.GetKey(KeyCode.E))
+				if (Input.GetKey(KeyCode.E) || GameManager.padState.Buttons.B == ButtonState.Pressed)
                 {
                     GameGUI.codexMode.GetComponent<GUICodexMode>().ActivateTable(tableNumber);
                     transform.GetComponent<AudioSource>().volume = GameMusic.FXVolume;

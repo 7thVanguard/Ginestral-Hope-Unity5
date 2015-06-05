@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using XInputDotNetPure;
 
 public class PlayerCombat
 {
@@ -49,7 +50,7 @@ public class PlayerCombat
         {
             if (Application.loadedLevelName != "Cavernina")
                 if (GameFlow.gameMode == GameFlow.GameMode.PLAYER && GameFlow.gameState == GameFlow.GameState.GAME && !GameFlow.pause && !GameFlow.onInterface && !GameFlow.onCameraTravel)
-                    if (Input.GetKeyDown(KeyCode.Mouse0))
+					if (Input.GetKeyDown(KeyCode.Mouse0) || ((GameManager.padState.Buttons.B == ButtonState.Pressed) && (GameManager.previousPadState.Buttons.B == ButtonState.Released)))
                         if (Global.player.fireCharges > 0)
                         {
                             Skill.Dictionary["Fire Ball"].CastDirected(null, player.playerObj.transform.position + new Vector3(0, 1, 0), true);

@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using XInputDotNetPure;
 
 public class GRL_Lever : MonoBehaviour 
 {
@@ -43,7 +44,7 @@ public class GRL_Lever : MonoBehaviour
         {
             if (other.GetComponent<CharacterController>().isGrounded)
             {
-                if (Input.GetKey(KeyCode.E))
+				if (Input.GetKey(KeyCode.E) || GameManager.padState.Buttons.B == ButtonState.Pressed)
                 {
                     if (!keepPressed)
                     {
@@ -54,7 +55,7 @@ public class GRL_Lever : MonoBehaviour
                         Global.player.animationCoolDown = 40;
                     }
                 }
-                else if (Input.GetKeyUp(KeyCode.E))
+				else if (Input.GetKeyUp(KeyCode.E) || GameManager.padState.Buttons.B == ButtonState.Released)
                     keepPressed = false;
 
 

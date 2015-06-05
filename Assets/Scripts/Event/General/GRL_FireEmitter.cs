@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using XInputDotNetPure;
 
 public class GRL_FireEmitter : MonoBehaviour
 {
@@ -38,7 +39,7 @@ public class GRL_FireEmitter : MonoBehaviour
         if (emitting)
         {
             if (other.CompareTag("Player"))
-                if (Input.GetKeyUp(KeyCode.Mouse1))
+				if (Input.GetKeyUp(KeyCode.Mouse1) || GameManager.padState.Buttons.X == ButtonState.Pressed)
                 {
                     if (Global.player.fireCharges < 3)
                         Global.player.fireCharges++;

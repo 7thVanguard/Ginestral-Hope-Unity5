@@ -14,9 +14,9 @@ public class GameManager : MonoBehaviour
     // Main control classes
     private Enemy enemy;
     private Skill skill;
-    private GamePadState padState;
-    private GamePadState previousPadState;
-    private PlayerIndex padIndex;
+    public static GamePadState padState;
+	public static GamePadState previousPadState;
+	public static PlayerIndex padIndex;
 
     // Save
     public GameSerializer gameSerializer;

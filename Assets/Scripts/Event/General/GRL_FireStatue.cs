@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using XInputDotNetPure;
 
 public class GRL_FireStatue : MonoBehaviour
 {
@@ -14,7 +15,7 @@ public class GRL_FireStatue : MonoBehaviour
 
 	void OnTriggerStay(Collider other)
     {
-        if (Input.GetKeyUp(KeyCode.Mouse1))
+		if (Input.GetKeyUp(KeyCode.Mouse1) || GameManager.padState.Buttons.X == ButtonState.Pressed)
 	        if (other.CompareTag("Player"))
             {
                 door.GetComponent<GRL_FireDoor>().close = true;

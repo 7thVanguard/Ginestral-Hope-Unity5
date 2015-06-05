@@ -61,15 +61,13 @@ public class PlayerMovement
             // Possible fall damage on landing
             if (landing)
             {
-                Debug.Log(objectiveDirection.y);
-
                 if (objectiveDirection.y < -15)
                 {
                     player.playerObj.transform.GetComponent<PlayerComponent>().Damage(1 + Mathf.Floor(-objectiveDirection.y - 15) / 5);
                 }
             }
 
-            if ((Input.GetKey(KeyCode.Space)) || (padState.Buttons.A == ButtonState.Pressed && previousPadState.Buttons.A == ButtonState.Released))
+            if ((Input.GetKey(KeyCode.Space)) || (padState.Buttons.A == ButtonState.Pressed))
             {
                 objectiveDirection = new Vector3(objectiveDirection.x, player.jumpInitialSpeed, objectiveDirection.z);
                 audioFX.clip = (AudioClip)Resources.Load("Audio/FX/Jump");
@@ -168,7 +166,10 @@ public class PlayerMovement
 
         // GamePad
         if ((padState.ThumbSticks.Left.X != 0) || (padState.ThumbSticks.Left.Y != 0))
+		{
             objectiveDirection = new Vector3(padState.ThumbSticks.Left.X * speed, objectiveDirection.y, padState.ThumbSticks.Left.Y * speed);
+			player.isMoving = true;
+		}
 
         // Player looking at movement direction
         if (player.isMoving)

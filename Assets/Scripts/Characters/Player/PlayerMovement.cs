@@ -57,7 +57,7 @@ public class PlayerMovement
             {
                 if (objectiveDirection.y < -15)
                 {
-                    player.playerObj.transform.GetComponent<PlayerComponent>().Damage(1 + Mathf.Floor(-objectiveDirection.y - 15) / 5);
+                    player.playerObj.transform.GetComponent<PlayerComponent>().Damage(1 + Mathf.Floor(-objectiveDirection.y - 20) / 5);
                 }
             }
 

@@ -257,7 +257,15 @@ public class GUIGHMainMenu : MonoBehaviour
             GUI.DrawTexture(new Rect(Screen.width * 3 / 5, 20, Screen.width * 2 / 5 - 20, Screen.width * 2 / 5 - 20), selectedAtlas);
 
         if (movie.isPlaying)
+        {
             GUI.DrawTexture(new Rect(0, 0, Screen.width, Screen.height), movie);
+
+            GUIStyle style = new GUIStyle();
+            style.font = (Font)Resources.Load("UI/Fonts/Amigo-Regular");
+            style.fontSize = 30;
+            style.normal.textColor = Color.white;
+            GUI.Label(new Rect(Screen.width * 6 / 8, Screen.height * 7.4f / 8, Screen.width * 2 / 8, Screen.height * 0.5f / 8), "Press Spacebar to skip", style);
+        }
     }
 
 

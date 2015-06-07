@@ -10,10 +10,12 @@ public class PlayerHUD
 
     private Texture2D gizmoCross;
 
-    private Color orbColor = Color.white;
+    private Color orbColor = Color.green;
 
     private float collectedOrbMargin = 0;
     private int margin = 5;
+
+    private bool orbColorGrowing = false;
 
 
     public void Start()
@@ -57,23 +59,24 @@ public class PlayerHUD
         if (GameFlow.orbCollected)
         {
             GameFlow.orbCollected = false;
-            orbColor.g = 0;
-            orbColor.b = 0;
+            orbColor = Color.yellow;
             collectedOrbMargin = textureSize / 2;
+
+            orbColorGrowing = true;
         }
         else
         {
-            if (orbColor.g < 1)
+            if (orbColorGrowing)
             {
-                orbColor.g += Time.deltaTime / 3;
-                orbColor.b += Time.deltaTime / 3;
+                orbColor = Color.Lerp(orbColor, Color.green, 0.002f);
+                collectedOrbMargin = (textureSize / 2) * orbColor.r;
 
-                collectedOrbMargin = (textureSize / 2) * (1 - orbColor.g);
+                if (orbColor.r < 0.01f)
+                    orbColorGrowing = true;
             }
             else
             {
-                orbColor.g = 1;
-                orbColor.b = 1;
+                orbColor = Color.green;
 
                 collectedOrbMargin = 0;
             }

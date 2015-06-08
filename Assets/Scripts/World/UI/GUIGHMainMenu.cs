@@ -264,7 +264,7 @@ public class GUIGHMainMenu : MonoBehaviour
             style.font = (Font)Resources.Load("UI/Fonts/Amigo-Regular");
             style.fontSize = 30;
             style.normal.textColor = Color.white;
-            GUI.Label(new Rect(Screen.width * 6 / 8, Screen.height * 7.4f / 8, Screen.width * 2 / 8, Screen.height * 0.5f / 8), "Press Spacebar to skip", style);
+            GUI.Label(new Rect(Screen.width * 6.2f / 8, Screen.height * 7.6f / 8, Screen.width * 2 / 8, Screen.height * 0.5f / 8), "Press Spacebar to skip", style);
         }
     }
 

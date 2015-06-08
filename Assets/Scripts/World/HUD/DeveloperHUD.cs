@@ -4,6 +4,7 @@ using System.Collections;
 public class DeveloperHUD
 {
     Texture2D atlas;
+    Texture2D gizmoCross;
 
     private Vector2 mousePosition;
     private Vector2 textureSelection = new Vector2((Screen.height * 5 / 8) / 8, Screen.height * 3 / 8);
@@ -22,6 +23,8 @@ public class DeveloperHUD
                 break;
             }
         }
+
+        gizmoCross = TextureCreator.CreateCross(gizmoCross);
     }
 
 
@@ -55,6 +58,10 @@ public class DeveloperHUD
             else
                 Global.mainCamera.voxelsObj.SetActive(false);
         }
+
+        // Draw Gizmos
+        if (GameFlow.gameMode == GameFlow.GameMode.DEVELOPER && GameFlow.gameState == GameFlow.GameState.GAME && !GameFlow.pause && !GameFlow.onInterface && !GameFlow.onCameraTravel)
+            GUI.DrawTexture(new Rect(Screen.width / 2 - gizmoCross.width / 2, Screen.height / 2 - gizmoCross.height / 2, gizmoCross.width, gizmoCross.height), gizmoCross);
     }
 
 

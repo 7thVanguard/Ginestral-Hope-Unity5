@@ -19,7 +19,7 @@ public class NGGH_EndLevel : MonoBehaviour
     private Vector3 fireGemInitialPosition;
     private Transform fireGemAuxTransform;
 
-    private float gemRotationSpeed = -1;
+    public float gemRotationSpeed;
 
     public float frameToframeAnimSpeed;
     public float animTime;
@@ -108,6 +108,8 @@ public class NGGH_EndLevel : MonoBehaviour
 
     private void AnimateFireGem()
     {
+        fireGemTransform.Rotate(new Vector3(0, Time.deltaTime * gemRotationSpeed, 0));
+        
         fireGemTransform.position = Vector3.Slerp(fireGemTransform.position, fireGemAuxTransform.position, animSlerpTime);
 
         switch (animState)

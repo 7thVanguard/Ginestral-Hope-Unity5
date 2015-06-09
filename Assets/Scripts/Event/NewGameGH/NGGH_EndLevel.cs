@@ -1,8 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+public enum AnimState { MoveDown, MoveUp }
 public class NGGH_EndLevel : MonoBehaviour 
 {
+    private AnimState animState = AnimState.MoveUp;
+
     private Texture2D sevenV;
     private Texture2D blackSpace;
 
@@ -11,11 +14,29 @@ public class NGGH_EndLevel : MonoBehaviour
     private bool active = false;
     private bool inTrigger = false;
 
+    //Fire Gem Transform
+    public Transform fireGemTransform;
+    private Vector3 fireGemInitialPosition;
+    private Transform fireGemAuxTransform;
+
+    private float gemRotationSpeed = -1;
+
+    public float frameToframeAnimSpeed;
+    public float animTime;
+    private float animTimeInit;
+    public float animSlerpTime;
+
 
     void Start()
     {
         sevenV = (Texture2D)Resources.Load("UI/7V");
         blackSpace = (Texture2D)Resources.Load("UI/BlackScreen");
+        fireGemInitialPosition = fireGemTransform.position;
+
+        fireGemAuxTransform = fireGemTransform;
+        //fireGemAuxTransform.position = fireGemInitialPosition;
+
+        animTimeInit = animTime;
     }
 
 
@@ -45,6 +66,8 @@ public class NGGH_EndLevel : MonoBehaviour
             alphaCounter7V = 0;
             active = false;
         }
+
+        AnimateFireGem();
     }
 
 
@@ -82,4 +105,63 @@ public class NGGH_EndLevel : MonoBehaviour
     {
         inTrigger = false;
     }
+
+    private void AnimateFireGem()
+    {
+        fireGemTransform.position = Vector3.Slerp(fireGemTransform.position, fireGemAuxTransform.position, animSlerpTime);
+
+        switch (animState)
+        {
+            case AnimState.MoveUp:
+                {
+                    UpBehaviour();
+
+                }break;
+
+            case AnimState.MoveDown:
+                {
+                    DownBehaviour();
+
+                }break;
+
+            default:
+                break;
+        }
+    }
+
+
+    #region Animate Gem Auxiliar Functions
+    //Set
+	    private void SetUp(){
+
+            animTime = animTimeInit;
+
+            animState = AnimState.MoveUp;
+		
+	    }
+	
+	    private void SetDown(){
+
+            animTime = animTimeInit;
+
+            animState = AnimState.MoveDown;
+	    }
+	    //Behaviours
+	    private void UpBehaviour(){
+            animTime -= Time.deltaTime;
+            if (animTime < 0) SetDown();
+
+            fireGemAuxTransform.Translate(new Vector3(0, Time.deltaTime * frameToframeAnimSpeed, 0));
+		
+	    }
+	
+	    private void DownBehaviour(){
+            animTime -= Time.deltaTime;
+            if (animTime < 0) SetUp();
+
+            fireGemAuxTransform.Translate(new Vector3(0, Time.deltaTime * -frameToframeAnimSpeed, 0));
+
+        }
+
+    #endregion
 }

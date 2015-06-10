@@ -13,9 +13,24 @@ public class GRL_FireStatue : MonoBehaviour
     public List<GameObject> List = new List<GameObject>();
 
 
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (this.transform.FindChild("TemporaryParticles") == null)
+        {
+            GameObject temporaryParticles = new GameObject();
+            temporaryParticles.name = "TemporaryParticles";
+            temporaryParticles.transform.parent = this.transform;
+            temporaryParticles.transform.localPosition = Vector3.zero;
+        }
+
+        if(this.transform.FindChild("TemporaryParticles").FindChild("Fire Orb(Clone)") == null)
+            EventsLib.SpawnParticlesOnObject(this.transform.FindChild("TemporaryParticles").gameObject, 2, "Particle Systems/Prefabs/Fire Orb");
+    }
 	void OnTriggerStay(Collider other)
     {
-		if (Input.GetKeyUp(KeyCode.Mouse1) || GameManager.padState.Buttons.X == ButtonState.Pressed)
+
+        if (Input.GetKeyUp(KeyCode.Mouse1) || GameManager.padState.Buttons.X == ButtonState.Pressed)
 	        if (other.CompareTag("Player"))
             {
                 door.GetComponent<GRL_FireDoor>().close = true;
@@ -27,6 +42,12 @@ public class GRL_FireStatue : MonoBehaviour
                     torch.GetComponent<GRL_FireEmitter>().emitting = torch.GetComponent<GRL_FireEmitter>().startEmitting;
 
                 Global.player.fireCharges = 3;
+
+                EventsLib.SpawnParticlesOnPlayer("Particle Systems/Prefabs/Absorb Energy");
             }
 	}
+    void OnTriggerExit(Collider other)
+    {
+        GameObject.Destroy(this.transform.FindChild("TemporaryParticles").gameObject);
+    }
 }

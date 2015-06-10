@@ -138,4 +138,25 @@ public static class EventsLib
         GUI.DrawTextureWithTexCoords(new Rect(Screen.width * 2 / 3, Screen.height / 2 - 30, 60, 60), (Texture2D)Resources.Load("UI/Interactivity"),
             new Rect(0, 0, 1, 1));
     }
+
+    public static void SpawnParticlesOnPlayer(string prefabPath)
+    {
+        GameObject particle = GameObject.Instantiate((GameObject)Resources.Load(prefabPath));
+
+
+        particle.transform.parent = Global.player.playerObj.transform.FindChild("Mesh").FindChild("Bip001").transform;
+        particle.transform.localPosition = Vector3.zero;
+
+        GameObject.Destroy(particle, 7);
+    }
+
+    public static void SpawnParticlesOnObject(GameObject target, float yPositionOffset, string prefabPath)
+    {
+        GameObject particle = GameObject.Instantiate((GameObject)Resources.Load(prefabPath));
+
+        particle.transform.parent = target.transform;
+        particle.transform.localPosition = new Vector3(0, yPositionOffset, 0);
+
+        GameObject.Destroy(particle, 7);
+    }
 }

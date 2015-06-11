@@ -56,6 +56,7 @@ public class GRL_FireDoor : MonoBehaviour
 
                             EventsLib.SetDoorOpenDoubleSlider(lefttDoor, leftDoorObjectivePosition, rightDoor, rightDoorObjectivePosition);
                             open = true;
+							close = false;
                         }
                     }
 

@@ -37,9 +37,9 @@ public class GRL_SignalPlatform : MonoBehaviour
                 interpolation -= Time.deltaTime / duration;
 
             interpolation = Mathf.Clamp(interpolation, 0, 1);
-            transform.position = Vector3.Slerp(nonActivePosition, activePosition, interpolation);
+			transform.localPosition = Vector3.Slerp(nonActivePosition, activePosition, interpolation);
 
-            if (Vector3.Distance(transform.position, activePosition) > 0.2f && Vector3.Distance(transform.position, nonActivePosition) > 0.2f)
+			if (Vector3.Distance(transform.position, activePosition) > 0.2f && Vector3.Distance(transform.localPosition, nonActivePosition) > 0.2f)
             {
                 if (!transform.GetComponent<AudioSource>().isPlaying)
                     transform.GetComponent<AudioSource>().Play();

@@ -52,9 +52,9 @@ public class GRL_FireFlyer : MonoBehaviour
                             }
 
                             if (positionIndex == ControlPoints.Count - 1)
-                                transform.position = Vector3.Lerp(ControlPoints[positionIndex], ControlPoints[0], routeTimeCounter);
+                                transform.localPosition = Vector3.Lerp(ControlPoints[positionIndex], ControlPoints[0], routeTimeCounter);
                             else
-                                transform.position = Vector3.Lerp(ControlPoints[positionIndex], ControlPoints[positionIndex + 1], routeTimeCounter);
+								transform.localPosition = Vector3.Lerp(ControlPoints[positionIndex], ControlPoints[positionIndex + 1], routeTimeCounter);
                         }
                         break;
                     case RouteType.goAndReverse:
@@ -81,9 +81,9 @@ public class GRL_FireFlyer : MonoBehaviour
                             }
 
                             if (!returning)
-                                transform.position = Vector3.Lerp(ControlPoints[positionIndex], ControlPoints[positionIndex + 1], routeTimeCounter);
+								transform.localPosition = Vector3.Lerp(ControlPoints[positionIndex], ControlPoints[positionIndex + 1], routeTimeCounter);
                             else
-                                transform.position = Vector3.Lerp(ControlPoints[positionIndex], ControlPoints[positionIndex - 1], routeTimeCounter);
+								transform.localPosition = Vector3.Lerp(ControlPoints[positionIndex], ControlPoints[positionIndex - 1], routeTimeCounter);
                         }
                         break;
                     case RouteType.Random:

@@ -38,6 +38,9 @@ public class PlayerMovement
         if (Input.GetKeyUp(KeyCode.B))
             player.playerObj.GetComponent<PlayerComponent>().Damage(1);
 
+		if (Input.GetKeyUp(KeyCode.F))
+			player.fireCharges++;
+
         // Calculates the module of the speed
         float root = Mathf.Sqrt(player.runSpeed * player.runSpeed / 2);
 

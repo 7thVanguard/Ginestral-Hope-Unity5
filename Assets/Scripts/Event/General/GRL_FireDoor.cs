@@ -29,8 +29,8 @@ public class GRL_FireDoor : MonoBehaviour
 
         leftDoorBasePosition = Vector3.zero;
         rightDoorBasePosition = Vector3.zero;
-        leftDoorObjectivePosition = new Vector3(-2, 0, 1);
-        rightDoorObjectivePosition = new Vector3(2, 0, 1);
+        leftDoorObjectivePosition = new Vector3(0, -4, 0);
+        rightDoorObjectivePosition = new Vector3(0, -4, 0);
 
         audio = transform.GetComponent<AudioSource>();
 

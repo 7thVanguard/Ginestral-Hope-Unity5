@@ -20,7 +20,7 @@ public class SDFireBall : SkillDirected
 
         // Flight
         skillTrajectory = Skill.SkillTrajectory.LINEAR;
-        objectSpeed = 25;
+        objectSpeed = 70;
         maxDistance = 200;
 
         // Cast

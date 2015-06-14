@@ -94,6 +94,7 @@ public class SDFireBallBehaviour : MonoBehaviour
 
                     // Explosion relative
                     transform.FindChild("Explosion").gameObject.SetActive(true);
+                    transform.FindChild("Explosion").GetComponent<AudioSource>().Play();
                     //light = transform.FindChild("Explosion").GetComponent<Light>();
                 }
 

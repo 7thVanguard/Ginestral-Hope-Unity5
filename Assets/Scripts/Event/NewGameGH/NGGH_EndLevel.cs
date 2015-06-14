@@ -3,12 +3,17 @@ using System.Collections;
 using UnityEngine;
 using System.Collections;
 
+using UnityEngine;
+using System.Collections;
+
 public enum AnimState { MoveDown, MoveUp }
 public class NGGH_EndLevel : MonoBehaviour 
 {
 	private AnimState animState = AnimState.MoveUp;
 	
 	private MovieTexture movie;
+	private AudioSource movieSource;
+	
 	private Texture2D sevenV;
 	private Texture2D blackSpace;
 	
@@ -35,6 +40,8 @@ public class NGGH_EndLevel : MonoBehaviour
 	void Start()
 	{
 		movie = (MovieTexture)Resources.Load("Cinematics/Cinematica02_English");
+		movieSource = transform.GetComponent<AudioSource>();
+		
 		blackSpace = (Texture2D)Resources.Load("UI/BlackScreen");
 		fireGemInitialPosition = fireGemTransform.position;
 		
@@ -77,11 +84,13 @@ public class NGGH_EndLevel : MonoBehaviour
 				if (!launchMovie)
 				{
 					movie.Play();
+					GameFlow.onCameraTravel = true;
+					movieSource.Play();
 					
-					timeCounter = 0;
+					timeCounter = movie.duration * 2;
 					launchMovie = true;
 				}
-				timeCounter += Time.deltaTime;
+				timeCounter -= Time.deltaTime;
 				
 				GUI.color = Color.white;
 				GUI.DrawTexture(new Rect(0, 0, Screen.width, Screen.height), movie);
@@ -92,9 +101,11 @@ public class NGGH_EndLevel : MonoBehaviour
 				style.normal.textColor = Color.white;
 				GUI.Label(new Rect(Screen.width * 6.2f / 8, Screen.height * 7.6f / 8, Screen.width * 2 / 8, Screen.height * 0.5f / 8), "Press Spacebar to skip", style);
 				
-				if (timeCounter >= movie.duration)
+				if (timeCounter <= 0)
 				{
 					movie.Stop();
+					GameFlow.onCameraTravel = false;
+					movieSource.Stop();
 					Application.LoadLevel(3);
 					
 					GUIGHMainMenu.newGame = true;
@@ -190,4 +201,3 @@ public class NGGH_EndLevel : MonoBehaviour
 	
 	#endregion
 }
-

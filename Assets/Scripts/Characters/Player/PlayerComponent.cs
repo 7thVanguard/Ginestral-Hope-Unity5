@@ -11,7 +11,9 @@ public class PlayerComponent : MonoBehaviour
 	
 	private MovieTexture movie;
 	private float movieTime;
+	private float movieDelay;
 	private bool playerDead;
+	private bool moviePlaying;
 	
 	
 	public void Init(Player player)
@@ -19,6 +21,7 @@ public class PlayerComponent : MonoBehaviour
 		this.player = player;
 		movie = (MovieTexture)Resources.Load("Cinematics/GameOver");
 		movieTime = movie.duration;
+		movieDelay = 2;
 		playerDead = false;
 	}
 	
@@ -39,25 +42,34 @@ public class PlayerComponent : MonoBehaviour
 		
 		if (playerDead)
 		{
-			if (!movie.isPlaying)
+			movieDelay -= Time.deltaTime;
+			
+			if (movieDelay <= 0)
 			{
-				movie.Play();
-				movieTime = movie.duration;
-			}
-			
-			movieTime -= Time.deltaTime;
-			
-			if (Input.GetKey(KeyCode.Space))
-				movieTime = 0;
-			
-			if (movieTime <= 0.1f)
-			{
-				movie.Stop();
-				Global.player.currentLife = 1;
-				playerDead = false;
-				GUIGHMainMenu.reset = true;
-				GUIGHMainMenu.blackSpace.SetActive(true);
-				GUIGHMainMenu.alphaCounterBlackScreen = 1;
+				if (!movie.isPlaying)
+				{
+					movie.Play();
+					movieTime = movie.duration;
+				}
+				
+				movieTime -= Time.deltaTime;
+				
+				if (Input.GetKey(KeyCode.Space))
+					movieTime = 0;
+				
+				if (movieTime <= 0.5f)
+					movieTime = 0;
+				
+				if (movieTime <= 0.1f)
+				{
+					movie.Stop();
+					Global.player.currentLife = 1;
+					playerDead = false;
+					GUIGHMainMenu.reset = true;
+					GUIGHMainMenu.blackSpace.SetActive(true);
+					GUIGHMainMenu.alphaCounterBlackScreen = 1;
+					movieDelay = 2;
+				}
 			}
 		}
 	}
@@ -109,3 +121,4 @@ public class PlayerComponent : MonoBehaviour
 		// gameObject.renderer.material.color = Color.red;
 	}
 }
+

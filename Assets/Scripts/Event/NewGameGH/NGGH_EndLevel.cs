@@ -1,10 +1,5 @@
 ﻿using UnityEngine;
 using System.Collections;
-using UnityEngine;
-using System.Collections;
-
-using UnityEngine;
-using System.Collections;
 
 public enum AnimState { MoveDown, MoveUp }
 public class NGGH_EndLevel : MonoBehaviour 
@@ -66,7 +61,7 @@ public class NGGH_EndLevel : MonoBehaviour
 		}
 		
 		if (Input.GetKey(KeyCode.Space))
-			timeCounter = movie.duration;
+			timeCounter = 0;
 		
 		AnimateFireGem();
 	}

@@ -50,6 +50,8 @@ public class PlayerComponent : MonoBehaviour
 				{
 					movie.Play();
 					movieTime = movie.duration;
+					Global.player.playerObj.transform.FindChild("MovieMusic").GetComponent<AudioSource>().Play();
+					GameFlow.onCameraTravel = true;
 				}
 				
 				movieTime -= Time.deltaTime;
@@ -63,12 +65,14 @@ public class PlayerComponent : MonoBehaviour
 				if (movieTime <= 0.1f)
 				{
 					movie.Stop();
+					Global.player.playerObj.transform.FindChild("FXPlayer").GetComponent<AudioSource>().Stop();
 					Global.player.currentLife = 1;
 					playerDead = false;
 					GUIGHMainMenu.reset = true;
 					GUIGHMainMenu.blackSpace.SetActive(true);
 					GUIGHMainMenu.alphaCounterBlackScreen = 1;
 					movieDelay = 2;
+					GameFlow.onCameraTravel = false;
 				}
 			}
 		}
@@ -121,4 +125,5 @@ public class PlayerComponent : MonoBehaviour
 		// gameObject.renderer.material.color = Color.red;
 	}
 }
+
 

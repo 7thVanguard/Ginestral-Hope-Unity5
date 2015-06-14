@@ -92,7 +92,7 @@ public class PlayerHUD
 			
 			// Draw text
 			GUI.Label(new Rect(margin + Screen.width / 2 + Screen.width / 60, margin, Screen.width / 3, Screen.width / 3),
-			          "x " + Global.player.orbsCollected + " / 3");
+			          "x " + Global.player.orbsCollected);
 			
 			// Draw Gizmos
 			if (GameFlow.gameMode == GameFlow.GameMode.PLAYER && GameFlow.gameState == GameFlow.GameState.GAME && !GameFlow.pause && !GameFlow.onInterface && !GameFlow.onCameraTravel)

@@ -126,7 +126,7 @@ public static class EventsLib
 	}
 	public static void FadeMaterialEmission(Material material)
 	{
-		float emissionValue = Mathf.PingPong(Time.time / 2, 1.0f);
+		float emissionValue = Mathf.PingPong(Time.time / 20, 0.05f);
 		
 		Color baseColor = Color.white;
 		Color finalColor = baseColor * Mathf.LinearToGammaSpace(emissionValue);

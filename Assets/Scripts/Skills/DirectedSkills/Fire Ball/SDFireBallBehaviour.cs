@@ -94,6 +94,12 @@ public class SDFireBallBehaviour : MonoBehaviour
 					
 					// Explosion relative
 					transform.FindChild("Explosion").gameObject.SetActive(true);
+					if (Vector3.Distance(Global.player.playerObj.transform.position, transform.position) < 16)
+					{
+						this.transform.FindChild("Explosion").GetComponent<AudioSource>().Play();
+						this.transform.FindChild("Explosion").GetComponent<AudioSource>().volume 
+							= 1 - Vector3.Distance(Global.player.playerObj.transform.position, transform.position)/16;
+					}
 					//light = transform.FindChild("Explosion").GetComponent<Light>();
 				}
 				
